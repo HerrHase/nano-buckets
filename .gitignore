@@ -1,0 +1,15 @@
+composer.phar
+
+/vendor/
+node_modules
+.env
+
+*.log
+rysnc_exclude
+
+storage/csv/*
+!storage/csv/.gitkeep
+storage/database/*
+!storage/database/.gitkeep
+storage/cache/*
+!storage/cache/.gitkeep
