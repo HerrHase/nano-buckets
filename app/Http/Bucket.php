@@ -20,8 +20,20 @@ use Carbon\Carbon;
  */
 class Bucket extends FlightAbstract
 {
-    public function indexAction()
+    public function viewAction($id)
     {
-        
+        $this->app->render('bucket', [
+            'id' => $id
+        ]);
+    }
+
+    public function indexAction($id, $visibilty, $page)
+    {
+        $bucketStore = new Bucket();
+        $publicBuckets = $bucketStore->findBy();
+
+        $this->app->json([
+            'publicBuckets' => $publicBuckets
+        ]);
     }
 }

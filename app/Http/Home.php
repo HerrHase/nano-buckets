@@ -22,9 +22,7 @@ class Home extends FlightAbstract
 {
     public function indexAction()
     {
-        
-
-        $this->app->render('index', [
+        $this->app->render('home', [
 
         ]);
     }
