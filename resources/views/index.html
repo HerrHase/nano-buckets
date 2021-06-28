@@ -1,0 +1,22 @@
+<% layout('./layout.html') %>
+
+<div class="container">
+    <div class="grid">
+        <div class="col-12">
+            <h2>
+                Buckets
+                <a class="button" href="/bucket/create">
+                    Create
+                </a>
+            </h2>
+        </div>
+        <h3>
+            Your Buckets
+        </h3>
+        <app-buckets visiblity="private"></app-buckets>
+        <h3>
+            Other Buckets
+        </h3>
+        <app-buckets visiblity="public,community"></app-buckets>
+    </div>
+</div>

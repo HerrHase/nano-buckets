@@ -1,0 +1,55 @@
+<% layout('./../layout.html') %>
+
+<div class="container">
+    <div class="grid">
+        <div class="col-12">
+            <h2>
+                Create Bucket
+            </h2>
+        </div>
+        <div class="col-12">
+            <form action="/bucket/store" method="POST" novalidate>
+                <div class="field">
+                    <label class="field__label">
+                        title*
+                        <input class="field__text" name="title" type="text" />
+                    </label>
+                </div>
+                <div class="field">
+                    <label class="field__label">
+                        description*
+                        <input class="field__text" name="description" type="text" />
+                    </label>
+                </div>
+                <div class="field">
+                    <label class="field__label">
+                        type*
+                        <% it.types.forEach(function(type) { %>
+                            <input class="field__choice" name="type" type="radio" value="<%= type.value %>" />
+                            <span class="field__help">
+                                <%= type %>
+                            </span>
+                        <% }) %>
+                    </label>
+                </div>
+                <div class="field">
+                    <label class="field__label">
+                        visiblity*
+                        <% it.visiblities.forEach(function(visiblity) { %>
+                            <input class="field__choice" name="visiblity" type="radio" value="<%= visiblity.value %>" />
+                            <span>
+                                <%= visiblity %>
+                            </span>
+                        <% }) %>
+                    </label>
+                </div>
+
+                <div class="">
+                    <button class="button">
+                        Create
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
