@@ -39,7 +39,8 @@ mix.webpackConfig({
 mix.options({
     terser: {
         extractComments: false
-    }
+    },
+    processCssUrls: false
 })
 
 mix
