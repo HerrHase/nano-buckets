@@ -16,9 +16,11 @@ import bucketApi from './src/http/api/bucket.ts'
 const app = opine()
 const __dirname = dirname(import.meta.url)
 
-//
-app.use(json()); // for parsing application/json
-app.use(urlencoded()); // for parsing application/x-www-form-urlencoded
+// for parsing application/json
+app.use(json());
+
+// for parsing application/x-www-form-urlencoded
+app.use(urlencoded());
 
 // adding static files
 app.use(serveStatic(join(__dirname, 'public')))
@@ -40,4 +42,3 @@ app.use((request, response, next) => {
 // let it rain
 app.listen(Number(Deno.env.get('SERVER_PORT')))
 console.log('running on ' + Deno.env.get('SERVER_PORT'))
-

@@ -3,50 +3,65 @@
 <div class="container">
     <div class="grid">
         <div class="col-12">
-            <h2>
+            <h1 class="highlight m-top-5">
                 Create Bucket
-            </h2>
+            </h1>
         </div>
         <div class="col-12">
             <form action="/bucket/store" method="POST" novalidate>
-                <div class="field">
-                    <label class="field__label">
+                <div class="field-group">
+                    <label class="field-label">
                         title*
-                        <input class="field__text" name="title" type="text" />
+                        <input class="field-text" name="title" type="text" />
                     </label>
                 </div>
-                <div class="field">
-                    <label class="field__label">
+                <div class="field-group">
+                    <label class="field-label">
                         description*
-                        <input class="field__text" name="description" type="text" />
+                        <input class="field-text" name="description" type="text" />
                     </label>
                 </div>
-                <div class="field">
-                    <label class="field__label">
+                <div class="field-group">
+                    <div class="m-top-4 m-bottom-3">
                         type*
-                        <% it.types.forEach(function(type) { %>
-                            <input class="field__choice" name="type" type="radio" value="<%= type.value %>" />
-                            <span class="field__help">
-                                <%= type %>
-                            </span>
-                        <% }) %>
-                    </label>
+                    </div>
+                    <% it.types.forEach(function(type) { %>
+                        <label class="field-label m-right-3">
+                            <input class="field-choice" name="type" type="radio" value="<%= type.value %>" />
+                            <svg class="icon field-choice__unchecked" aria-hidden="true">
+                                <use xlink:href="/symbol-defs.svg#icon-circle"></use>
+                            </svg>
+                            <svg class="icon field-choice__checked" aria-hidden="true">
+                                <use xlink:href="/symbol-defs.svg#icon-circle-check"></use>
+                            </svg>
+                            <%= type %>
+                        </label>
+                    <% }) %>
                 </div>
-                <div class="field">
-                    <label class="field__label">
+                <div class="field-group">
+                    <div class="m-top-4 m-bottom-3">
                         visiblity*
-                        <% it.visiblities.forEach(function(visiblity) { %>
-                            <input class="field__choice" name="visiblity" type="radio" value="<%= visiblity.value %>" />
-                            <span>
-                                <%= visiblity %>
-                            </span>
-                        <% }) %>
-                    </label>
+                    </div>
+                    <% it.visiblities.forEach(function(visiblity) { %>
+                        <label class="field-label m-right-3">
+                            <input class="field-choice" name="visiblity" type="radio" value="<%= visiblity.value %>" />
+                            <svg class="icon field-choice__unchecked" aria-hidden="true">
+                                <use xlink:href="/symbol-defs.svg#icon-circle"></use>
+                            </svg>
+                            <svg class="icon field-choice__checked" aria-hidden="true">
+                                <use xlink:href="/symbol-defs.svg#icon-circle-check"></use>
+                            </svg>
+                            <%= visiblity %>
+                        </label>
+                    <% }) %>
                 </div>
 
                 <div class="">
-                    <button class="button">
+                    <button class="button hover-fill-text-constrast">
                         Create
+                        <svg class="icon p-left-3 size-large" aria-hidden="true">
+                            <use xlink:href="/symbol-defs.svg#icon-circle-add"></use>
+                        </svg>
                     </button>
                 </div>
             </form>

@@ -51,6 +51,7 @@ router.post('/store', async function(request, response, next)
         body.title = escapeHtml(body.title)
     }
 
+    // escape before validate
     if (body.description) {
         body.description = escapeHtml(body.description)
     }

@@ -1,4 +1,5 @@
 const mix = require('laravel-mix')
+const SvgSpritemapPlugin = require('svg-spritemap-webpack-plugin')
 
 /*
  |--------------------------------------------------------------------------
@@ -11,10 +12,34 @@ const mix = require('laravel-mix')
  |
  */
 
+mix.webpackConfig({
+    plugins: [
+        new SvgSpritemapPlugin('node_modules/@tentakelfabrik/plain-ui/src/icons/mono-icons/svg/*.svg', {
+            output: {
+                filename: 'public/symbol-defs.svg',
+                chunk: {
+                    keep: true
+                },
+                svgo: {
+                    plugins: [{
+                        removeAttrs: {
+                            attrs: 'fill'
+                        }
+                    }]
+                },
+                svg4everybody: false
+            },
+            sprite: {
+                prefix: 'icon-'
+            }
+        })
+    ]
+})
+
 mix.options({
-   terser: {
-     extractComments: false
-   }
+    terser: {
+        extractComments: false
+    }
 })
 
 mix
