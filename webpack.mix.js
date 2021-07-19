@@ -14,7 +14,10 @@ const SvgSpritemapPlugin = require('svg-spritemap-webpack-plugin')
 
 mix.webpackConfig({
     plugins: [
-        new SvgSpritemapPlugin('node_modules/@tentakelfabrik/plain-ui/src/icons/mono-icons/svg/*.svg', {
+        new SvgSpritemapPlugin([
+                'node_modules/@tentakelfabrik/plain-ui/src/icons/mono-icons/svg/*.svg',
+                'resources/icons/*.svg'
+            ], {
             output: {
                 filename: 'public/symbol-defs.svg',
                 chunk: {
@@ -47,3 +50,7 @@ mix
     .js('resources/js/index.js', 'public/js')
     .js('resources/js/critical.js', 'public/js')
     .sass('resources/scss/index.scss', 'public/css')
+    .copy(
+        'node_modules/@tentakelfabrik/plain-ui/src/fonts/*',
+        'public/css'
+    )

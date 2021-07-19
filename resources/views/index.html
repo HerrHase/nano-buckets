@@ -3,20 +3,26 @@
 <div class="container">
     <div class="grid">
         <div class="col-12">
-            <h2>
-                Buckets
-                <a class="button" href="/bucket/create">
+            <section class="flex m-bottom-5"">
+                <h2 class="m-bottom-2 m-right-2 highlight">
+                    Buckets
+                </h2>
+                <a class="button m-0 " href="/bucket/create">
                     Create
                 </a>
-            </h2>
-            <h3>
-                Your Buckets
-            </h3>
-            <app-buckets visiblity="private"></app-buckets>
-            <h3>
-                Other Buckets
-            </h3>
-            <app-buckets visiblity="public,community"></app-buckets>
+            </section>
+            <section class="m-bottom-5">
+                <h3 class="highlight">
+                    Your Buckets
+                </h3>
+                <app-buckets visiblity="private"></app-buckets>
+            </section>
+            <section class="m-bottom-5">
+                <h3 class="highlight">
+                    Other Buckets
+                </h3>
+                <app-buckets visiblity="public,community"></app-buckets>
+            </section>
         </div>
     </div>
 </div>
