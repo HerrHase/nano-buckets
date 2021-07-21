@@ -14905,6 +14905,11 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
     font-size: 2.7rem;
   }
 }
+.container--app {
+  max-width: 100%;
+  padding: 15px 30px;
+}
+
 .turbolinks-progress-bar {
   width: 5px;
   height: 100%;

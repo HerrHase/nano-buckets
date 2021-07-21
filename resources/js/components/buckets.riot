@@ -1,0 +1,38 @@
+<app-buckets>
+    <div class="buckets">
+        <div class="grid">
+            <div class="col-12 col-md-4" each={ bucket in buckets }>
+                <a class="panel" href="/bucket/single/{ bucket.id }">
+                    { bucket.title }
+                </a>
+            </div>
+        </div>
+        <div class="buckets__more">
+            <button type="button" class="button" onclick={ handleClick }>
+                More
+                <span class="icon is-small is-left">
+                    <svg aria-hidden="true">
+                        <use xlink:href="/symbol-defs.svg#icon-add-circle"></use>
+                    </svg>
+                </span>
+            </button>
+        </div>
+    </div>
+    <script>
+
+        /**
+         *
+         *
+         *
+         *  @author Björn Hase
+         *
+         */
+
+        export default {
+            handleClick() {
+
+            }
+        }
+
+    </script>
+</app-buckets>

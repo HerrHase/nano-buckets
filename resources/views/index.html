@@ -1,27 +1,19 @@
 <% layout('./layout.html') %>
 
-<div class="container">
+<div class="container container--app">
     <div class="grid">
         <div class="col-12">
-            <section class="flex m-bottom-5"">
-                <h2 class="m-bottom-2 m-right-2 highlight">
-                    Buckets
+            <a class="button m-bottom-5" href="/bucket/create">
+                Create Bucket
+                <svg class="icon p-left-3 size-large" aria-hidden="true">
+                    <use xlink:href="/symbol-defs.svg#icon-circle-add"></use>
+                </svg>
+            </a>
+            <section class="m-bottom-5">
+                <h2 class="highlight">
+                    Public
                 </h2>
-                <a class="button m-0 " href="/bucket/create">
-                    Create
-                </a>
-            </section>
-            <section class="m-bottom-5">
-                <h3 class="highlight">
-                    Your Buckets
-                </h3>
-                <app-buckets visiblity="private"></app-buckets>
-            </section>
-            <section class="m-bottom-5">
-                <h3 class="highlight">
-                    Other Buckets
-                </h3>
-                <app-buckets visiblity="public,community"></app-buckets>
+                <app-buckets visiblity="public"></app-buckets>
             </section>
         </div>
     </div>
