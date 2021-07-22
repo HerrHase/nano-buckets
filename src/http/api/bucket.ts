@@ -36,7 +36,8 @@ router.get('/', async function(request, response)
  *  @param  response
  *  @return
  */
-router.get('/:uuid', function(request, response) {
+router.get('/:uuid', function(request, response)
+{
 
 })
 
@@ -47,7 +48,8 @@ router.get('/:uuid', function(request, response) {
  *  @param  response
  *  @return
  */
-router.post('/', function(request, response, next) {
+router.post('/', function(request, response, next)
+{
 
 })
 
@@ -58,12 +60,13 @@ router.post('/', function(request, response, next) {
  *  @param  response
  *  @return
  */
-router.put('/:uuid', function(request, response, next) {
+router.put('/:uuid', function(request, response, next)
+{
 
 })
 
 /**
- *
+ *  delete single bucket
  *
  *  @param  request
  *  @param  response
@@ -71,15 +74,18 @@ router.put('/:uuid', function(request, response, next) {
  */
 router.delete('/:uuid', async function(request, response, next)
 {
+    // check if uuid is valid
     if (!v4.validate(request.params.uuid)) {
         response.setStatus(404)
     }
 
     let result = false
 
+    // getting database and search by uuid
     const db = new Database<BucketSchema>('./storage/database/buckets.json')
     const bucket = await db.deleteOne({ _id: request.params.uuid });
 
+    // check if bucket is deleted 
     if (bucket) {
         result = true
     }

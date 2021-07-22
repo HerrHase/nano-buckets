@@ -14919,15 +14919,19 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
   color: var(--text);
 }
 
+.field-error ul {
+  list-style: none;
+  padding: 0;
+}
+
 .container--app {
   max-width: 100%;
   padding: 15px 30px;
 }
 
 .turbolinks-progress-bar {
-  width: 5px;
-  height: 100%;
-  background-color: blue;
+  height: 5px;
+  background-color: var(--danger);
 }
 
 .app-header .logo {

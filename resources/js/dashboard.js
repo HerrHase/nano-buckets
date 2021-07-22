@@ -1,11 +1,7 @@
+import * as riot from 'riot'
+
 import AppBuckets from './components/buckets.riot'
 
-/**
- *  Bucket
- *
- *
- */
-
-// register components
+// register components for buckets
 riot.register('app-buckets', AppBuckets)
 riot.mount('app-buckets')

@@ -1,0 +1,108 @@
+<field-error>
+    <div class="field-error" if={ state.errors.length > 0 }>
+        <ul>
+            <li each={ error in state.errors }>
+                { error }
+            </li>
+        </ul>
+    </div>
+    <script>
+
+        /**
+         *  Shows errors of Validation and raise a element to
+         *  trigger single validation of field
+         *
+         *  <field-error name="name" nofieldupdate></field-error>
+         *
+         *  @author Björn Hase, Tentakelfabrik, me@tentakelfabrik.de
+         *
+         */
+
+        export default {
+
+            state: {
+                errors: [
+
+                ],
+            },
+
+            /**
+             *
+             *
+             *  @param  {Object} props [description]
+             *  @param  {Object} state [description]
+             *
+             */
+            onMounted(props, state)
+            {
+                // getting parent element for entire field
+                const parent = this.root.closest('.field-group')
+
+                // getting current element by name
+                const element = document.querySelector('[name="' + props.name + '"]')
+
+                // getting form
+                const form = element.closest('form')
+
+                // element, form are exists and nofieldupdate is not set
+                // each change of the element dispatch a event to form validation
+                if (element && form && !props.nofieldupdate) {
+                    element.addEventListener('input', (event) => {
+                        this.dispatchCustomEvent(event, form, props.name)
+                    })
+                }
+
+                // add custom event to listen to form-validation
+                this.root.addEventListener('form-validation', (event) => {
+                    this.onFormValidation(event, parent)
+                })
+            },
+
+            /**
+             *  process form validation triggered by form
+             *
+             *  @param  {Event} event
+             *  @param  {Element} parent
+             *
+             */
+            onFormValidation(event, parent)
+            {
+                // if detail is a value, set to errors
+                if (event.detail) {
+                    this.state.errors = event.detail
+
+                    parent.classList.add('field--error')
+                    parent.classList.remove('field--valid')
+                } else {
+                    this.state.errors = []
+
+                    parent.classList.remove('field--error')
+                    parent.classList.add('field--valid')
+                }
+
+                this.update()
+            },
+
+            /**
+             *  create event to send to form validation
+             *
+             *  @param  {Event} event
+             *  @param  {Element} form
+             *  @param  {string} name
+             *
+             */
+            dispatchCustomEvent(event, form, name)
+            {
+                const fieldUpdateEvent = new CustomEvent('field-update', {
+                    'detail': {
+                        'name': name,
+                        'value': event.target.value
+                    }
+                })
+
+                form.dispatchEvent(fieldUpdateEvent)
+            },
+        }
+
+    </script>
+</field-error>

@@ -56,6 +56,7 @@ router.post('/store', async function(request, response, next)
         body.description = escapeHtml(body.description)
     }
 
+    // validate 
     const [ valid, errors ] = await validate(body, {
         title: [ required, maxLength(255) ],
         description: [ required, maxLength(255) ],

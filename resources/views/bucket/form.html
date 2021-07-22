@@ -8,18 +8,20 @@
             </h1>
         </div>
         <div class="col-12">
-            <form action="/bucket/store" method="POST" novalidate>
+            <form id="form" action="/bucket/store" method="POST" novalidate >
                 <div class="field-group">
                     <label class="field-label">
                         title*
                         <input class="field-text" name="title" type="text" />
                     </label>
+                    <field-error name="title"></field-error>
                 </div>
                 <div class="field-group">
                     <label class="field-label">
                         description*
                         <input class="field-text" name="description" type="text" />
                     </label>
+                    <field-error name="description"></field-error>
                 </div>
                 <div class="field-group">
                     <div class="m-top-4 m-bottom-3">
@@ -37,6 +39,7 @@
                             <%= type %>
                         </label>
                     <% }) %>
+                    <field-error name="type"></field-error>
                 </div>
                 <div class="field-group">
                     <div class="m-top-4 m-bottom-3">
@@ -54,6 +57,7 @@
                             <%= visiblity %>
                         </label>
                     <% }) %>
+                    <field-error name="visiblity"></field-error>
                 </div>
 
                 <div class="m-top-5">
@@ -68,3 +72,5 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="/js/create-bucket.js" defer></script>

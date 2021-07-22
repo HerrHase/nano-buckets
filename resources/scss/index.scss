@@ -2,12 +2,12 @@
     '../../node_modules/@tentakelfabrik/plain-ui/src/scss/plain-ui',
 
     'components/buckets',
+    'components/field',
     'container';
 
 .turbolinks-progress-bar {
-    width: 5px;
-    height: 100%;
-    background-color: blue;
+    height: 5px;
+    background-color: var(--danger);
 }
 
 .app-header {

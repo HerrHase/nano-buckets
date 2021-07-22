@@ -58,8 +58,8 @@ mix.options({
 })
 
 mix
-    .js('resources/js/index.js', 'public/js')
     .js('resources/js/critical.js', 'public/js')
+    .js('resources/js/create-bucket.js', 'public/js')
     .js('resources/js/dashboard.js', 'public/js')
     .sass('resources/scss/index.scss', 'public/css')
     .copy(
