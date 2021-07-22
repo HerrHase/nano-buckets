@@ -14905,6 +14905,20 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
     font-size: 2.7rem;
   }
 }
+/**
+ *
+ *
+ */
+.buckets__title {
+  font-size: 1.6rem;
+}
+.buckets__item {
+  transition: transform 0.2s;
+}
+.buckets__item a:hover {
+  color: var(--text);
+}
+
 .container--app {
   max-width: 100%;
   padding: 15px 30px;

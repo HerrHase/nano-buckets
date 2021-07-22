@@ -1,24 +1,49 @@
 <app-buckets>
     <div class="buckets">
         <div class="grid">
-            <div class="col-12 col-md-4" each={ bucket in buckets }>
-                <a class="panel" href="/bucket/single/{ bucket.id }">
-                    { bucket.title }
-                </a>
+            <div class="col-12 col-md-4 col-xlg-3" each={ bucket in state.buckets }>
+                <article class="panel buckets__item">
+                    <div class="bar">
+                        <div class="bar__end w-100">
+                            <button class="button button--transparent" onclick={ (event) => { handleDelete(event, bucket) } }>
+                                <svg class="icon fill-text-contrast" aria-hidden="true">
+                                    <use xlink:href="/symbol-defs.svg#icon-delete"></use>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="panel__body">
+                        <a href="/bucket/{ bucket._id }">
+                            <h3 class="buckets__title">
+                                { bucket.title }
+                            </h3>
+                            <div class="content">
+                                <p>
+                                    { bucket.description }
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </article>
             </div>
         </div>
-        <div class="buckets__more">
-            <button type="button" class="button" onclick={ handleClick }>
-                More
-                <span class="icon is-small is-left">
-                    <svg aria-hidden="true">
-                        <use xlink:href="/symbol-defs.svg#icon-add-circle"></use>
-                    </svg>
-                </span>
-            </button>
+        <div class="grid">
+            <div class="col-12">
+                <div class="buckets__more">
+                    <button type="button" class="button" onclick={ handleClick }>
+                        More
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="/symbol-defs.svg#icon-arrow-down"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     <script>
+
+        import axios from 'axios'
+        import remove from 'lodash.remove'
 
         /**
          *
@@ -29,8 +54,43 @@
          */
 
         export default {
+
+            state: {
+                buckets: []
+            },
+
+            onBeforeMount() {
+                this.fetch()
+            },
+
             handleClick() {
 
+            },
+
+            handleDelete(event, bucket) {
+                event.preventDefault()
+
+                axios.delete('/api/bucket/' + bucket._id)
+                    .then((response) => {
+
+                        // removing from buckets
+                        remove(this.state.buckets, function(b) {
+                            return b._id === bucket._id
+                        })
+
+                        this.update()
+                    })
+            },
+
+            fetch() {
+                axios.get('/api/bucket/', {
+                    params: {
+                        visiblity: this.props.visiblity
+                    }
+                }).then((response) => {
+                    this.state.buckets = response.data.data
+                    this.update()
+                })
             }
         }
 

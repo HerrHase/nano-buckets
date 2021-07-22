@@ -1,0 +1,22 @@
+/**
+ *
+ *
+ */
+
+.buckets {
+
+    &__title {
+        font-size: 1.6rem;
+    }
+
+    &__item {
+        transition: transform 0.2s;
+
+        a {
+            &:hover {
+                color: var(--text);
+            }
+        }
+    }
+
+}

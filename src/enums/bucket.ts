@@ -4,6 +4,7 @@ import Enum from 'https://deno.land/x/enum@v3.0.4/index.js'
 export const visibilties = new Enum([
     'PUBLIC',
     'COMMUNITY',
+    'GROUP',
     'PRIVATE'
 ], { freeze: true, name: 'visibilties' })
 

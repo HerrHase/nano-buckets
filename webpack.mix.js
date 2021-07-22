@@ -13,6 +13,17 @@ const SvgSpritemapPlugin = require('svg-spritemap-webpack-plugin')
  */
 
 mix.webpackConfig({
+    module: {
+        rules: [{
+            test: /\.riot$/,
+            use: [{
+                loader: '@riotjs/webpack-loader',
+                options: {
+                    hot: false
+                }
+            }]
+        }
+    ]},
     plugins: [
         new SvgSpritemapPlugin([
                 'node_modules/@tentakelfabrik/plain-ui/src/icons/mono-icons/svg/*.svg',
@@ -49,6 +60,7 @@ mix.options({
 mix
     .js('resources/js/index.js', 'public/js')
     .js('resources/js/critical.js', 'public/js')
+    .js('resources/js/dashboard.js', 'public/js')
     .sass('resources/scss/index.scss', 'public/css')
     .copy(
         'node_modules/@tentakelfabrik/plain-ui/src/fonts/*',

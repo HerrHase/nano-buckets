@@ -20,8 +20,11 @@
                 </div>
                 <div class="bar__main">
                     <div class="tabs tabs--contrast">
-                        <a href="/" class="tabs__item tabs__item--selected">
+                        <a href="/" data-turbolinks="false" class="tabs__item tabs__item--selected">
                             Dashboard
+                        </a>
+                        <a href="/" class="tabs__item">
+                            Settings
                         </a>
                     </div>
                 </div>
@@ -31,6 +34,9 @@
         <main class="app-main">
             <%~ it.body %>
         </main>
+
+        <script type="text/javascript" src="/js/index.js" defer></script>
+        <script type="text/javascript" src="/js/dashboard.js" defer></script>
 
     </body>
 </html>
