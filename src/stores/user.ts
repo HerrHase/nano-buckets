@@ -1,6 +1,7 @@
-interface Bucket {
+interface UserSchema {
     _id: string;
-    username: string;
+    email: string;
     password: string;
     displayname: string;
+    is_admin: boolean
 }
