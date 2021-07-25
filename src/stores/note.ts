@@ -1,8 +1,9 @@
-export interface Note {
+export interface NoteSchema {
     _id: string;
     title: string;
     type: string;
     content: string;
-    attachment: array;
+    attachment: any[];
+    authors: string[];
     tags: string[];
 }

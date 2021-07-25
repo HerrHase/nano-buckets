@@ -1,0 +1,123 @@
+<app-note-form>
+    <div class="note-form">
+        <div class="panel">
+            <div class="panel__body">
+                <form id="form" novalidate>
+
+                    <input type="hidden" if={ state.note && state.note._id } name="_id" value="{ state.note._id }" />
+
+                    <div class="field-group">
+                        <label class="field-label">
+                            title
+                            <input type="text" class="field-text" name="title" />
+                        </label>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">
+                            content
+                            <textarea name="content" class="field-text"></textarea>
+                        </label>
+                    </div>
+
+                    <div class="">
+                        <div class="tabs">
+
+                        </div>
+                    </div>
+
+                    <div>
+                        <button class="button" if={ !state.note || (state.note && !state.note._id) }>
+                            Create
+                        </button>
+                        <button class="button" type="submit" if={ state.note && state.note._id }>
+                            Save
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        import axios from 'axios'
+        import * as riot from 'riot'
+
+        import FormValidator from './../FormValidator'
+        import FieldError from './field-error.riot'
+
+        riot.register('field-error', FieldError)
+        riot.mount('field-error')
+
+        /**
+         *
+         *
+         *
+         *  @author Björn Hase
+         *
+         */
+
+        export default {
+
+            state: {
+                note: undefined
+            },
+
+            onBeforeMount() {
+
+                // show error if props is missing
+                if (!this.props.bucketId) {
+                    console.error('ID of Bucket is Missing!')
+                }
+
+            },
+
+            /**
+             *
+             *
+             */
+            onMounted(props, state) {
+
+                // create form validation
+                const formValidation = new FormValidator('form', {
+                    'title': {
+                        'length': {
+                            'maximum': 255
+                        }
+                    },
+                    'content': {
+                        'length': {
+                            'maximum': 10922
+                        }
+                    }
+                }, (event, data) => {
+                    this.handleSubmit(event, data)
+                })
+
+            },
+
+            /**
+             *
+             *
+             */
+            handleSubmit(event, data) {
+
+                let method = 'post'
+
+                if (this.state.note && this.state.note._id) {
+                    method = 'put'
+                }
+
+                axios({
+                    method: method,
+                    url: '/api/note/' + this.props.bucketId,
+                    data: data
+                }).then((response) => {
+                    this.state.note = response.data.data
+                    this.update()
+                })
+            }
+        }
+
+    </script>
+</app-note-form>

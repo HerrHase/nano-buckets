@@ -7,6 +7,14 @@
             <span>
                 <%= it.bucket.description %>
             </span>
+            <button id="note-form-toggle" class="button absolute">
+                <svg class="icon p-left-3 size-large" aria-hidden="true">
+                    <use xlink:href="/symbol-defs.svg#icon-circle-add"></use>
+                </svg>
+            </button>
+            <note-form bucket-id="<%= it.bucket._id %>"></note-form>
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="/js/bucket-single.js" defer></script>

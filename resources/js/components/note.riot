@@ -1,0 +1,49 @@
+<app-note>
+    <div class="note">
+        <div class="panel">
+            <div class="bar">
+                <div class="bar__end w-100">
+                    <button class="button button--transparent" onclick={ (event) => { handleEdit(event, note) } }>
+                        <svg class="icon fill-text-contrast" aria-hidden="true">
+                            <use xlink:href="/symbol-defs.svg#icon-edit"></use>
+                        </svg>
+                    </button>
+                    <button class="button button--transparent" onclick={ (event) => { handleDelete(event, note) } }>
+                        <svg class="icon fill-text-contrast" aria-hidden="true">
+                            <use xlink:href="/symbol-defs.svg#icon-delete"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="note__title">
+                <h3>
+                    { state.note.title }
+                </h3>
+            </div>
+            <div class="panel__body">
+                { state.note.content }
+            </div>
+        </div>
+    </div>
+    <script>
+
+        import axios from 'axios'
+        import remove from 'lodash.remove'
+
+        /**
+         *
+         *
+         *
+         *  @author Björn Hase
+         *
+         */
+
+        export default {
+
+            state: {
+                note: undefined
+            }
+            
+        }
+    </script>
+</app-note>

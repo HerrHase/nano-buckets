@@ -11,7 +11,10 @@ import { renderFile } from 'https://deno.land/x/eta@v1.12.2/mod.ts'
 // getting routes
 import index from './src/http/index.ts'
 import bucket from './src/http/bucket.ts'
+import settings from './src/http/settings.ts'
+
 import bucketApi from './src/http/api/bucket.ts'
+import noteApi from './src/http/api/note.ts'
 
 const app = opine()
 const __dirname = dirname(import.meta.url)
@@ -33,7 +36,9 @@ app.set('view engine', 'html')
 // adding http classes for routes
 app.use('/', index)
 app.use('/bucket', bucket)
+app.use('/settings', settings)
 app.use('/api/bucket', bucketApi)
+app.use('/api/note', noteApi)
 app.use((request, response, next) => {
     response.setStatus(404)
     response.render('errors/404')

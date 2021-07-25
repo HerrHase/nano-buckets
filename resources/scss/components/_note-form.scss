@@ -1,0 +1,36 @@
+.note-form {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    .panel {
+        position: relative;
+        z-index: 20;
+
+        max-width: 33%;
+        width: 100%;
+        height: 100%;
+
+        border-left: 0;
+        border-top: 0;
+        border-bottom: 0;
+    }
+
+    &:before {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        transition: background-color .5s;
+        z-index: 19;
+        content: "";
+
+        background: rgba(0,0,0,.87);
+        z-index: 0;
+    }
+}

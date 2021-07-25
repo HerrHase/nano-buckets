@@ -1,6 +1,7 @@
 {
     "/public/js/spritemap.js": "/public/js/spritemap.js",
     "/public/js/critical.js": "/public/js/critical.js",
+    "/public/js/bucket-single.js": "/public/js/bucket-single.js",
     "/public/js/create-bucket.js": "/public/js/create-bucket.js",
     "/public/js/dashboard.js": "/public/js/dashboard.js",
     "/public/css/index.css": "/public/css/index.css",
