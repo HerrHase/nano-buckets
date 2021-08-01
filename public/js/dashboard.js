@@ -74,7 +74,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div class="buckets"><div class="grid"><div expr2="expr2" class="col-12 col-md-4 col-xlg-3"></div></div><div class="grid"><div class="col-12"><div class="buckets__more"><button expr7="expr7" type="button" class="button">\n                        More\n                        <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-down"/></svg></button></div></div></div></div>',
+      '<div class="buckets"><div class="grid"><div expr8="expr8" class="col-12 col-md-4 col-xlg-3"></div></div><div class="grid"><div class="col-12"><div class="buckets__more"><button expr13="expr13" type="button" class="button">\n                        More\n                        <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-down"/></svg></button></div></div></div></div>',
       [
         {
           'type': bindingTypes.EACH,
@@ -82,11 +82,11 @@ __webpack_require__.r(__webpack_exports__);
           'condition': null,
 
           'template': template(
-            '<article class="panel buckets__item"><div class="bar"><div class="bar__end w-100"><button expr3="expr3" class="button button--transparent"><svg class="icon fill-text-contrast" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-delete"/></svg></button></div></div><div class="panel__body"><a expr4="expr4"><h3 expr5="expr5" class="buckets__title"> </h3><div class="content"><p expr6="expr6"> </p></div></a></div></article>',
+            '<article class="panel buckets__item"><div class="bar"><div class="bar__end w-100"><button expr9="expr9" class="button button--transparent"><svg class="icon fill-text-contrast" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-delete"/></svg></button></div></div><div class="panel__body"><a expr10="expr10"><h3 expr11="expr11" class="buckets__title"> </h3><div class="content"><p expr12="expr12"> </p></div></a></div></article>',
             [
               {
-                'redundantAttribute': 'expr3',
-                'selector': '[expr3]',
+                'redundantAttribute': 'expr9',
+                'selector': '[expr9]',
 
                 'expressions': [
                   {
@@ -102,8 +102,8 @@ __webpack_require__.r(__webpack_exports__);
                 ]
               },
               {
-                'redundantAttribute': 'expr4',
-                'selector': '[expr4]',
+                'redundantAttribute': 'expr10',
+                'selector': '[expr10]',
 
                 'expressions': [
                   {
@@ -124,8 +124,8 @@ __webpack_require__.r(__webpack_exports__);
                 ]
               },
               {
-                'redundantAttribute': 'expr5',
-                'selector': '[expr5]',
+                'redundantAttribute': 'expr11',
+                'selector': '[expr11]',
 
                 'expressions': [
                   {
@@ -145,8 +145,8 @@ __webpack_require__.r(__webpack_exports__);
                 ]
               },
               {
-                'redundantAttribute': 'expr6',
-                'selector': '[expr6]',
+                'redundantAttribute': 'expr12',
+                'selector': '[expr12]',
 
                 'expressions': [
                   {
@@ -168,8 +168,8 @@ __webpack_require__.r(__webpack_exports__);
             ]
           ),
 
-          'redundantAttribute': 'expr2',
-          'selector': '[expr2]',
+          'redundantAttribute': 'expr8',
+          'selector': '[expr8]',
           'itemName': 'bucket',
           'indexName': null,
 
@@ -180,8 +180,8 @@ __webpack_require__.r(__webpack_exports__);
           }
         },
         {
-          'redundantAttribute': 'expr7',
-          'selector': '[expr7]',
+          'redundantAttribute': 'expr13',
+          'selector': '[expr13]',
 
           'expressions': [
             {

@@ -1,0 +1,86 @@
+<app-users>
+    <div class="buckets">
+        <table class="table">
+            <div class="table__row" each={ user in state.users }>
+                <div class="table__column">
+                    { user.username }
+                </div>
+                <div class="table__column">
+                    { user.email }
+                </div>
+                <div class="table__column">
+
+                </div>
+            </div>
+        </table>
+        <div class="grid" if={ state.maxLength > state.users.length }>
+            <div class="col-12">
+                <div class="buckets__more">
+                    <button type="button" class="button" onclick={ handleClick }>
+                        More
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="/symbol-defs.svg#icon-arrow-down"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        import axios from 'axios'
+        import remove from 'lodash.remove'
+
+        /**
+         *
+         *
+         *
+         *  @author Björn Hase
+         *
+         */
+
+        export default {
+
+            state: {
+                users: [],
+                maxLength: 0
+            },
+
+            onBeforeMount() {
+                this.fetch()
+            },
+
+            handleClick() {
+
+            },
+
+            handleDelete(event, bucket) {
+                event.preventDefault()
+
+                axios.delete('/api/bucket/' + bucket._id)
+                    .then((response) => {
+
+                        // removing from buckets
+                        remove(this.state.buckets, function(b) {
+                            return b._id === bucket._id
+                        })
+
+                        this.update()
+                    })
+            },
+
+            /**
+             *  getting all buckets
+             *
+             *
+             */
+            fetch() {
+                axios.get('/api/users').then((response) => {
+                    this.state.users = response.data.data
+                    this.update()
+                })
+            }
+        }
+
+    </script>
+</app-users>

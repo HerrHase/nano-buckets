@@ -2524,16 +2524,16 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
  *  @link https://github.com/tentakelfabrik/plain-ui
  *
  */
-.panel {
+.panel, .sidebar__inner {
   border: 1px solid var(--border);
   border-radius: 2px;
   background-color: var(--background-contrast);
 }
-.panel__body {
+.panel__body, .sidebar__body {
   padding: 0.6rem 0.8rem;
 }
 @media only screen and (min-width: 992px) {
-  .panel__body {
+  .panel__body, .sidebar__body {
     padding: 0.7rem 1rem 0.9rem;
   }
 }
@@ -14926,7 +14926,7 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
   width: 100%;
   height: 100%;
 }
-.note-form .panel {
+.note-form .panel, .note-form .sidebar__inner {
   position: relative;
   z-index: 20;
   max-width: 33%;
@@ -14953,6 +14953,55 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
 .field-error ul {
   list-style: none;
   padding: 0;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 33%;
+  z-index: 1;
+  visibility: hidden;
+  transition: visibility 0s linear 0.5s;
+}
+.sidebar__inner {
+  position: relative;
+  height: 100%;
+  transition: transform 0.2s;
+  transform: translateX(-100%);
+}
+.sidebar__footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  background: var(--background);
+  width: 100%;
+  padding: 1rem;
+}
+.sidebar:before {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transition: background-color 0.5s;
+  z-index: 0;
+  content: "";
+}
+.sidebar--open {
+  visibility: visible;
+  transition: visibility 0s linear 0s;
+}
+.sidebar--open .sidebar__inner {
+  transform: translateX(0);
+}
+.sidebar--open:before {
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .container--app {

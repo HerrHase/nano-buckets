@@ -62,6 +62,7 @@ mix
     .js('resources/js/bucket-single.js', 'public/js')
     .js('resources/js/create-bucket.js', 'public/js')
     .js('resources/js/dashboard.js', 'public/js')
+    .js('resources/js/users.js', 'public/js')
     .sass('resources/scss/index.scss', 'public/css')
     .copy(
         'node_modules/@tentakelfabrik/plain-ui/src/fonts/*',

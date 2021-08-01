@@ -1,0 +1,128 @@
+<app-users-form>
+    <div class="sidebar sidebar--open">
+        <div class="sidebar__inner">
+
+            <div class="bar">
+                <div class="bar__main">
+                    Create User
+                </div>
+                <div class="bar__end">
+                    <button class="button button--transparent" type="button" onclick={ (event) => { handleClose(event) } }>
+                        <svg class="icon fill-text-contrast" aria-hidden="true">
+                            <use xlink:href="/symbol-defs.svg#icon-close"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar__body">
+                <form id="app-users-form">
+                    <div class="field-group">
+                        <label class="field-label">
+                            E-Mail
+                            <input name="email" type="text" class="field-text" />
+                        </label>
+                        <field-error name="email"></field-error>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">
+                            Password
+                            <input name="password" type="password" class="field-text" />
+                        </label>
+                        <field-error name="password"></field-error>
+                    </div>
+                </form>
+            </div>
+            <div class="sidebar__footer">
+                <button class="button m-bottom-0" type="submit" form="app-users-form">
+                    Save
+                    <svg class="icon fill-success p-left-3" aria-hidden="true">
+                        <use xlink:href="/symbol-defs.svg#icon-check"></use>
+                    </svg>
+                </button>
+                <button class="button m-bottom-0" type="submit" form="app-users-form">
+                    Save and Close
+                    <svg class="icon fill-success p-left-3" aria-hidden="true">
+                        <use xlink:href="/symbol-defs.svg#icon-arrow-right"></use>
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <script>
+
+        import axios from 'axios'
+        import * as riot from 'riot'
+
+        import FormValidator from './../../FormValidator'
+        import FieldError from './../field-error.riot'
+
+        riot.register('field-error', FieldError)
+        riot.mount('field-error')
+
+        export default {
+
+            state: {
+                user: { }
+            },
+
+            /**
+             *
+             *
+             */
+            onMounted(props, state) {
+
+                // create form validation
+                const formValidation = new FormValidator('app-users-form', {
+                    'email': {
+                        'length': {
+                            'maximum': 255
+                        },
+                        'email': true,
+                        'presence': true
+                    },
+                    'password': {
+                        'length': {
+                            'maximum': 64
+                        },
+                        'presence': true
+                    }
+                }, (event, data) => {
+                    this.handleSubmit(event, data)
+                })
+
+            },
+
+            handleClose(event)
+            {
+                event.preventDefault()
+                this.$('.sidebar').classList.remove('sidebar--open')
+            },
+
+            /**
+             *
+             *
+             */
+            handleSubmit(event, data) {
+
+                let method = 'post'
+
+                if (this.state.user && this.state.user._id) {
+                    method = 'put'
+                }
+
+                axios({
+                    method: method,
+                    url: '/api/users',
+                    data: data
+                }).then((response) => {
+                    this.state.user = response.data.data
+                    this.update()
+                })
+            }
+
+        }
+
+    </script>
+</app-users-form>

@@ -3,5 +3,7 @@ interface UserSchema {
     email: string;
     password: string;
     displayname: string;
-    is_admin: boolean
+    session_id: string;
+    session_expired: string;
+    role: string[]
 }

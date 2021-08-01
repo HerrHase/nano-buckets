@@ -19,31 +19,14 @@ const router = Router()
 router.post('/:bucket_id', async function(request, response)
 {
     const body = request.body
-    let note
-
-    // check if uuid is valid
-    if (!v4.validate(request.params.bucket_id)) {
-        response.setStatus(404)
-    }
-
-    // check if bucket exists
-    const db = new Database<BucketSchema>('./storage/database/buckets.json')
-    const bucket = await db.findOne({ _id: request.params.bucket_id })
-
-    if (!bucket) {
-        response.setStatus(404)
-    }
 
     const [ valid, errors ] = await validate(body, {
         title: [ maxLength(255) ],
         content: [ maxLength(10922) ]
     })
 
-    if (valid && bucket) {
-        body._id = v4.generate()
-
-        // getting database and search by uuid
-        const db = new Database<NoteSchema>('./storage/database/' + bucket._id + '.json')
+    if (valid) {
+        const noteRepository = new NoteRepository(request.bucket._id)
         note = await db.insertOne(body)
     }
 
