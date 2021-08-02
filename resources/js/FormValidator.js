@@ -25,6 +25,11 @@ class FormValidator
 
         // get form and elements
         this.form = document.querySelector(this.formSelector)
+
+        if (!this.form) {
+            console.error('FormValidator: form not found, querySelector not found "' + this.formSelector + '"')
+        }
+
         this.elements = this.form.querySelectorAll('field-error')
 
         // adding submit event

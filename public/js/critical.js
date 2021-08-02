@@ -7,6 +7,13 @@
   \**********************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
+/**
+ *  add turbolinks to site
+ *
+ *  
+ *  @author Björn Hase
+ *
+ */
 var Turbolinks = __webpack_require__(/*! turbolinks */ "./node_modules/turbolinks/dist/turbolinks.js");
 
 Turbolinks.start();

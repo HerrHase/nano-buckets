@@ -3,9 +3,17 @@
 <div class="container container--app">
     <div class="grid">
         <div class="col-12">
-            <h1 class="highlight">
-                Users
-            </h1>
+            <div style="display: flex">
+                <h1 class="highlight">
+                    Users
+                </h1>
+                <app-sidebar-button class="m-left-4" event="app-users-form-open" selector="app-users-form">
+                    Add
+                    <svg class="icon p-left-3" aria-hidden="true">
+                        <use xlink:href="/symbol-defs.svg#icon-circle-add"></use>
+                    </svg>
+                </app-sidebar-button>
+            </div>
             <app-users></app-users>
             <app-users-form></app-users-form>
         </div>

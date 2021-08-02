@@ -107,7 +107,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div expr14="expr14" class="field-error"></div>',
+      '<div expr4="expr4" class="field-error"></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -118,11 +118,11 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.state.errors.length > 0;
           },
 
-          'redundantAttribute': 'expr14',
-          'selector': '[expr14]',
+          'redundantAttribute': 'expr4',
+          'selector': '[expr4]',
 
           'template': template(
-            '<ul><li expr15="expr15"></li></ul>',
+            '<ul><li expr5="expr5"></li></ul>',
             [
               {
                 'type': bindingTypes.EACH,
@@ -153,8 +153,8 @@ __webpack_require__.r(__webpack_exports__);
                   ]
                 ),
 
-                'redundantAttribute': 'expr15',
-                'selector': '[expr15]',
+                'redundantAttribute': 'expr5',
+                'selector': '[expr5]',
                 'itemName': 'error',
                 'indexName': null,
 

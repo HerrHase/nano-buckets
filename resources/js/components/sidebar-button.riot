@@ -1,0 +1,49 @@
+<app-sidebar-button>
+    <button class="button m-bottom-0" type="button" onclick={ (event) => { handleClick(event) } }></button>
+    <script>
+
+        export default {
+
+            state: {
+                element: undefined,
+                data: []
+            },
+
+            /**
+             *
+             *
+             */
+            onBeforeMount() {
+
+                // getting innerHtml before rendering component
+                this.content = this.root.innerHTML;
+                this.root.innerHTML = '';
+            },
+
+            /**
+             *
+             *
+             */
+            onMounted() {
+                this.state.element = document.querySelector(this.props.selector)
+
+                // adding innerHtml to button
+                this.$('button').innerHTML = this.content;
+            },
+
+            /**
+             *
+             *  @param  {[type]} event
+             *  @return {[type]}
+             */
+            handleClick(event) {
+                event.preventDefault()
+
+                const customEvent = new CustomEvent(this.props.event)
+                this.state.element.dispatchEvent(customEvent, this.state.data)
+            }
+
+        }
+
+    </script>
+</app-sidebar-button>

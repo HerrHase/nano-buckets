@@ -14,7 +14,7 @@ class UserRepository
 
     constructor()
     {
-        this.db = new Database<UserSchema>('./../../storage/database/users.json')
+        this.db = new Database<UserSchema>('./storage/database/users.json')
     }
 
     /**
@@ -25,7 +25,9 @@ class UserRepository
         data._id = v4.generate()
         data.password = await bcrypt.hash(data.password)
 
-        return await this.db.insertOne(data)
+        const user = await this.db.insertOne(data)
+
+        return user
     }
 
     /**

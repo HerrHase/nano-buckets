@@ -107,7 +107,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div expr14="expr14" class="field-error"></div>',
+      '<div expr4="expr4" class="field-error"></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -118,11 +118,11 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.state.errors.length > 0;
           },
 
-          'redundantAttribute': 'expr14',
-          'selector': '[expr14]',
+          'redundantAttribute': 'expr4',
+          'selector': '[expr4]',
 
           'template': template(
-            '<ul><li expr15="expr15"></li></ul>',
+            '<ul><li expr5="expr5"></li></ul>',
             [
               {
                 'type': bindingTypes.EACH,
@@ -153,8 +153,8 @@ __webpack_require__.r(__webpack_exports__);
                   ]
                 ),
 
-                'redundantAttribute': 'expr15',
-                'selector': '[expr15]',
+                'redundantAttribute': 'expr5',
+                'selector': '[expr5]',
                 'itemName': 'error',
                 'indexName': null,
 
@@ -172,6 +172,96 @@ __webpack_require__.r(__webpack_exports__);
   },
 
   'name': 'field-error'
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/sidebar-button.riot":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/sidebar-button.riot ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  'css': null,
+
+  'exports': {
+    state: {
+        element: undefined,
+        data: []
+    },
+
+    /**
+     *
+     *
+     */
+    onBeforeMount() {
+
+        // getting innerHtml before rendering component
+        this.content = this.root.innerHTML;
+        this.root.innerHTML = '';
+    },
+
+    /**
+     *
+     *
+     */
+    onMounted() {
+        this.state.element = document.querySelector(this.props.selector)
+
+        // adding innerHtml to button
+        this.$('button').innerHTML = this.content;
+    },
+
+    /**
+     *
+     *  @param  {[type]} event
+     *  @return {[type]}
+     */
+    handleClick(event) {
+        event.preventDefault()
+
+        const customEvent = new CustomEvent(this.props.event)
+        this.state.element.dispatchEvent(customEvent, this.state.data)
+    }
+  },
+
+  'template': function(
+    template,
+    expressionTypes,
+    bindingTypes,
+    getComponent
+  ) {
+    return template(
+      '<button expr0="expr0" class="button m-bottom-0" type="button"></button>',
+      [
+        {
+          'redundantAttribute': 'expr0',
+          'selector': '[expr0]',
+
+          'expressions': [
+            {
+              'type': expressionTypes.EVENT,
+              'name': 'onclick',
+
+              'evaluate': function(
+                _scope
+              ) {
+                return (event) => { _scope.handleClick(event) };
+              }
+            }
+          ]
+        }
+      ]
+    );
+  },
+
+  'name': 'app-sidebar-button'
 });
 
 /***/ }),
@@ -246,7 +336,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div class="buckets"><table class="table"><div expr3="expr3" class="table__row"></div></table><div expr6="expr6" class="grid"></div></div>',
+      '<div class="buckets"><table class="table"><tbody><tr expr6="expr6"></tr></tbody></table><div expr10="expr10" class="grid"></div></div>',
       [
         {
           'type': bindingTypes.EACH,
@@ -254,11 +344,11 @@ __webpack_require__.r(__webpack_exports__);
           'condition': null,
 
           'template': template(
-            '<div expr4="expr4" class="table__column"> </div><div expr5="expr5" class="table__column"> </div><div class="table__column"></div>',
+            '<td expr7="expr7" class="table__td"> </td><td expr8="expr8" class="table__td"> </td><td expr9="expr9" class="table__td"> </td><td class="table__td"><button class="button button--small m-bottom-0 m-right-3"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-edit"/></svg></button><button class="button button--small m-bottom-0" type="button"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-delete"/></svg></button></td>',
             [
               {
-                'redundantAttribute': 'expr4',
-                'selector': '[expr4]',
+                'redundantAttribute': 'expr7',
+                'selector': '[expr7]',
 
                 'expressions': [
                   {
@@ -269,7 +359,7 @@ __webpack_require__.r(__webpack_exports__);
                       _scope
                     ) {
                       return [
-                        _scope.user.username
+                        _scope.user.display_name
                       ].join(
                         ''
                       );
@@ -278,8 +368,8 @@ __webpack_require__.r(__webpack_exports__);
                 ]
               },
               {
-                'redundantAttribute': 'expr5',
-                'selector': '[expr5]',
+                'redundantAttribute': 'expr8',
+                'selector': '[expr8]',
 
                 'expressions': [
                   {
@@ -297,12 +387,33 @@ __webpack_require__.r(__webpack_exports__);
                     }
                   }
                 ]
+              },
+              {
+                'redundantAttribute': 'expr9',
+                'selector': '[expr9]',
+
+                'expressions': [
+                  {
+                    'type': expressionTypes.TEXT,
+                    'childNodeIndex': 0,
+
+                    'evaluate': function(
+                      _scope
+                    ) {
+                      return [
+                        _scope.user.is_admin
+                      ].join(
+                        ''
+                      );
+                    }
+                  }
+                ]
               }
             ]
           ),
 
-          'redundantAttribute': 'expr3',
-          'selector': '[expr3]',
+          'redundantAttribute': 'expr6',
+          'selector': '[expr6]',
           'itemName': 'user',
           'indexName': null,
 
@@ -321,15 +432,15 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.state.maxLength > _scope.state.users.length;
           },
 
-          'redundantAttribute': 'expr6',
-          'selector': '[expr6]',
+          'redundantAttribute': 'expr10',
+          'selector': '[expr10]',
 
           'template': template(
-            '<div class="col-12"><div class="buckets__more"><button expr7="expr7" type="button" class="button">\n                        More\n                        <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-down"/></svg></button></div></div>',
+            '<div class="col-12"><div class="buckets__more"><button expr11="expr11" type="button" class="button">\n                        More\n                        <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-down"/></svg></button></div></div>',
             [
               {
-                'redundantAttribute': 'expr7',
-                'selector': '[expr7]',
+                'redundantAttribute': 'expr11',
+                'selector': '[expr11]',
 
                 'expressions': [
                   {
@@ -395,8 +506,12 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
      */
     onMounted(props, state) {
 
+        this.root.addEventListener('app-users-form-open', (event) => {
+            this.$('.sidebar').classList.add('sidebar--open')
+        })
+
         // create form validation
-        const formValidation = new _FormValidator__WEBPACK_IMPORTED_MODULE_1__.default('app-users-form', {
+        const formValidation = new _FormValidator__WEBPACK_IMPORTED_MODULE_1__.default('#app-users-form', {
             'email': {
                 'length': {
                     'maximum': 255
@@ -452,11 +567,11 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
     getComponent
   ) {
     return template(
-      '<div class="sidebar sidebar--open"><div class="sidebar__inner"><div class="bar"><div class="bar__main">\n                    Create User\n                </div><div class="bar__end"><button expr16="expr16" class="button button--transparent" type="button"><svg class="icon fill-text-contrast" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-close"/></svg></button></div></div><div class="sidebar__body"><form id="app-users-form"><div class="field-group"><label class="field-label">\n                            E-Mail\n                            <input name="email" type="text" class="field-text"/></label><field-error expr17="expr17" name="email"></field-error></div><div class="field-group"><label class="field-label">\n                            Password\n                            <input name="password" type="password" class="field-text"/></label><field-error expr18="expr18" name="password"></field-error></div></form></div><div class="sidebar__footer"><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg></button><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save and Close\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-right"/></svg></button></div></div></div>',
+      '<div class="sidebar"><div class="sidebar__inner"><div class="bar"><div class="bar__main">\n                    Create User\n                </div><div class="bar__end"><button expr18="expr18" class="button button--transparent" type="button"><svg class="icon fill-text-contrast" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-close"/></svg></button></div></div><div class="sidebar__body"><form id="app-users-form" novalidate><div class="field-group"><label class="field-label">\n                            Display Name\n                            <input name="display_name" type="text" class="field-text"/></label><field-error expr19="expr19" name="display_name"></field-error></div><div class="field-group"><label class="field-label">\n                            E-Mail\n                            <input name="email" type="text" class="field-text"/></label><field-error expr20="expr20" name="email"></field-error></div><div class="field-group"><label class="field-label">\n                            Password\n                            <input name="password" type="password" class="field-text"/></label><field-error expr21="expr21" name="password"></field-error></div></form></div><div class="sidebar__footer"><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg></button><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save and Close\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-right"/></svg></button></div></div></div>',
       [
         {
-          'redundantAttribute': 'expr16',
-          'selector': '[expr16]',
+          'redundantAttribute': 'expr18',
+          'selector': '[expr18]',
 
           'expressions': [
             {
@@ -483,8 +598,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
 
           'slots': [],
           'attributes': [],
-          'redundantAttribute': 'expr17',
-          'selector': '[expr17]'
+          'redundantAttribute': 'expr19',
+          'selector': '[expr19]'
         },
         {
           'type': bindingTypes.TAG,
@@ -498,8 +613,23 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
 
           'slots': [],
           'attributes': [],
-          'redundantAttribute': 'expr18',
-          'selector': '[expr18]'
+          'redundantAttribute': 'expr20',
+          'selector': '[expr20]'
+        },
+        {
+          'type': bindingTypes.TAG,
+          'getComponent': getComponent,
+
+          'evaluate': function(
+            _scope
+          ) {
+            return 'field-error';
+          },
+
+          'slots': [],
+          'attributes': [],
+          'redundantAttribute': 'expr21',
+          'selector': '[expr21]'
         }
       ]
     );
@@ -2391,6 +2521,11 @@ var FormValidator = /*#__PURE__*/function () {
     this.constraits = constraits; // get form and elements
 
     this.form = document.querySelector(this.formSelector);
+
+    if (!this.form) {
+      console.error('FormValidator: form not found, querySelector not found "' + this.formSelector + '"');
+    }
+
     this.elements = this.form.querySelectorAll('field-error'); // adding submit event
 
     this.form.addEventListener('submit', function (event) {
@@ -9263,17 +9398,21 @@ var __webpack_exports__ = {};
   !*** ./resources/js/users.js ***!
   \*******************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var riot__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! riot */ "./node_modules/riot/riot.esm.js");
+/* harmony import */ var riot__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! riot */ "./node_modules/riot/riot.esm.js");
 /* harmony import */ var _components_users_riot__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/users.riot */ "./resources/js/components/users.riot");
 /* harmony import */ var _components_users_form_riot__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/users/form.riot */ "./resources/js/components/users/form.riot");
+/* harmony import */ var _components_sidebar_button_riot__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/sidebar-button.riot */ "./resources/js/components/sidebar-button.riot");
+
 
 
  // register components for buckets
 
-riot__WEBPACK_IMPORTED_MODULE_2__.register('app-users', _components_users_riot__WEBPACK_IMPORTED_MODULE_0__.default);
-riot__WEBPACK_IMPORTED_MODULE_2__.mount('app-users');
-riot__WEBPACK_IMPORTED_MODULE_2__.register('app-users-form', _components_users_form_riot__WEBPACK_IMPORTED_MODULE_1__.default);
-riot__WEBPACK_IMPORTED_MODULE_2__.mount('app-users-form');
+riot__WEBPACK_IMPORTED_MODULE_3__.register('app-users', _components_users_riot__WEBPACK_IMPORTED_MODULE_0__.default);
+riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-users');
+riot__WEBPACK_IMPORTED_MODULE_3__.register('app-users-form', _components_users_form_riot__WEBPACK_IMPORTED_MODULE_1__.default);
+riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-users-form');
+riot__WEBPACK_IMPORTED_MODULE_3__.register('app-sidebar-button', _components_sidebar_button_riot__WEBPACK_IMPORTED_MODULE_2__.default);
+riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-sidebar-button');
 })();
 
 /******/ })()

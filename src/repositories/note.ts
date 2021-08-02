@@ -10,14 +10,14 @@ class BucketRepository
 {
     db: any
 
-    constructor()
+    constructor(user_id, bucket_id)
     {
-        this.db = new Database<BucketSchema>('./storage/database/buckets.json')
+        this.db = new Database<BucketSchema>('./storage/database/' + user_id + '/' + bucket_id + '.json')
     }
 
     /**
      *
-     *  
+     *
      */
     async create(data: any)
     {
@@ -27,7 +27,7 @@ class BucketRepository
 
     /**
      *
-     *
+     *  
      */
     async update(data: any)
     {

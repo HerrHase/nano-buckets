@@ -1,5 +1,5 @@
 <app-users-form>
-    <div class="sidebar sidebar--open">
+    <div class="sidebar">
         <div class="sidebar__inner">
 
             <div class="bar">
@@ -16,7 +16,14 @@
             </div>
 
             <div class="sidebar__body">
-                <form id="app-users-form">
+                <form id="app-users-form" novalidate>
+                    <div class="field-group">
+                        <label class="field-label">
+                            Display Name
+                            <input name="display_name" type="text" class="field-text" />
+                        </label>
+                        <field-error name="display_name"></field-error>
+                    </div>
                     <div class="field-group">
                         <label class="field-label">
                             E-Mail
@@ -73,8 +80,12 @@
              */
             onMounted(props, state) {
 
+                this.root.addEventListener('app-users-form-open', (event) => {
+                    this.$('.sidebar').classList.add('sidebar--open')
+                })
+
                 // create form validation
-                const formValidation = new FormValidator('app-users-form', {
+                const formValidation = new FormValidator('#app-users-form', {
                     'email': {
                         'length': {
                             'maximum': 255
