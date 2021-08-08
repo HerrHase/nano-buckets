@@ -12,7 +12,7 @@
          *  Shows errors of Validation and raise a element to
          *  trigger single validation of field
          *
-         *  <field-error name="name" nofieldupdate></field-error>
+         *  <field-error name="name" closest="<optional>" nofieldupdate></field-error>
          *
          *  @author Björn Hase, Tentakelfabrik, me@tentakelfabrik.de
          *
@@ -24,19 +24,36 @@
                 errors: [
 
                 ],
+
+                // css class for
+                closest: '.field-group',
             },
 
             /**
              *
              *
-             *  @param  {Object} props [description]
-             *  @param  {Object} state [description]
+             *  @param  {Object} props
+             *  @param  {Object} state
+             *
+             */
+            onBeforeMounted(props, state)
+            {
+                if (props.closest) {
+                    state.closest = props.closest
+                }
+            },
+
+            /**
+             *
+             *
+             *  @param  {Object} props
+             *  @param  {Object} state
              *
              */
             onMounted(props, state)
             {
                 // getting parent element for entire field
-                const parent = this.root.closest('.field-group')
+                const parent = this.root.closest(state.closest)
 
                 // getting current element by name
                 const element = document.querySelector('[name="' + props.name + '"]')

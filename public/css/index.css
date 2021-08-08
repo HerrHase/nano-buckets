@@ -1597,6 +1597,13 @@
  *
  */
 /**
+ *  adding overlay with z-index and color
+ *
+ *  @param {z-index}
+ *  @param {color}
+ *  
+ */
+/**
  *  variables
  *
  *
@@ -1632,6 +1639,20 @@
  *
  */
 /**
+ *  Container
+ *
+ *
+ *  @author Björn Hase, Tentakelfabrik
+ *  @license http://opensource.org/licenses/MIT The MIT License
+ *  @link https://github.com/tentakelfabrik/crispy-css
+ *
+ */
+.container--app {
+  max-width: 100%;
+  padding: 15px 30px;
+}
+
+/**
  *  normalize
  *
  *  Thanks to https://necolas.github.io/normalize.css/, use a lot from them
@@ -1661,6 +1682,7 @@
   --warning-contrast: #f8d9ac;
   --background: #3e3e3e;
   --background-contrast: #ffffff;
+  --background-alpha: rgba(0, 0, 0, 0.7);
   --border: #3e3e3e;
   --border-contrast: #ffffff;
   --font-family: IBM Plex Mono, sans-serif;
@@ -2612,7 +2634,7 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
  */
 .table {
   width: 100%;
-  border: 1px solid #cacaca;
+  border: 1px solid var(--border);
   background: var(--white);
 }
 .table--striped tr:nth-child(even) {
@@ -2621,23 +2643,27 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
 .table--scroll {
   overflow-x: auto;
 }
-.table td {
+.table__td {
   color: var(--text);
 }
-.table td,
-.table th {
+.table__td, .table__th {
   text-align: left;
-  border-bottom: 1px solid #cacaca;
-  padding: 0.5em 1.25em;
+  border-bottom: 1px solid var(--border);
+  padding: 0.25em 0.75em;
 }
-.table th {
+@media only screen and (min-width: 992px) {
+  .table__td, .table__th {
+    padding: 0.5em 1.25em;
+  }
+}
+.table__th {
   color: white;
-  background-color: #3e3e3e;
+  background-color: var(--background);
 }
-.table tr:hover {
+.table--hover .table__tr:hover {
   background-color: #585858;
 }
-.table tr:hover td {
+.table--hover .table__tr:hover .table__td {
   color: white;
 }
 
@@ -2676,6 +2702,7 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
 .bar__start, .bar__main, .bar__end {
   display: flex;
   align-self: center;
+  align-items: center;
   margin-left: 0.75em;
 }
 .bar__start:last-child, .bar__main:last-child, .bar__end:last-child {
@@ -2705,6 +2732,18 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
   align-items: center;
   justify-content: center;
 }
+.modal:before {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transition: background-color 0.5s;
+  z-index: 19;
+  content: "";
+  transition: background-color 0.5s;
+}
 .modal__inner {
   position: relative;
   z-index: 21;
@@ -2730,24 +2769,13 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
 .modal .button {
   color: var(--text-contrast);
 }
-.modal:before {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-  transition: background-color 0.5s;
-  z-index: 19;
-  content: "";
-}
 .modal--open {
   display: flex;
   visibility: visible;
   transition: visibility 0s linear 0s;
 }
 .modal--open:before {
-  background: rgba(0, 0, 0, 0.87);
+  background-color: var(--background-alpha);
 }
 .modal--open .modal__inner {
   transform: scale(1);
@@ -2823,6 +2851,77 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
     height: 60px;
   }
 }
+/**
+ *  <div class="sidebar">
+ *      <div class="sidebar__inner">
+ *          <div class="sidebar__body">
+ *          </div>
+ *          <div class="sidebar__footer">
+ *          </div>
+ *      </div>
+ *  </div>
+ *
+ *  @author Björn Hase, Tentakelfabrik
+ *  @license http://opensource.org/licenses/MIT The MIT License
+ *  @link https://gitea.com/tentakelfabrik/plain-ui
+ *
+ */
+.sidebar {
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 95%;
+  visibility: hidden;
+  transition: visibility 0s linear 0.5s;
+}
+.sidebar:before {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transition: background-color 0.5s;
+  z-index: 9;
+  content: "";
+  transition: background-color 0.5s;
+}
+.sidebar__inner {
+  position: relative;
+  height: 100%;
+  z-index: 10;
+  transition: transform 0.2s;
+  transform: translateX(-100%);
+}
+.sidebar__footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  background: var(--background);
+  width: 100%;
+  padding: 1rem;
+}
+.sidebar--open {
+  visibility: visible;
+  transition: visibility 0s linear 0s;
+}
+.sidebar--open .sidebar__inner {
+  transform: translateX(0);
+}
+.sidebar--open:before {
+  background: var(--background-alpha);
+}
+@media only screen and (min-width: 992px) {
+  .sidebar {
+    max-width: 33%;
+  }
+}
+
 /**
  *  masonry
  *
@@ -14355,6 +14454,10 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
   color: var(--background-contrast);
 }
 
+.color-background-alpha {
+  color: var(--background-alpha);
+}
+
 .color-border {
   color: var(--border);
 }
@@ -14437,6 +14540,10 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
 
 .fill-background-contrast {
   fill: var(--background-contrast);
+}
+
+.fill-background-alpha {
+  fill: var(--background-alpha);
 }
 
 .fill-border {
@@ -14523,6 +14630,10 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
   fill: var(--background-contrast);
 }
 
+.hover-fill-background-alpha:hover svg {
+  fill: var(--background-alpha);
+}
+
 .hover-fill-border:hover svg {
   fill: var(--border);
 }
@@ -14605,6 +14716,10 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
 
 .border-color-background-contrast {
   border-color: var(--background-contrast);
+}
+
+.border-color-background-alpha {
+  border-color: var(--background-alpha);
 }
 
 .border-color-border {
@@ -14691,6 +14806,10 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
   background-color: var(--background-contrast);
 }
 
+.background-color-background-alpha {
+  background-color: var(--background-alpha);
+}
+
 .background-color-border {
   background-color: var(--border);
 }
@@ -14760,6 +14879,11 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
   font-weight: bolder;
 }
 
+/**
+ *  font-sizes
+ *
+ *
+ */
 .size-default {
   font-size: 0.9rem;
 }
@@ -14906,6 +15030,245 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
   }
 }
 /**
+ *  white-space
+ *
+ *
+ */
+.white-space-normal {
+  white-space: normal;
+}
+
+.white-space-nowrap {
+  white-space: nowrap;
+}
+
+.white-space-pre {
+  white-space: pre;
+}
+
+.white-space-preline {
+  white-space: preline;
+}
+
+.white-space-preline {
+  white-space: pre-line;
+}
+
+.white-space-prewrap {
+  white-space: pre-wrap;
+}
+
+/**
+ *  visibility
+ *
+ *
+ *  @author Björn Hase, Tentakelfabrik
+ *  @license http://opensource.org/licenses/MIT The MIT License
+ *  @link https://github.com/tentakelfabrik/plain-ui-css
+ *
+ */
+/**
+ *  display
+ *
+ *
+ */
+.display-block {
+  display: block;
+}
+
+@media only screen and (min-width: 576px) {
+  .display-block-xs {
+    display: block;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .display-block-sm {
+    display: block;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .display-block-md {
+    display: block;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .display-block-lg {
+    display: block;
+  }
+}
+@media only screen and (min-width: 1600px) {
+  .display-block-xlg {
+    display: block;
+  }
+}
+.display-inline {
+  display: inline;
+}
+
+@media only screen and (min-width: 576px) {
+  .display-inline-xs {
+    display: inline;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .display-inline-sm {
+    display: inline;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .display-inline-md {
+    display: inline;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .display-inline-lg {
+    display: inline;
+  }
+}
+@media only screen and (min-width: 1600px) {
+  .display-inline-xlg {
+    display: inline;
+  }
+}
+.display-inline-block {
+  display: inline-block;
+}
+
+@media only screen and (min-width: 576px) {
+  .display-inline-block-xs {
+    display: inline-block;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .display-inline-block-sm {
+    display: inline-block;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .display-inline-block-md {
+    display: inline-block;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .display-inline-block-lg {
+    display: inline-block;
+  }
+}
+@media only screen and (min-width: 1600px) {
+  .display-inline-block-xlg {
+    display: inline-block;
+  }
+}
+.display-flex {
+  display: flex;
+}
+
+@media only screen and (min-width: 576px) {
+  .display-flex-xs {
+    display: flex;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .display-flex-sm {
+    display: flex;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .display-flex-md {
+    display: flex;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .display-flex-lg {
+    display: flex;
+  }
+}
+@media only screen and (min-width: 1600px) {
+  .display-flex-xlg {
+    display: flex;
+  }
+}
+.display-inline-flex {
+  display: inline-flex;
+}
+
+@media only screen and (min-width: 576px) {
+  .display-inline-flex-xs {
+    display: inline-flex;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .display-inline-flex-sm {
+    display: inline-flex;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .display-inline-flex-md {
+    display: inline-flex;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .display-inline-flex-lg {
+    display: inline-flex;
+  }
+}
+@media only screen and (min-width: 1600px) {
+  .display-inline-flex-xlg {
+    display: inline-flex;
+  }
+}
+.display-table {
+  display: table;
+}
+
+@media only screen and (min-width: 576px) {
+  .display-table-xs {
+    display: table;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .display-table-sm {
+    display: table;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .display-table-md {
+    display: table;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .display-table-lg {
+    display: table;
+  }
+}
+@media only screen and (min-width: 1600px) {
+  .display-table-xlg {
+    display: table;
+  }
+}
+/**
+ *  for hidden-xs etc, show https://reflexgrid.com/#visibility-helpers
+ *
+ *  @TODO full integration of reflexgrid will change this part
+ *
+ */
+/**
+ * Visibility
+ *
+ */
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.visibility-visible {
+  visibility: visible;
+}
+
+.visibility-collapse {
+  visibility: collapse;
+}
+
+/**
  *
  *
  */
@@ -14953,60 +15316,6 @@ input[type=checkbox].field-choice:checked ~ .field-switch:after {
 .field-error ul {
   list-style: none;
   padding: 0;
-}
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  max-width: 33%;
-  z-index: 1;
-  visibility: hidden;
-  transition: visibility 0s linear 0.5s;
-}
-.sidebar__inner {
-  position: relative;
-  height: 100%;
-  transition: transform 0.2s;
-  transform: translateX(-100%);
-}
-.sidebar__footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  background: var(--background);
-  width: 100%;
-  padding: 1rem;
-}
-.sidebar:before {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-  transition: background-color 0.5s;
-  z-index: 0;
-  content: "";
-}
-.sidebar--open {
-  visibility: visible;
-  transition: visibility 0s linear 0s;
-}
-.sidebar--open .sidebar__inner {
-  transform: translateX(0);
-}
-.sidebar--open:before {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.container--app {
-  max-width: 100%;
-  padding: 15px 30px;
 }
 
 .turbolinks-progress-bar {

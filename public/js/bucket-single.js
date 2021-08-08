@@ -20,19 +20,36 @@ __webpack_require__.r(__webpack_exports__);
         errors: [
 
         ],
+
+        // css class for
+        closest: '.field-group',
     },
 
     /**
      *
      *
-     *  @param  {Object} props [description]
-     *  @param  {Object} state [description]
+     *  @param  {Object} props
+     *  @param  {Object} state
+     *
+     */
+    onBeforeMounted(props, state)
+    {
+        if (props.closest) {
+            state.closest = props.closest
+        }
+    },
+
+    /**
+     *
+     *
+     *  @param  {Object} props
+     *  @param  {Object} state
      *
      */
     onMounted(props, state)
     {
         // getting parent element for entire field
-        const parent = this.root.closest('.field-group')
+        const parent = this.root.closest(state.closest)
 
         // getting current element by name
         const element = document.querySelector('[name="' + props.name + '"]')
@@ -107,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div expr4="expr4" class="field-error"></div>',
+      '<div expr7="expr7" class="field-error"></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -118,11 +135,11 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.state.errors.length > 0;
           },
 
-          'redundantAttribute': 'expr4',
-          'selector': '[expr4]',
+          'redundantAttribute': 'expr7',
+          'selector': '[expr7]',
 
           'template': template(
-            '<ul><li expr5="expr5"></li></ul>',
+            '<ul><li expr8="expr8"></li></ul>',
             [
               {
                 'type': bindingTypes.EACH,
@@ -153,8 +170,8 @@ __webpack_require__.r(__webpack_exports__);
                   ]
                 ),
 
-                'redundantAttribute': 'expr5',
-                'selector': '[expr5]',
+                'redundantAttribute': 'expr8',
+                'selector': '[expr8]',
                 'itemName': 'error',
                 'indexName': null,
 
@@ -272,7 +289,7 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
     getComponent
   ) {
     return template(
-      '<div class="note-form"><div class="panel"><div class="panel__body"><form id="form" novalidate><input expr1="expr1" type="hidden" name="_id"/><div class="field-group"><label class="field-label">\n                            title\n                            <input type="text" class="field-text" name="title"/></label></div><div class="field-group"><label class="field-label">\n                            content\n                            <textarea name="content" class="field-text"></textarea></label></div><div class><div class="tabs"></div></div><div><button expr2="expr2" class="button"></button><button expr3="expr3" class="button" type="submit"></button></div></form></div></div></div>',
+      '<div class="note-form"><div class="panel"><div class="panel__body"><form id="form" novalidate><input expr9="expr9" type="hidden" name="_id"/><div class="field-group"><label class="field-label">\n                            title\n                            <input type="text" class="field-text" name="title"/></label></div><div class="field-group"><label class="field-label">\n                            content\n                            <textarea name="content" class="field-text"></textarea></label></div><div class><div class="tabs"></div></div><div><button expr10="expr10" class="button"></button><button expr11="expr11" class="button" type="submit"></button></div></form></div></div></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -283,8 +300,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
             return _scope.state.note && _scope.state.note._id;
           },
 
-          'redundantAttribute': 'expr1',
-          'selector': '[expr1]',
+          'redundantAttribute': 'expr9',
+          'selector': '[expr9]',
 
           'template': template(
             null,
@@ -315,8 +332,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
             return !_scope.state.note || (_scope.state.note && !_scope.state.note._id);
           },
 
-          'redundantAttribute': 'expr2',
-          'selector': '[expr2]',
+          'redundantAttribute': 'expr10',
+          'selector': '[expr10]',
 
           'template': template(
             '\n                            Create\n                        ',
@@ -332,8 +349,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
             return _scope.state.note && _scope.state.note._id;
           },
 
-          'redundantAttribute': 'expr3',
-          'selector': '[expr3]',
+          'redundantAttribute': 'expr11',
+          'selector': '[expr11]',
 
           'template': template(
             '\n                            Save\n                        ',

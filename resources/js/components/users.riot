@@ -1,24 +1,47 @@
 <app-users>
     <div class="buckets">
         <table class="table">
+            <thead>
+                <tr class="table__tr">
+                    <th class="table__th">
+                        Email
+                    </th>
+                    <th class="table__th">
+                        Display Name
+                    </th>
+                    <th class="table__th" colspan="2">
+                        Roles
+                    </th>
+                </tr>
+            </thead>
             <tbody>
-                <tr each={ user in state.users }>
-                    <td class="table__td">
-                        { user.display_name }
-                    </td>
+                <tr class="table__tr" each={ user in state.users }>
+
                     <td class="table__td">
                         { user.email }
                     </td>
+
                     <td class="table__td">
-                        { user.is_admin }
+                        { user.display_name }
                     </td>
+
                     <td class="table__td">
+                        <div if={ user.roles && user.roles.indexOf('admin') >= 0 }>
+                            Admin
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="/symbol-defs.svg#icon-check"></use>
+                            </svg>
+                        </div>
+                    </td>
+
+                    <!-- actions -->
+                    <td class="table__td right">
                         <button class="button button--small m-bottom-0 m-right-3">
                             <svg class="icon" aria-hidden="true">
                                 <use xlink:href="/symbol-defs.svg#icon-edit"></use>
                             </svg>
                         </button>
-                        <button class="button button--small m-bottom-0" type="button">
+                        <button class="button button--small m-bottom-0" type="button" onclick={ (event) => { handleDelete(event, user) } }>
                             <svg class="icon" aria-hidden="true">
                                 <use xlink:href="/symbol-defs.svg#icon-delete"></use>
                             </svg>
@@ -27,6 +50,29 @@
                 </tr>
             </tbody>
         </table>
+
+        <div class="modal">
+            <div class="modal__inner">
+                <div class="modal__title center">
+                    <svg class="icon fill-text-contrast" aria-hidden="true">
+                        <use xlink:href="/symbol-defs.svg#icon-close"></use>
+                    </svg>
+                    { title }
+                </div>
+                <div class="modal__body">
+                    { content }
+                </div>
+                <div class="modal__footer">
+                    <button class="button button--outline button--danger" onclick={ () => { handleConfirm(event, data) } }>
+                        Confirm
+                    </button>
+                    <button class="button button--outline float-right" onclick={ (event) => { handleClose(event) } }>
+                        Reject
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <div class="grid" if={ state.maxLength > state.users.length }>
             <div class="col-12">
                 <div class="buckets__more">
@@ -39,6 +85,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <script>
 
@@ -68,15 +115,15 @@
 
             },
 
-            handleDelete(event, bucket) {
+            handleDelete(event, user) {
                 event.preventDefault()
 
-                axios.delete('/api/bucket/' + bucket._id)
+                axios.delete('/api/users/' + user._id)
                     .then((response) => {
 
                         // removing from buckets
-                        remove(this.state.buckets, function(b) {
-                            return b._id === bucket._id
+                        remove(this.state.users, function(u) {
+                            return u._id === user._id
                         })
 
                         this.update()

@@ -19,17 +19,17 @@
                 <form id="app-users-form" novalidate>
                     <div class="field-group">
                         <label class="field-label">
-                            Display Name
-                            <input name="display_name" type="text" class="field-text" />
-                        </label>
-                        <field-error name="display_name"></field-error>
-                    </div>
-                    <div class="field-group">
-                        <label class="field-label">
                             E-Mail
                             <input name="email" type="text" class="field-text" />
                         </label>
                         <field-error name="email"></field-error>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">
+                            Display Name
+                            <input name="display_name" type="text" class="field-text" />
+                        </label>
+                        <field-error name="display_name"></field-error>
                     </div>
                     <div class="field-group">
                         <label class="field-label">
@@ -38,8 +38,22 @@
                         </label>
                         <field-error name="password"></field-error>
                     </div>
+                    <div class="field-group">
+                        <label class="field-label">
+                            <input name="roles[]" type="checkbox" class="field-choice" value="admin" />
+                            <svg class="icon field-choice__unchecked" aria-hidden="true">
+                                <use xlink:href="/symbol-defs.svg#icon-checkbox"></use>
+                            </svg>
+                            <svg class="icon field-choice__checked" aria-hidden="true">
+                                <use xlink:href="/symbol-defs.svg#icon-checkbox-checked"></use>
+                            </svg>
+                            Admin
+                        </label>
+                        <field-error name="roles"></field-error>
+                    </div>
                 </form>
             </div>
+
             <div class="sidebar__footer">
                 <button class="button m-bottom-0" type="submit" form="app-users-form">
                     Save

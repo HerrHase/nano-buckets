@@ -2,6 +2,17 @@
     <button class="button m-bottom-0" type="button" onclick={ (event) => { handleClick(event) } }></button>
     <script>
 
+        /**
+         *  button to create customEvent and dispatch to element
+         *
+         *  <app-sidebar-button event="" selector="" data={ }>
+         *
+         *  </app-sidebar-button>
+         *
+         *  @author Björn Hase
+         *
+         */
+
         export default {
 
             state: {
@@ -18,6 +29,14 @@
                 // getting innerHtml before rendering component
                 this.content = this.root.innerHTML;
                 this.root.innerHTML = '';
+
+                if (!this.props.event) {
+                    console.error('sidebar-button: attribute for name of custom event is missing')
+                }
+
+                if (!this.props.selector) {
+                    console.error('sidebar-button: attribute for selector to send custom event is missing')
+                }
             },
 
             /**
@@ -32,6 +51,7 @@
             },
 
             /**
+             *  create custom event with props
              *
              *  @param  {[type]} event
              *  @return {[type]}
