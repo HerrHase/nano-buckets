@@ -51,27 +51,14 @@
             </tbody>
         </table>
 
-        <div class="modal">
-            <div class="modal__inner">
-                <div class="modal__title center">
-                    <svg class="icon fill-text-contrast" aria-hidden="true">
-                        <use xlink:href="/symbol-defs.svg#icon-close"></use>
-                    </svg>
-                    { title }
-                </div>
-                <div class="modal__body">
-                    { content }
-                </div>
-                <div class="modal__footer">
-                    <button class="button button--outline button--danger" onclick={ () => { handleConfirm(event, data) } }>
-                        Confirm
-                    </button>
-                    <button class="button button--outline float-right" onclick={ (event) => { handleClose(event) } }>
-                        Reject
-                    </button>
-                </div>
-            </div>
-        </div>
+        <app-modal id="user-delete-confirm">
+            <span slot="title">
+                <svg class="icon fill-text-contrast" aria-hidden="true">
+                    <use xlink:href="/symbol-defs.svg#icon-close"></use>
+                </svg>
+                Delete
+            </span>
+        </app-modal>
 
         <div class="grid" if={ state.maxLength > state.users.length }>
             <div class="col-12">
@@ -91,6 +78,12 @@
 
         import axios from 'axios'
         import remove from 'lodash.remove'
+
+        import * as riot from 'riot'
+        import AppModal from './modal.riot'
+
+        riot.register('app-modal', AppModal)
+        riot.mount('app-modal')
 
         /**
          *
@@ -116,18 +109,33 @@
             },
 
             handleDelete(event, user) {
+
                 event.preventDefault()
 
-                axios.delete('/api/users/' + user._id)
-                    .then((response) => {
+                const customEvent = new CustomEvent('open', {
+                    'detail': {
+                        'confirm': () => {
+                            axios.delete('/api/users/' + user._id)
+                                .then((response) => {
 
-                        // removing from buckets
-                        remove(this.state.users, function(u) {
-                            return u._id === user._id
-                        })
+                                    // removing from buckets
+                                    remove(this.state.users, function(u) {
+                                        return u._id === user._id
+                                    })
 
-                        this.update()
-                    })
+                                    this.update()
+                                })
+                        },
+
+                        // @TODO find a better solution to create body text
+                        'body': 'Do you want delete ' + user.email + '?'
+                    }
+                });
+
+                this.$('#user-delete-confirm').dispatchEvent(customEvent);
+
+                /**
+                */
             },
 
             /**

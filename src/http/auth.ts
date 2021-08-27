@@ -33,7 +33,6 @@ router.post('/', async function(request, response)
             result = userRepository.verifyPassword(user, body.password)
 
             if (result) {
-
                 response.cookie('auth-token', jwt)
             }
         }

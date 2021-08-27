@@ -1,0 +1,84 @@
+<app-modal>
+    <div class="modal">
+        <div class="modal__inner">
+            <div class="modal__title center">
+                <slot name="title" />
+            </div>
+            <div class="modal__body">
+                { state.body }
+            </div>
+            <div class="modal__footer">
+                <button class="button button--outline button--danger" onclick={ (event) => { handleConfirm(event) } }>
+                    Confirm
+                </button>
+                <button class="button button--outline float-right" onclick={ (event) => { handleClose(event) } } >
+                    Reject
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        /**
+         *
+         *
+         *
+         *
+         */
+
+        export default {
+
+            state: {
+                confirm: {}
+            },
+
+            onMounted() {
+                this.root.addEventListener('open', this.__open)
+                this.root.addEventListener('close', this.__close)
+            },
+
+            __open(event) {
+
+                // adding confirm function to state
+                this.state.confirm = event.detail.confirm
+                this.state.body = event.detail.body
+
+                this.$('.modal').classList.add('modal--open')
+                this.update()
+            },
+
+            __close(event) {
+                this.$('.modal').classList.remove('modal--open')
+                this.update()
+            },
+
+            /**
+             *
+             *  @param  {[type]} event
+             *  @return {[type]}
+             *
+             */
+            handleConfirm(event) {
+                event.preventDefault()
+
+                // calling confirm function
+                this.state.confirm()
+
+                this.__close()
+            },
+
+            /**
+             *
+             *
+             *  @param  {object} event
+             *
+             */
+            handleClose(event) {
+                event.preventDefault()
+                this.__close()
+            }
+        }
+
+    </script>
+</app-modal>

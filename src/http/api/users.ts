@@ -6,7 +6,6 @@ import { uuid } from '../../rules/uuid.ts'
 
 const router = Router()
 
-
 /**
  *  get all users
  *

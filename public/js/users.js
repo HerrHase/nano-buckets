@@ -124,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div expr7="expr7" class="field-error"></div>',
+      '<div expr18="expr18" class="field-error"></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -135,11 +135,11 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.state.errors.length > 0;
           },
 
-          'redundantAttribute': 'expr7',
-          'selector': '[expr7]',
+          'redundantAttribute': 'expr18',
+          'selector': '[expr18]',
 
           'template': template(
-            '<ul><li expr8="expr8"></li></ul>',
+            '<ul><li expr19="expr19"></li></ul>',
             [
               {
                 'type': bindingTypes.EACH,
@@ -170,8 +170,8 @@ __webpack_require__.r(__webpack_exports__);
                   ]
                 ),
 
-                'redundantAttribute': 'expr8',
-                'selector': '[expr8]',
+                'redundantAttribute': 'expr19',
+                'selector': '[expr19]',
                 'itemName': 'error',
                 'indexName': null,
 
@@ -189,6 +189,152 @@ __webpack_require__.r(__webpack_exports__);
   },
 
   'name': 'field-error'
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/modal.riot":
+/*!********************************************!*\
+  !*** ./resources/js/components/modal.riot ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  'css': null,
+
+  'exports': {
+    state: {
+        confirm: {}
+    },
+
+    onMounted() {
+        this.root.addEventListener('open', this.__open)
+        this.root.addEventListener('close', this.__close)
+    },
+
+    __open(event) {
+
+        // adding confirm function to state
+        this.state.confirm = event.detail.confirm
+        this.state.body = event.detail.body
+
+        this.$('.modal').classList.add('modal--open')
+        this.update()
+    },
+
+    __close(event) {
+        this.$('.modal').classList.remove('modal--open')
+        this.update()
+    },
+
+    /**
+     *
+     *  @param  {[type]} event
+     *  @return {[type]}
+     *
+     */
+    handleConfirm(event) {
+        event.preventDefault()
+
+        // calling confirm function
+        this.state.confirm()
+
+        this.__close()
+    },
+
+    /**
+     *
+     *
+     *  @param  {object} event
+     *
+     */
+    handleClose(event) {
+        event.preventDefault()
+        this.__close()
+    }
+  },
+
+  'template': function(
+    template,
+    expressionTypes,
+    bindingTypes,
+    getComponent
+  ) {
+    return template(
+      '<div class="modal"><div class="modal__inner"><div class="modal__title center"><slot expr25="expr25" name="title"></slot></div><div expr26="expr26" class="modal__body"> </div><div class="modal__footer"><button expr27="expr27" class="button button--outline button--danger">\n                    Confirm\n                </button><button expr28="expr28" class="button button--outline float-right">\n                    Reject\n                </button></div></div></div>',
+      [
+        {
+          'type': bindingTypes.SLOT,
+          'attributes': [],
+          'name': 'title',
+          'redundantAttribute': 'expr25',
+          'selector': '[expr25]'
+        },
+        {
+          'redundantAttribute': 'expr26',
+          'selector': '[expr26]',
+
+          'expressions': [
+            {
+              'type': expressionTypes.TEXT,
+              'childNodeIndex': 0,
+
+              'evaluate': function(
+                _scope
+              ) {
+                return [
+                  _scope.state.body
+                ].join(
+                  ''
+                );
+              }
+            }
+          ]
+        },
+        {
+          'redundantAttribute': 'expr27',
+          'selector': '[expr27]',
+
+          'expressions': [
+            {
+              'type': expressionTypes.EVENT,
+              'name': 'onclick',
+
+              'evaluate': function(
+                _scope
+              ) {
+                return (event) => { _scope.handleConfirm(event) };
+              }
+            }
+          ]
+        },
+        {
+          'redundantAttribute': 'expr28',
+          'selector': '[expr28]',
+
+          'expressions': [
+            {
+              'type': expressionTypes.EVENT,
+              'name': 'onclick',
+
+              'evaluate': function(
+                _scope
+              ) {
+                return (event) => { _scope.handleClose(event) };
+              }
+            }
+          ]
+        }
+      ]
+    );
+  },
+
+  'name': 'app-modal'
 });
 
 /***/ }),
@@ -264,11 +410,11 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<button expr12="expr12" class="button m-bottom-0" type="button"></button>',
+      '<button expr6="expr6" class="button m-bottom-0" type="button"></button>',
       [
         {
-          'redundantAttribute': 'expr12',
-          'selector': '[expr12]',
+          'redundantAttribute': 'expr6',
+          'selector': '[expr6]',
 
           'expressions': [
             {
@@ -307,8 +453,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var lodash_remove__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash.remove */ "./node_modules/lodash.remove/index.js");
 /* harmony import */ var lodash_remove__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_remove__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var riot__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! riot */ "./node_modules/riot/riot.esm.js");
+/* harmony import */ var _modal_riot__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal.riot */ "./resources/js/components/modal.riot");
 
 
+
+
+
+
+riot__WEBPACK_IMPORTED_MODULE_3__.register('app-modal', _modal_riot__WEBPACK_IMPORTED_MODULE_2__.default)
+riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   'css': null,
@@ -328,18 +482,33 @@ __webpack_require__.r(__webpack_exports__);
     },
 
     handleDelete(event, user) {
+
         event.preventDefault()
 
-        axios__WEBPACK_IMPORTED_MODULE_0___default().delete('/api/users/' + user._id)
-            .then((response) => {
+        const customEvent = new CustomEvent('open', {
+            'detail': {
+                'confirm': () => {
+                    axios__WEBPACK_IMPORTED_MODULE_0___default().delete('/api/users/' + user._id)
+                        .then((response) => {
 
-                // removing from buckets
-                lodash_remove__WEBPACK_IMPORTED_MODULE_1___default()(this.state.users, function(u) {
-                    return u._id === user._id
-                })
+                            // removing from buckets
+                            lodash_remove__WEBPACK_IMPORTED_MODULE_1___default()(this.state.users, function(u) {
+                                return u._id === user._id
+                            })
 
-                this.update()
-            })
+                            this.update()
+                        })
+                },
+
+                // @TODO find a better solution to create body text
+                'body': 'Do you want delete ' + user.email + '?'
+            }
+        });
+
+        this.$('#user-delete-confirm').dispatchEvent(customEvent);
+
+        /**
+        */
     },
 
     /**
@@ -362,7 +531,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div class="buckets"><table class="table"><thead><tr class="table__tr"><th class="table__th">\n                        Email\n                    </th><th class="table__th">\n                        Display Name\n                    </th><th class="table__th" colspan="2">\n                        Roles\n                    </th></tr></thead><tbody><tr expr0="expr0" class="table__tr"></tr></tbody></table><div expr5="expr5" class="grid"></div></div>',
+      '<div class="buckets"><table class="table"><thead><tr class="table__tr"><th class="table__th">\n                        Email\n                    </th><th class="table__th">\n                        Display Name\n                    </th><th class="table__th" colspan="2">\n                        Roles\n                    </th></tr></thead><tbody><tr expr10="expr10" class="table__tr"></tr></tbody></table><app-modal expr15="expr15" id="user-delete-confirm"></app-modal><div expr16="expr16" class="grid"></div></div>',
       [
         {
           'type': bindingTypes.EACH,
@@ -370,11 +539,11 @@ __webpack_require__.r(__webpack_exports__);
           'condition': null,
 
           'template': template(
-            '<td expr1="expr1" class="table__td"> </td><td expr2="expr2" class="table__td"> </td><td class="table__td"><div expr3="expr3"></div></td><td class="table__td right"><button class="button button--small m-bottom-0 m-right-3"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-edit"/></svg></button><button expr4="expr4" class="button button--small m-bottom-0" type="button"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-delete"/></svg></button></td>',
+            '<td expr11="expr11" class="table__td"> </td><td expr12="expr12" class="table__td"> </td><td class="table__td"><div expr13="expr13"></div></td><td class="table__td right"><button class="button button--small m-bottom-0 m-right-3"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-edit"/></svg></button><button expr14="expr14" class="button button--small m-bottom-0" type="button"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-delete"/></svg></button></td>',
             [
               {
-                'redundantAttribute': 'expr1',
-                'selector': '[expr1]',
+                'redundantAttribute': 'expr11',
+                'selector': '[expr11]',
 
                 'expressions': [
                   {
@@ -394,8 +563,8 @@ __webpack_require__.r(__webpack_exports__);
                 ]
               },
               {
-                'redundantAttribute': 'expr2',
-                'selector': '[expr2]',
+                'redundantAttribute': 'expr12',
+                'selector': '[expr12]',
 
                 'expressions': [
                   {
@@ -423,8 +592,8 @@ __webpack_require__.r(__webpack_exports__);
                   return _scope.user.roles && _scope.user.roles.indexOf('admin') >= 0;
                 },
 
-                'redundantAttribute': 'expr3',
-                'selector': '[expr3]',
+                'redundantAttribute': 'expr13',
+                'selector': '[expr13]',
 
                 'template': template(
                   '\n                            Admin\n                            <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg>',
@@ -432,8 +601,8 @@ __webpack_require__.r(__webpack_exports__);
                 )
               },
               {
-                'redundantAttribute': 'expr4',
-                'selector': '[expr4]',
+                'redundantAttribute': 'expr14',
+                'selector': '[expr14]',
 
                 'expressions': [
                   {
@@ -451,8 +620,8 @@ __webpack_require__.r(__webpack_exports__);
             ]
           ),
 
-          'redundantAttribute': 'expr0',
-          'selector': '[expr0]',
+          'redundantAttribute': 'expr10',
+          'selector': '[expr10]',
           'itemName': 'user',
           'indexName': null,
 
@@ -463,6 +632,28 @@ __webpack_require__.r(__webpack_exports__);
           }
         },
         {
+          'type': bindingTypes.TAG,
+          'getComponent': getComponent,
+
+          'evaluate': function(
+            _scope
+          ) {
+            return 'app-modal';
+          },
+
+          'slots': [
+            {
+              'id': 'title',
+              'html': '<span slot="title"><svg class="icon fill-text-contrast" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-close"/></svg>\n                Delete\n            </span>',
+              'bindings': []
+            }
+          ],
+
+          'attributes': [],
+          'redundantAttribute': 'expr15',
+          'selector': '[expr15]'
+        },
+        {
           'type': bindingTypes.IF,
 
           'evaluate': function(
@@ -471,15 +662,15 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.state.maxLength > _scope.state.users.length;
           },
 
-          'redundantAttribute': 'expr5',
-          'selector': '[expr5]',
+          'redundantAttribute': 'expr16',
+          'selector': '[expr16]',
 
           'template': template(
-            '<div class="col-12"><div class="buckets__more"><button expr6="expr6" type="button" class="button">\n                        More\n                        <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-down"/></svg></button></div></div>',
+            '<div class="col-12"><div class="buckets__more"><button expr17="expr17" type="button" class="button">\n                        More\n                        <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-down"/></svg></button></div></div>',
             [
               {
-                'redundantAttribute': 'expr6',
-                'selector': '[expr6]',
+                'redundantAttribute': 'expr17',
+                'selector': '[expr17]',
 
                 'expressions': [
                   {
@@ -606,11 +797,11 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
     getComponent
   ) {
     return template(
-      '<div class="sidebar"><div class="sidebar__inner"><div class="bar"><div class="bar__main">\n                    Create User\n                </div><div class="bar__end"><button expr19="expr19" class="button button--transparent" type="button"><svg class="icon fill-text-contrast" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-close"/></svg></button></div></div><div class="sidebar__body"><form id="app-users-form" novalidate><div class="field-group"><label class="field-label">\n                            E-Mail\n                            <input name="email" type="text" class="field-text"/></label><field-error expr20="expr20" name="email"></field-error></div><div class="field-group"><label class="field-label">\n                            Display Name\n                            <input name="display_name" type="text" class="field-text"/></label><field-error expr21="expr21" name="display_name"></field-error></div><div class="field-group"><label class="field-label">\n                            Password\n                            <input name="password" type="password" class="field-text"/></label><field-error expr22="expr22" name="password"></field-error></div><div class="field-group"><label class="field-label"><input name="roles[]" type="checkbox" class="field-choice" value="admin"/><svg class="icon field-choice__unchecked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox"/></svg><svg class="icon field-choice__checked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox-checked"/></svg>\n                            Admin\n                        </label><field-error expr23="expr23" name="roles"></field-error></div></form></div><div class="sidebar__footer"><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg></button><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save and Close\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-right"/></svg></button></div></div></div>',
+      '<div class="sidebar"><div class="sidebar__inner"><div class="bar"><div class="bar__main">\n                    Create User\n                </div><div class="bar__end"><button expr20="expr20" class="button button--transparent" type="button"><svg class="icon fill-text-contrast" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-close"/></svg></button></div></div><div class="sidebar__body"><form id="app-users-form" novalidate><div class="field-group"><label class="field-label">\n                            E-Mail\n                            <input name="email" type="text" class="field-text"/></label><field-error expr21="expr21" name="email"></field-error></div><div class="field-group"><label class="field-label">\n                            Display Name\n                            <input name="display_name" type="text" class="field-text"/></label><field-error expr22="expr22" name="display_name"></field-error></div><div class="field-group"><label class="field-label">\n                            Password\n                            <input name="password" type="password" class="field-text"/></label><field-error expr23="expr23" name="password"></field-error></div><div class="field-group"><label class="field-label"><input name="roles[]" type="checkbox" class="field-choice" value="admin"/><svg class="icon field-choice__unchecked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox"/></svg><svg class="icon field-choice__checked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox-checked"/></svg>\n                            Admin\n                        </label><field-error expr24="expr24" name="roles"></field-error></div></form></div><div class="sidebar__footer"><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg></button><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save and Close\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-right"/></svg></button></div></div></div>',
       [
         {
-          'redundantAttribute': 'expr19',
-          'selector': '[expr19]',
+          'redundantAttribute': 'expr20',
+          'selector': '[expr20]',
 
           'expressions': [
             {
@@ -624,21 +815,6 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
               }
             }
           ]
-        },
-        {
-          'type': bindingTypes.TAG,
-          'getComponent': getComponent,
-
-          'evaluate': function(
-            _scope
-          ) {
-            return 'field-error';
-          },
-
-          'slots': [],
-          'attributes': [],
-          'redundantAttribute': 'expr20',
-          'selector': '[expr20]'
         },
         {
           'type': bindingTypes.TAG,
@@ -684,6 +860,21 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
           'attributes': [],
           'redundantAttribute': 'expr23',
           'selector': '[expr23]'
+        },
+        {
+          'type': bindingTypes.TAG,
+          'getComponent': getComponent,
+
+          'evaluate': function(
+            _scope
+          ) {
+            return 'field-error';
+          },
+
+          'slots': [],
+          'attributes': [],
+          'redundantAttribute': 'expr24',
+          'selector': '[expr24]'
         }
       ]
     );
