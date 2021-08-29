@@ -74,6 +74,8 @@
                 </button>
             </div>
 
+            <app-loading loading={ state.loading }></app-loading>
+
         </div>
     </div>
     <script>
@@ -83,16 +85,21 @@
 
         import FormValidator from './../../FormValidator'
         import FieldError from './../field-error.riot'
+        import AppLoading from './../loading.riot'
 
         riot.register('field-error', FieldError)
         riot.mount('field-error')
+
+        riot.register('app-loading', AppLoading)
+        riot.mount('app-loading')
 
         export default {
 
             state: {
                 user: {
 
-                }
+                },
+                loading: false
             },
 
             /**
@@ -172,6 +179,9 @@
                     url += '/' + this.state.user._id
                 }
 
+                this.state.loading = true
+                this.update()
+
                 axios({
                     method: method,
                     url: url,
@@ -185,6 +195,7 @@
                         this.$('#sidebar-user-form-close').click()
                     }
 
+                    this.state.loading = false
                     this.update()
                 })
             },

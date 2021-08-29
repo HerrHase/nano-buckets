@@ -124,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div expr3="expr3" class="field-error"></div>',
+      '<div expr0="expr0" class="field-error"></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -135,11 +135,11 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.state.errors.length > 0;
           },
 
-          'redundantAttribute': 'expr3',
-          'selector': '[expr3]',
+          'redundantAttribute': 'expr0',
+          'selector': '[expr0]',
 
           'template': template(
-            '<ul><li expr4="expr4"></li></ul>',
+            '<ul><li expr1="expr1"></li></ul>',
             [
               {
                 'type': bindingTypes.EACH,
@@ -170,8 +170,8 @@ __webpack_require__.r(__webpack_exports__);
                   ]
                 ),
 
-                'redundantAttribute': 'expr4',
-                'selector': '[expr4]',
+                'redundantAttribute': 'expr1',
+                'selector': '[expr1]',
                 'itemName': 'error',
                 'indexName': null,
 
@@ -289,7 +289,7 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
     getComponent
   ) {
     return template(
-      '<div class="note-form"><div class="panel"><div class="panel__body"><form id="form" novalidate><input expr0="expr0" type="hidden" name="_id"/><div class="field-group"><label class="field-label">\n                            title\n                            <input type="text" class="field-text" name="title"/></label></div><div class="field-group"><label class="field-label">\n                            content\n                            <textarea name="content" class="field-text"></textarea></label></div><div class><div class="tabs"></div></div><div><button expr1="expr1" class="button"></button><button expr2="expr2" class="button" type="submit"></button></div></form></div></div></div>',
+      '<div class="note-form"><div class="panel"><div class="panel__body"><form id="form" novalidate><input expr13="expr13" type="hidden" name="_id"/><div class="field-group"><label class="field-label">\n                            title\n                            <input type="text" class="field-text" name="title"/></label></div><div class="field-group"><label class="field-label">\n                            content\n                            <textarea name="content" class="field-text"></textarea></label></div><div class><div class="tabs"></div></div><div><button expr14="expr14" class="button"></button><button expr15="expr15" class="button" type="submit"></button></div></form></div></div></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -300,8 +300,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
             return _scope.state.note && _scope.state.note._id;
           },
 
-          'redundantAttribute': 'expr0',
-          'selector': '[expr0]',
+          'redundantAttribute': 'expr13',
+          'selector': '[expr13]',
 
           'template': template(
             null,
@@ -332,8 +332,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
             return !_scope.state.note || (_scope.state.note && !_scope.state.note._id);
           },
 
-          'redundantAttribute': 'expr1',
-          'selector': '[expr1]',
+          'redundantAttribute': 'expr14',
+          'selector': '[expr14]',
 
           'template': template(
             '\n                            Create\n                        ',
@@ -349,8 +349,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
             return _scope.state.note && _scope.state.note._id;
           },
 
-          'redundantAttribute': 'expr2',
-          'selector': '[expr2]',
+          'redundantAttribute': 'expr15',
+          'selector': '[expr15]',
 
           'template': template(
             '\n                            Save\n                        ',

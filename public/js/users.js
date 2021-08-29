@@ -124,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div expr3="expr3" class="field-error"></div>',
+      '<div expr0="expr0" class="field-error"></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -135,11 +135,11 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.state.errors.length > 0;
           },
 
-          'redundantAttribute': 'expr3',
-          'selector': '[expr3]',
+          'redundantAttribute': 'expr0',
+          'selector': '[expr0]',
 
           'template': template(
-            '<ul><li expr4="expr4"></li></ul>',
+            '<ul><li expr1="expr1"></li></ul>',
             [
               {
                 'type': bindingTypes.EACH,
@@ -170,8 +170,8 @@ __webpack_require__.r(__webpack_exports__);
                   ]
                 ),
 
-                'redundantAttribute': 'expr4',
-                'selector': '[expr4]',
+                'redundantAttribute': 'expr1',
+                'selector': '[expr1]',
                 'itemName': 'error',
                 'indexName': null,
 
@@ -189,6 +189,56 @@ __webpack_require__.r(__webpack_exports__);
   },
 
   'name': 'field-error'
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/loading.riot":
+/*!**********************************************!*\
+  !*** ./resources/js/components/loading.riot ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  'css': null,
+  'exports': {},
+
+  'template': function(
+    template,
+    expressionTypes,
+    bindingTypes,
+    getComponent
+  ) {
+    return template(
+      '<div class="loading-wrapper"><div expr32="expr32" class="loading"></div></div>',
+      [
+        {
+          'type': bindingTypes.IF,
+
+          'evaluate': function(
+            _scope
+          ) {
+            return _scope.props.loading;
+          },
+
+          'redundantAttribute': 'expr32',
+          'selector': '[expr32]',
+
+          'template': template(
+            '<span></span><span></span><span></span>',
+            []
+          )
+        }
+      ]
+    );
+  },
+
+  'name': 'app-loading'
 });
 
 /***/ }),
@@ -266,18 +316,18 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div class="modal"><div class="modal__inner"><div class="modal__title center"><slot expr31="expr31" name="title"></slot></div><div expr32="expr32" class="modal__body"> </div><div class="modal__footer"><button expr33="expr33" class="button button--outline button--danger">\n                    Confirm\n                </button><button expr34="expr34" class="button button--outline float-right">\n                    Reject\n                </button></div></div></div>',
+      '<div class="modal"><div class="modal__inner"><div class="modal__title center"><slot expr33="expr33" name="title"></slot></div><div expr34="expr34" class="modal__body"> </div><div class="modal__footer"><button expr35="expr35" class="button button--outline button--danger">\n                    Confirm\n                </button><button expr36="expr36" class="button button--outline float-right">\n                    Reject\n                </button></div></div></div>',
       [
         {
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'title',
-          'redundantAttribute': 'expr31',
-          'selector': '[expr31]'
+          'redundantAttribute': 'expr33',
+          'selector': '[expr33]'
         },
         {
-          'redundantAttribute': 'expr32',
-          'selector': '[expr32]',
+          'redundantAttribute': 'expr34',
+          'selector': '[expr34]',
 
           'expressions': [
             {
@@ -297,8 +347,8 @@ __webpack_require__.r(__webpack_exports__);
           ]
         },
         {
-          'redundantAttribute': 'expr33',
-          'selector': '[expr33]',
+          'redundantAttribute': 'expr35',
+          'selector': '[expr35]',
 
           'expressions': [
             {
@@ -314,8 +364,8 @@ __webpack_require__.r(__webpack_exports__);
           ]
         },
         {
-          'redundantAttribute': 'expr34',
-          'selector': '[expr34]',
+          'redundantAttribute': 'expr36',
+          'selector': '[expr36]',
 
           'expressions': [
             {
@@ -421,11 +471,11 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<button expr14="expr14" class="button m-bottom-0" type="button"><slot expr15="expr15"></slot></button>',
+      '<button expr2="expr2" class="button m-bottom-0" type="button"><slot expr3="expr3"></slot></button>',
       [
         {
-          'redundantAttribute': 'expr14',
-          'selector': '[expr14]',
+          'redundantAttribute': 'expr2',
+          'selector': '[expr2]',
 
           'expressions': [
             {
@@ -444,8 +494,8 @@ __webpack_require__.r(__webpack_exports__);
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr15',
-          'selector': '[expr15]'
+          'redundantAttribute': 'expr3',
+          'selector': '[expr3]'
         }
       ]
     );
@@ -557,7 +607,7 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
     getComponent
   ) {
     return template(
-      '<div class="buckets"><table class="table"><thead><tr class="table__tr"><th class="table__th">\n                        Email\n                    </th><th class="table__th">\n                        Display Name\n                    </th><th class="table__th" colspan="2">\n                        Roles\n                    </th></tr></thead><tbody><tr expr5="expr5" class="table__tr"></tr></tbody></table><app-modal expr11="expr11" id="user-delete-confirm"></app-modal><div expr12="expr12" class="grid"></div></div>',
+      '<div class="buckets"><table class="table"><thead><tr class="table__tr"><th class="table__th">\n                        Email\n                    </th><th class="table__th">\n                        Display Name\n                    </th><th class="table__th" colspan="2">\n                        Roles\n                    </th></tr></thead><tbody><tr expr4="expr4" class="table__tr"></tr></tbody></table><app-modal expr10="expr10" id="user-delete-confirm"></app-modal><div expr11="expr11" class="grid"></div></div>',
       [
         {
           'type': bindingTypes.EACH,
@@ -565,11 +615,11 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
           'condition': null,
 
           'template': template(
-            '<td expr6="expr6" class="table__td"> </td><td expr7="expr7" class="table__td"> </td><td class="table__td"><div expr8="expr8"></div></td><td class="table__td right"><app-sidebar-button expr9="expr9" class="m-bottom-0 m-right-3" event="app-users-form-open" selector="app-users-form"></app-sidebar-button><button expr10="expr10" class="button button--small m-bottom-0" type="button"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-delete"/></svg></button></td>',
+            '<td expr5="expr5" class="table__td"> </td><td expr6="expr6" class="table__td"> </td><td class="table__td"><div expr7="expr7"></div></td><td class="table__td right"><app-sidebar-button expr8="expr8" class="m-bottom-0 m-right-3" event="app-users-form-open" selector="app-users-form"></app-sidebar-button><button expr9="expr9" class="button button--small m-bottom-0" type="button"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-delete"/></svg></button></td>',
             [
               {
-                'redundantAttribute': 'expr6',
-                'selector': '[expr6]',
+                'redundantAttribute': 'expr5',
+                'selector': '[expr5]',
 
                 'expressions': [
                   {
@@ -589,8 +639,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
                 ]
               },
               {
-                'redundantAttribute': 'expr7',
-                'selector': '[expr7]',
+                'redundantAttribute': 'expr6',
+                'selector': '[expr6]',
 
                 'expressions': [
                   {
@@ -618,8 +668,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
                   return _scope.user.roles && _scope.user.roles.indexOf('admin') >= 0;
                 },
 
-                'redundantAttribute': 'expr8',
-                'selector': '[expr8]',
+                'redundantAttribute': 'expr7',
+                'selector': '[expr7]',
 
                 'template': template(
                   '\n                            Admin\n                            <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg>',
@@ -657,12 +707,12 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
                   }
                 ],
 
-                'redundantAttribute': 'expr9',
-                'selector': '[expr9]'
+                'redundantAttribute': 'expr8',
+                'selector': '[expr8]'
               },
               {
-                'redundantAttribute': 'expr10',
-                'selector': '[expr10]',
+                'redundantAttribute': 'expr9',
+                'selector': '[expr9]',
 
                 'expressions': [
                   {
@@ -680,8 +730,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
             ]
           ),
 
-          'redundantAttribute': 'expr5',
-          'selector': '[expr5]',
+          'redundantAttribute': 'expr4',
+          'selector': '[expr4]',
           'itemName': 'user',
           'indexName': null,
 
@@ -710,8 +760,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
           ],
 
           'attributes': [],
-          'redundantAttribute': 'expr11',
-          'selector': '[expr11]'
+          'redundantAttribute': 'expr10',
+          'selector': '[expr10]'
         },
         {
           'type': bindingTypes.IF,
@@ -722,15 +772,15 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
             return _scope.state.maxLength > _scope.state.users.length;
           },
 
-          'redundantAttribute': 'expr12',
-          'selector': '[expr12]',
+          'redundantAttribute': 'expr11',
+          'selector': '[expr11]',
 
           'template': template(
-            '<div class="col-12"><div class="buckets__more"><button expr13="expr13" type="button" class="button">\n                        More\n                        <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-down"/></svg></button></div></div>',
+            '<div class="col-12"><div class="buckets__more"><button expr12="expr12" type="button" class="button">\n                        More\n                        <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-down"/></svg></button></div></div>',
             [
               {
-                'redundantAttribute': 'expr13',
-                'selector': '[expr13]',
+                'redundantAttribute': 'expr12',
+                'selector': '[expr12]',
 
                 'expressions': [
                   {
@@ -770,17 +820,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var riot__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! riot */ "./node_modules/riot/riot.esm.js");
+/* harmony import */ var riot__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! riot */ "./node_modules/riot/riot.esm.js");
 /* harmony import */ var _FormValidator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../FormValidator */ "./resources/js/FormValidator.js");
 /* harmony import */ var _field_error_riot__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../field-error.riot */ "./resources/js/components/field-error.riot");
+/* harmony import */ var _loading_riot__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../loading.riot */ "./resources/js/components/loading.riot");
 
 
 
 
 
 
-riot__WEBPACK_IMPORTED_MODULE_3__.register('field-error', _field_error_riot__WEBPACK_IMPORTED_MODULE_2__.default)
-riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
+
+riot__WEBPACK_IMPORTED_MODULE_4__.register('field-error', _field_error_riot__WEBPACK_IMPORTED_MODULE_2__.default)
+riot__WEBPACK_IMPORTED_MODULE_4__.mount('field-error')
+
+riot__WEBPACK_IMPORTED_MODULE_4__.register('app-loading', _loading_riot__WEBPACK_IMPORTED_MODULE_3__.default)
+riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   'css': null,
@@ -789,7 +844,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
     state: {
         user: {
 
-        }
+        },
+        loading: false
     },
 
     /**
@@ -869,6 +925,9 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
             url += '/' + this.state.user._id
         }
 
+        this.state.loading = true
+        this.update()
+
         axios__WEBPACK_IMPORTED_MODULE_0___default()({
             method: method,
             url: url,
@@ -877,12 +936,12 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
 
             this.state.user = response.data.data
 
-            console.log(event)
-
+            // check if submit has close-attribute
             if (event.submitter.attributes.close) {
                 this.$('#sidebar-user-form-close').click()
             }
 
+            this.state.loading = false
             this.update()
         })
     },
@@ -904,7 +963,7 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
     getComponent
   ) {
     return template(
-      '<div class="sidebar"><div class="sidebar__inner"><div class="bar"><div class="bar__main"><span expr22="expr22"></span><span expr23="expr23"></span></div><div class="bar__end"><button expr24="expr24" id="sidebar-user-form-close" class="button button--transparent" type="button"><svg class="icon fill-text-contrast" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-close"/></svg></button></div></div><div class="sidebar__body"><form id="app-users-form" novalidate><div class="field-group"><label class="field-label">\n                            E-Mail\n                            <input expr25="expr25" name="email" type="text" class="field-text"/></label><field-error expr26="expr26" name="email"></field-error></div><div class="field-group"><label class="field-label">\n                            Display Name\n                            <input expr27="expr27" name="display_name" type="text" class="field-text"/></label><field-error expr28="expr28" name="display_name"></field-error></div><div class="field-group"><label class="field-label">\n                            Password\n                            <input name="password" type="password" class="field-text"/></label><field-error expr29="expr29" name="password"></field-error></div><div class="field-group"><label class="field-label"><input name="roles[]" type="checkbox" class="field-choice" value="admin"/><svg class="icon field-choice__unchecked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox"/></svg><svg class="icon field-choice__checked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox-checked"/></svg>\n                            Admin\n                        </label><field-error expr30="expr30" name="roles"></field-error></div></form></div><div class="sidebar__footer"><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg></button><button class="button m-bottom-0" type="submit" form="app-users-form" close>\n                    Save and Close\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-right"/></svg></button></div></div></div>',
+      '<div class="sidebar"><div class="sidebar__inner"><div class="bar"><div class="bar__main"><span expr22="expr22"></span><span expr23="expr23"></span></div><div class="bar__end"><button expr24="expr24" id="sidebar-user-form-close" class="button button--transparent" type="button"><svg class="icon fill-text-contrast" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-close"/></svg></button></div></div><div class="sidebar__body"><form id="app-users-form" novalidate><div class="field-group"><label class="field-label">\n                            E-Mail\n                            <input expr25="expr25" name="email" type="text" class="field-text"/></label><field-error expr26="expr26" name="email"></field-error></div><div class="field-group"><label class="field-label">\n                            Display Name\n                            <input expr27="expr27" name="display_name" type="text" class="field-text"/></label><field-error expr28="expr28" name="display_name"></field-error></div><div class="field-group"><label class="field-label">\n                            Password\n                            <input name="password" type="password" class="field-text"/></label><field-error expr29="expr29" name="password"></field-error></div><div class="field-group"><label class="field-label"><input name="roles[]" type="checkbox" class="field-choice" value="admin"/><svg class="icon field-choice__unchecked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox"/></svg><svg class="icon field-choice__checked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox-checked"/></svg>\n                            Admin\n                        </label><field-error expr30="expr30" name="roles"></field-error></div></form></div><div class="sidebar__footer"><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg></button><button class="button m-bottom-0" type="submit" form="app-users-form" close>\n                    Save and Close\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-right"/></svg></button></div><app-loading expr31="expr31"></app-loading></div></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -1048,6 +1107,34 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
           'attributes': [],
           'redundantAttribute': 'expr30',
           'selector': '[expr30]'
+        },
+        {
+          'type': bindingTypes.TAG,
+          'getComponent': getComponent,
+
+          'evaluate': function(
+            _scope
+          ) {
+            return 'app-loading';
+          },
+
+          'slots': [],
+
+          'attributes': [
+            {
+              'type': expressionTypes.ATTRIBUTE,
+              'name': 'loading',
+
+              'evaluate': function(
+                _scope
+              ) {
+                return _scope.state.loading;
+              }
+            }
+          ],
+
+          'redundantAttribute': 'expr31',
+          'selector': '[expr31]'
         }
       ]
     );
