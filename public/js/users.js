@@ -124,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div expr18="expr18" class="field-error"></div>',
+      '<div expr15="expr15" class="field-error"></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -135,11 +135,11 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.state.errors.length > 0;
           },
 
-          'redundantAttribute': 'expr18',
-          'selector': '[expr18]',
+          'redundantAttribute': 'expr15',
+          'selector': '[expr15]',
 
           'template': template(
-            '<ul><li expr19="expr19"></li></ul>',
+            '<ul><li expr16="expr16"></li></ul>',
             [
               {
                 'type': bindingTypes.EACH,
@@ -170,8 +170,8 @@ __webpack_require__.r(__webpack_exports__);
                   ]
                 ),
 
-                'redundantAttribute': 'expr19',
-                'selector': '[expr19]',
+                'redundantAttribute': 'expr16',
+                'selector': '[expr16]',
                 'itemName': 'error',
                 'indexName': null,
 
@@ -266,18 +266,18 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div class="modal"><div class="modal__inner"><div class="modal__title center"><slot expr25="expr25" name="title"></slot></div><div expr26="expr26" class="modal__body"> </div><div class="modal__footer"><button expr27="expr27" class="button button--outline button--danger">\n                    Confirm\n                </button><button expr28="expr28" class="button button--outline float-right">\n                    Reject\n                </button></div></div></div>',
+      '<div class="modal"><div class="modal__inner"><div class="modal__title center"><slot expr31="expr31" name="title"></slot></div><div expr32="expr32" class="modal__body"> </div><div class="modal__footer"><button expr33="expr33" class="button button--outline button--danger">\n                    Confirm\n                </button><button expr34="expr34" class="button button--outline float-right">\n                    Reject\n                </button></div></div></div>',
       [
         {
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'title',
-          'redundantAttribute': 'expr25',
-          'selector': '[expr25]'
+          'redundantAttribute': 'expr31',
+          'selector': '[expr31]'
         },
         {
-          'redundantAttribute': 'expr26',
-          'selector': '[expr26]',
+          'redundantAttribute': 'expr32',
+          'selector': '[expr32]',
 
           'expressions': [
             {
@@ -297,8 +297,8 @@ __webpack_require__.r(__webpack_exports__);
           ]
         },
         {
-          'redundantAttribute': 'expr27',
-          'selector': '[expr27]',
+          'redundantAttribute': 'expr33',
+          'selector': '[expr33]',
 
           'expressions': [
             {
@@ -314,8 +314,8 @@ __webpack_require__.r(__webpack_exports__);
           ]
         },
         {
-          'redundantAttribute': 'expr28',
-          'selector': '[expr28]',
+          'redundantAttribute': 'expr34',
+          'selector': '[expr34]',
 
           'expressions': [
             {
@@ -356,7 +356,7 @@ __webpack_require__.r(__webpack_exports__);
   'exports': {
     state: {
         element: undefined,
-        data: []
+        data: false
     },
 
     /**
@@ -364,10 +364,10 @@ __webpack_require__.r(__webpack_exports__);
      *
      */
     onBeforeMount() {
-
-        // getting innerHtml before rendering component
-        this.content = this.root.innerHTML;
-        this.root.innerHTML = '';
+        if (this.root.innerHTML) {
+            this.content = this.root.innerHTML;
+            this.root.innerHTML = '';
+        }
 
         if (!this.props.event) {
             console.error('sidebar-button: attribute for name of custom event is missing')
@@ -375,6 +375,10 @@ __webpack_require__.r(__webpack_exports__);
 
         if (!this.props.selector) {
             console.error('sidebar-button: attribute for selector to send custom event is missing')
+        }
+
+        if (this.props.data) {
+            this.state.data = this.props.data
         }
     },
 
@@ -386,7 +390,9 @@ __webpack_require__.r(__webpack_exports__);
         this.state.element = document.querySelector(this.props.selector)
 
         // adding innerHtml to button
-        this.$('button').innerHTML = this.content;
+        if (this.content) {
+            this.$('button').innerHTML = this.content;
+        }
     },
 
     /**
@@ -398,8 +404,13 @@ __webpack_require__.r(__webpack_exports__);
     handleClick(event) {
         event.preventDefault()
 
-        const customEvent = new CustomEvent(this.props.event)
-        this.state.element.dispatchEvent(customEvent, this.state.data)
+        const customEvent = new CustomEvent(this.props.event, {
+            'detail': {
+                'data': this.state.data
+            }
+        })
+
+        this.state.element.dispatchEvent(customEvent)
     }
   },
 
@@ -410,11 +421,11 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<button expr6="expr6" class="button m-bottom-0" type="button"></button>',
+      '<button expr20="expr20" class="button m-bottom-0" type="button"><slot expr21="expr21"></slot></button>',
       [
         {
-          'redundantAttribute': 'expr6',
-          'selector': '[expr6]',
+          'redundantAttribute': 'expr20',
+          'selector': '[expr20]',
 
           'expressions': [
             {
@@ -428,6 +439,13 @@ __webpack_require__.r(__webpack_exports__);
               }
             }
           ]
+        },
+        {
+          'type': bindingTypes.SLOT,
+          'attributes': [],
+          'name': 'default',
+          'redundantAttribute': 'expr21',
+          'selector': '[expr21]'
         }
       ]
     );
@@ -477,8 +495,12 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
         this.fetch()
     },
 
-    handleClick() {
+    handleUpdate(event, user) {
+        const customEvent = new CustomEvent('app-users-form-open', {
+            'detail': user
+        })
 
+        document.querySelector('app-users-form').dispatchEvent(customEvent);
     },
 
     handleDelete(event, user) {
@@ -503,12 +525,9 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
                 // @TODO find a better solution to create body text
                 'body': 'Do you want delete ' + user.email + '?'
             }
-        });
+        })
 
         this.$('#user-delete-confirm').dispatchEvent(customEvent);
-
-        /**
-        */
     },
 
     /**
@@ -531,7 +550,7 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
     getComponent
   ) {
     return template(
-      '<div class="buckets"><table class="table"><thead><tr class="table__tr"><th class="table__th">\n                        Email\n                    </th><th class="table__th">\n                        Display Name\n                    </th><th class="table__th" colspan="2">\n                        Roles\n                    </th></tr></thead><tbody><tr expr10="expr10" class="table__tr"></tr></tbody></table><app-modal expr15="expr15" id="user-delete-confirm"></app-modal><div expr16="expr16" class="grid"></div></div>',
+      '<div class="buckets"><table class="table"><thead><tr class="table__tr"><th class="table__th">\n                        Email\n                    </th><th class="table__th">\n                        Display Name\n                    </th><th class="table__th" colspan="2">\n                        Roles\n                    </th></tr></thead><tbody><tr expr6="expr6" class="table__tr"></tr></tbody></table><app-modal expr12="expr12" id="user-delete-confirm"></app-modal><div expr13="expr13" class="grid"></div></div>',
       [
         {
           'type': bindingTypes.EACH,
@@ -539,11 +558,11 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
           'condition': null,
 
           'template': template(
-            '<td expr11="expr11" class="table__td"> </td><td expr12="expr12" class="table__td"> </td><td class="table__td"><div expr13="expr13"></div></td><td class="table__td right"><button class="button button--small m-bottom-0 m-right-3"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-edit"/></svg></button><button expr14="expr14" class="button button--small m-bottom-0" type="button"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-delete"/></svg></button></td>',
+            '<td expr7="expr7" class="table__td"> </td><td expr8="expr8" class="table__td"> </td><td class="table__td"><div expr9="expr9"></div></td><td class="table__td right"><app-sidebar-button expr10="expr10" class="m-bottom-0 m-right-3" event="app-users-form-open" selector="app-users-form"></app-sidebar-button><button expr11="expr11" class="button button--small m-bottom-0" type="button"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-delete"/></svg></button></td>',
             [
               {
-                'redundantAttribute': 'expr11',
-                'selector': '[expr11]',
+                'redundantAttribute': 'expr7',
+                'selector': '[expr7]',
 
                 'expressions': [
                   {
@@ -563,8 +582,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
                 ]
               },
               {
-                'redundantAttribute': 'expr12',
-                'selector': '[expr12]',
+                'redundantAttribute': 'expr8',
+                'selector': '[expr8]',
 
                 'expressions': [
                   {
@@ -592,8 +611,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
                   return _scope.user.roles && _scope.user.roles.indexOf('admin') >= 0;
                 },
 
-                'redundantAttribute': 'expr13',
-                'selector': '[expr13]',
+                'redundantAttribute': 'expr9',
+                'selector': '[expr9]',
 
                 'template': template(
                   '\n                            Admin\n                            <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg>',
@@ -601,8 +620,42 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
                 )
               },
               {
-                'redundantAttribute': 'expr14',
-                'selector': '[expr14]',
+                'type': bindingTypes.TAG,
+                'getComponent': getComponent,
+
+                'evaluate': function(
+                  _scope
+                ) {
+                  return 'app-sidebar-button';
+                },
+
+                'slots': [
+                  {
+                    'id': 'default',
+                    'html': '<svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-edit"/></svg>',
+                    'bindings': []
+                  }
+                ],
+
+                'attributes': [
+                  {
+                    'type': expressionTypes.ATTRIBUTE,
+                    'name': 'data',
+
+                    'evaluate': function(
+                      _scope
+                    ) {
+                      return _scope.user;
+                    }
+                  }
+                ],
+
+                'redundantAttribute': 'expr10',
+                'selector': '[expr10]'
+              },
+              {
+                'redundantAttribute': 'expr11',
+                'selector': '[expr11]',
 
                 'expressions': [
                   {
@@ -620,8 +673,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
             ]
           ),
 
-          'redundantAttribute': 'expr10',
-          'selector': '[expr10]',
+          'redundantAttribute': 'expr6',
+          'selector': '[expr6]',
           'itemName': 'user',
           'indexName': null,
 
@@ -650,8 +703,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
           ],
 
           'attributes': [],
-          'redundantAttribute': 'expr15',
-          'selector': '[expr15]'
+          'redundantAttribute': 'expr12',
+          'selector': '[expr12]'
         },
         {
           'type': bindingTypes.IF,
@@ -662,15 +715,15 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
             return _scope.state.maxLength > _scope.state.users.length;
           },
 
-          'redundantAttribute': 'expr16',
-          'selector': '[expr16]',
+          'redundantAttribute': 'expr13',
+          'selector': '[expr13]',
 
           'template': template(
-            '<div class="col-12"><div class="buckets__more"><button expr17="expr17" type="button" class="button">\n                        More\n                        <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-down"/></svg></button></div></div>',
+            '<div class="col-12"><div class="buckets__more"><button expr14="expr14" type="button" class="button">\n                        More\n                        <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-down"/></svg></button></div></div>',
             [
               {
-                'redundantAttribute': 'expr17',
-                'selector': '[expr17]',
+                'redundantAttribute': 'expr14',
+                'selector': '[expr14]',
 
                 'expressions': [
                   {
@@ -727,7 +780,9 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
 
   'exports': {
     state: {
-        user: { }
+        user: {
+
+        }
     },
 
     /**
@@ -738,6 +793,12 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
 
         this.root.addEventListener('app-users-form-open', (event) => {
             this.$('.sidebar').classList.add('sidebar--open')
+
+            // check for data, and if user is send add to state
+            if (event.detail.data) {
+                this.state.user = event.detail.data
+                this.update()
+            }
         })
 
         // create form validation
@@ -761,10 +822,19 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
 
     },
 
+    /**
+     *  close current form
+     *
+     *
+     *  @param  {object} event
+     *
+     */
     handleClose(event)
     {
         event.preventDefault()
         this.$('.sidebar').classList.remove('sidebar--open')
+
+        this.reset()
     },
 
     /**
@@ -785,8 +855,19 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
             data: data
         }).then((response) => {
             this.state.user = response.data.data
+            this.$('#sidebar-user-form-close').click()
+
             this.update()
         })
+    },
+
+    /**
+     *
+     *  
+     */
+    reset() {
+        this.state.user = { }
+        this.update()
     }
   },
 
@@ -797,11 +878,45 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
     getComponent
   ) {
     return template(
-      '<div class="sidebar"><div class="sidebar__inner"><div class="bar"><div class="bar__main">\n                    Create User\n                </div><div class="bar__end"><button expr20="expr20" class="button button--transparent" type="button"><svg class="icon fill-text-contrast" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-close"/></svg></button></div></div><div class="sidebar__body"><form id="app-users-form" novalidate><div class="field-group"><label class="field-label">\n                            E-Mail\n                            <input name="email" type="text" class="field-text"/></label><field-error expr21="expr21" name="email"></field-error></div><div class="field-group"><label class="field-label">\n                            Display Name\n                            <input name="display_name" type="text" class="field-text"/></label><field-error expr22="expr22" name="display_name"></field-error></div><div class="field-group"><label class="field-label">\n                            Password\n                            <input name="password" type="password" class="field-text"/></label><field-error expr23="expr23" name="password"></field-error></div><div class="field-group"><label class="field-label"><input name="roles[]" type="checkbox" class="field-choice" value="admin"/><svg class="icon field-choice__unchecked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox"/></svg><svg class="icon field-choice__checked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox-checked"/></svg>\n                            Admin\n                        </label><field-error expr24="expr24" name="roles"></field-error></div></form></div><div class="sidebar__footer"><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg></button><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save and Close\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-right"/></svg></button></div></div></div>',
+      '<div class="sidebar"><div class="sidebar__inner"><div class="bar"><div class="bar__main"><span expr22="expr22"></span><span expr23="expr23"></span></div><div class="bar__end"><button expr24="expr24" id="sidebar-user-form-close" class="button button--transparent" type="button"><svg class="icon fill-text-contrast" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-close"/></svg></button></div></div><div class="sidebar__body"><form id="app-users-form" novalidate><div class="field-group"><label class="field-label">\n                            E-Mail\n                            <input expr25="expr25" name="email" type="text" class="field-text"/></label><field-error expr26="expr26" name="email"></field-error></div><div class="field-group"><label class="field-label">\n                            Display Name\n                            <input expr27="expr27" name="display_name" type="text" class="field-text"/></label><field-error expr28="expr28" name="display_name"></field-error></div><div class="field-group"><label class="field-label">\n                            Password\n                            <input name="password" type="password" class="field-text"/></label><field-error expr29="expr29" name="password"></field-error></div><div class="field-group"><label class="field-label"><input name="roles[]" type="checkbox" class="field-choice" value="admin"/><svg class="icon field-choice__unchecked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox"/></svg><svg class="icon field-choice__checked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox-checked"/></svg>\n                            Admin\n                        </label><field-error expr30="expr30" name="roles"></field-error></div></form></div><div class="sidebar__footer"><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg></button><button class="button m-bottom-0" type="submit" form="app-users-form" close>\n                    Save and Close\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-right"/></svg></button></div></div></div>',
       [
         {
-          'redundantAttribute': 'expr20',
-          'selector': '[expr20]',
+          'type': bindingTypes.IF,
+
+          'evaluate': function(
+            _scope
+          ) {
+            return !_scope.state.user._id;
+          },
+
+          'redundantAttribute': 'expr22',
+          'selector': '[expr22]',
+
+          'template': template(
+            '\n                        Create User\n                    ',
+            []
+          )
+        },
+        {
+          'type': bindingTypes.IF,
+
+          'evaluate': function(
+            _scope
+          ) {
+            return _scope.state.user._id;
+          },
+
+          'redundantAttribute': 'expr23',
+          'selector': '[expr23]',
+
+          'template': template(
+            '\n                        Update User\n                    ',
+            []
+          )
+        },
+        {
+          'redundantAttribute': 'expr24',
+          'selector': '[expr24]',
 
           'expressions': [
             {
@@ -812,6 +927,22 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
                 _scope
               ) {
                 return (event) => { _scope.handleClose(event) };
+              }
+            }
+          ]
+        },
+        {
+          'redundantAttribute': 'expr25',
+          'selector': '[expr25]',
+
+          'expressions': [
+            {
+              'type': expressionTypes.VALUE,
+
+              'evaluate': function(
+                _scope
+              ) {
+                return _scope.state.user.email;
               }
             }
           ]
@@ -828,8 +959,24 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
 
           'slots': [],
           'attributes': [],
-          'redundantAttribute': 'expr21',
-          'selector': '[expr21]'
+          'redundantAttribute': 'expr26',
+          'selector': '[expr26]'
+        },
+        {
+          'redundantAttribute': 'expr27',
+          'selector': '[expr27]',
+
+          'expressions': [
+            {
+              'type': expressionTypes.VALUE,
+
+              'evaluate': function(
+                _scope
+              ) {
+                return _scope.state.user.display_name;
+              }
+            }
+          ]
         },
         {
           'type': bindingTypes.TAG,
@@ -843,8 +990,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
 
           'slots': [],
           'attributes': [],
-          'redundantAttribute': 'expr22',
-          'selector': '[expr22]'
+          'redundantAttribute': 'expr28',
+          'selector': '[expr28]'
         },
         {
           'type': bindingTypes.TAG,
@@ -858,8 +1005,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
 
           'slots': [],
           'attributes': [],
-          'redundantAttribute': 'expr23',
-          'selector': '[expr23]'
+          'redundantAttribute': 'expr29',
+          'selector': '[expr29]'
         },
         {
           'type': bindingTypes.TAG,
@@ -873,8 +1020,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
 
           'slots': [],
           'attributes': [],
-          'redundantAttribute': 'expr24',
-          'selector': '[expr24]'
+          'redundantAttribute': 'expr30',
+          'selector': '[expr30]'
         }
       ]
     );

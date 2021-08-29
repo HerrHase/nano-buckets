@@ -4,10 +4,15 @@
 
             <div class="bar">
                 <div class="bar__main">
-                    Create User
+                    <span if={ !state.user._id }>
+                        Create User
+                    </span>
+                    <span if={ state.user._id }>
+                        Update User
+                    </span>
                 </div>
                 <div class="bar__end">
-                    <button class="button button--transparent" type="button" onclick={ (event) => { handleClose(event) } }>
+                    <button id="sidebar-user-form-close" class="button button--transparent" type="button" onclick={ (event) => { handleClose(event) } }>
                         <svg class="icon fill-text-contrast" aria-hidden="true">
                             <use xlink:href="/symbol-defs.svg#icon-close"></use>
                         </svg>
@@ -20,14 +25,14 @@
                     <div class="field-group">
                         <label class="field-label">
                             E-Mail
-                            <input name="email" type="text" class="field-text" />
+                            <input name="email" type="text" value={ state.user.email } class="field-text" />
                         </label>
                         <field-error name="email"></field-error>
                     </div>
                     <div class="field-group">
                         <label class="field-label">
                             Display Name
-                            <input name="display_name" type="text" class="field-text" />
+                            <input name="display_name" type="text" value={ state.user.display_name } class="field-text" />
                         </label>
                         <field-error name="display_name"></field-error>
                     </div>
@@ -61,7 +66,7 @@
                         <use xlink:href="/symbol-defs.svg#icon-check"></use>
                     </svg>
                 </button>
-                <button class="button m-bottom-0" type="submit" form="app-users-form">
+                <button class="button m-bottom-0" type="submit" form="app-users-form" close>
                     Save and Close
                     <svg class="icon fill-success p-left-3" aria-hidden="true">
                         <use xlink:href="/symbol-defs.svg#icon-arrow-right"></use>
@@ -85,7 +90,9 @@
         export default {
 
             state: {
-                user: { }
+                user: {
+
+                }
             },
 
             /**
@@ -96,6 +103,12 @@
 
                 this.root.addEventListener('app-users-form-open', (event) => {
                     this.$('.sidebar').classList.add('sidebar--open')
+
+                    // check for data, and if user is send add to state
+                    if (event.detail.data) {
+                        this.state.user = event.detail.data
+                        this.update()
+                    }
                 })
 
                 // create form validation
@@ -119,10 +132,19 @@
 
             },
 
+            /**
+             *  close current form
+             *
+             *
+             *  @param  {object} event
+             *
+             */
             handleClose(event)
             {
                 event.preventDefault()
                 this.$('.sidebar').classList.remove('sidebar--open')
+
+                this.reset()
             },
 
             /**
@@ -143,8 +165,19 @@
                     data: data
                 }).then((response) => {
                     this.state.user = response.data.data
+                    this.$('#sidebar-user-form-close').click()
+
                     this.update()
                 })
+            },
+
+            /**
+             *
+             *  
+             */
+            reset() {
+                this.state.user = { }
+                this.update()
             }
 
         }

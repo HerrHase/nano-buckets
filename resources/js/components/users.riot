@@ -36,11 +36,11 @@
 
                     <!-- actions -->
                     <td class="table__td right">
-                        <button class="button button--small m-bottom-0 m-right-3">
+                        <app-sidebar-button class="m-bottom-0 m-right-3" event="app-users-form-open" selector="app-users-form" data={ user }>
                             <svg class="icon" aria-hidden="true">
                                 <use xlink:href="/symbol-defs.svg#icon-edit"></use>
                             </svg>
-                        </button>
+                        </app-sidebar-button>
                         <button class="button button--small m-bottom-0" type="button" onclick={ (event) => { handleDelete(event, user) } }>
                             <svg class="icon" aria-hidden="true">
                                 <use xlink:href="/symbol-defs.svg#icon-delete"></use>
@@ -104,8 +104,12 @@
                 this.fetch()
             },
 
-            handleClick() {
+            handleUpdate(event, user) {
+                const customEvent = new CustomEvent('app-users-form-open', {
+                    'detail': user
+                })
 
+                document.querySelector('app-users-form').dispatchEvent(customEvent);
             },
 
             handleDelete(event, user) {
@@ -130,12 +134,9 @@
                         // @TODO find a better solution to create body text
                         'body': 'Do you want delete ' + user.email + '?'
                     }
-                });
+                })
 
                 this.$('#user-delete-confirm').dispatchEvent(customEvent);
-
-                /**
-                */
             },
 
             /**

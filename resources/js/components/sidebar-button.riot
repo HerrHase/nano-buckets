@@ -1,5 +1,7 @@
 <app-sidebar-button>
-    <button class="button m-bottom-0" type="button" onclick={ (event) => { handleClick(event) } }></button>
+    <button class="button m-bottom-0" type="button" onclick={ (event) => { handleClick(event) } }>
+        <slot />
+    </button>
     <script>
 
         /**
@@ -17,7 +19,7 @@
 
             state: {
                 element: undefined,
-                data: []
+                data: false
             },
 
             /**
@@ -25,10 +27,10 @@
              *
              */
             onBeforeMount() {
-
-                // getting innerHtml before rendering component
-                this.content = this.root.innerHTML;
-                this.root.innerHTML = '';
+                if (this.root.innerHTML) {
+                    this.content = this.root.innerHTML;
+                    this.root.innerHTML = '';
+                }
 
                 if (!this.props.event) {
                     console.error('sidebar-button: attribute for name of custom event is missing')
@@ -36,6 +38,10 @@
 
                 if (!this.props.selector) {
                     console.error('sidebar-button: attribute for selector to send custom event is missing')
+                }
+
+                if (this.props.data) {
+                    this.state.data = this.props.data
                 }
             },
 
@@ -47,7 +53,9 @@
                 this.state.element = document.querySelector(this.props.selector)
 
                 // adding innerHtml to button
-                this.$('button').innerHTML = this.content;
+                if (this.content) {
+                    this.$('button').innerHTML = this.content;
+                }
             },
 
             /**
@@ -59,8 +67,13 @@
             handleClick(event) {
                 event.preventDefault()
 
-                const customEvent = new CustomEvent(this.props.event)
-                this.state.element.dispatchEvent(customEvent, this.state.data)
+                const customEvent = new CustomEvent(this.props.event, {
+                    'detail': {
+                        'data': this.state.data
+                    }
+                })
+
+                this.state.element.dispatchEvent(customEvent)
             }
 
         }
