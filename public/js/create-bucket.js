@@ -52,7 +52,7 @@ __webpack_require__.r(__webpack_exports__);
         const parent = this.root.closest(state.closest)
 
         // getting current element by name
-        const element = document.querySelector('[name="' + props.name + '"]')
+        const element = parent.querySelector('[name="' + props.name + '"]')
 
         // getting form
         const form = element.closest('form')
@@ -124,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div expr15="expr15" class="field-error"></div>',
+      '<div expr3="expr3" class="field-error"></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -135,11 +135,11 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.state.errors.length > 0;
           },
 
-          'redundantAttribute': 'expr15',
-          'selector': '[expr15]',
+          'redundantAttribute': 'expr3',
+          'selector': '[expr3]',
 
           'template': template(
-            '<ul><li expr16="expr16"></li></ul>',
+            '<ul><li expr4="expr4"></li></ul>',
             [
               {
                 'type': bindingTypes.EACH,
@@ -170,8 +170,8 @@ __webpack_require__.r(__webpack_exports__);
                   ]
                 ),
 
-                'redundantAttribute': 'expr16',
-                'selector': '[expr16]',
+                'redundantAttribute': 'expr4',
+                'selector': '[expr4]',
                 'itemName': 'error',
                 'indexName': null,
 

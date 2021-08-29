@@ -52,7 +52,7 @@ __webpack_require__.r(__webpack_exports__);
         const parent = this.root.closest(state.closest)
 
         // getting current element by name
-        const element = document.querySelector('[name="' + props.name + '"]')
+        const element = parent.querySelector('[name="' + props.name + '"]')
 
         // getting form
         const form = element.closest('form')
@@ -124,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div expr15="expr15" class="field-error"></div>',
+      '<div expr3="expr3" class="field-error"></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -135,11 +135,11 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.state.errors.length > 0;
           },
 
-          'redundantAttribute': 'expr15',
-          'selector': '[expr15]',
+          'redundantAttribute': 'expr3',
+          'selector': '[expr3]',
 
           'template': template(
-            '<ul><li expr16="expr16"></li></ul>',
+            '<ul><li expr4="expr4"></li></ul>',
             [
               {
                 'type': bindingTypes.EACH,
@@ -170,8 +170,8 @@ __webpack_require__.r(__webpack_exports__);
                   ]
                 ),
 
-                'redundantAttribute': 'expr16',
-                'selector': '[expr16]',
+                'redundantAttribute': 'expr4',
+                'selector': '[expr4]',
                 'itemName': 'error',
                 'indexName': null,
 
@@ -421,11 +421,11 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<button expr20="expr20" class="button m-bottom-0" type="button"><slot expr21="expr21"></slot></button>',
+      '<button expr14="expr14" class="button m-bottom-0" type="button"><slot expr15="expr15"></slot></button>',
       [
         {
-          'redundantAttribute': 'expr20',
-          'selector': '[expr20]',
+          'redundantAttribute': 'expr14',
+          'selector': '[expr14]',
 
           'expressions': [
             {
@@ -444,8 +444,8 @@ __webpack_require__.r(__webpack_exports__);
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr21',
-          'selector': '[expr21]'
+          'redundantAttribute': 'expr15',
+          'selector': '[expr15]'
         }
       ]
     );
@@ -495,6 +495,13 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
         this.fetch()
     },
 
+    /**
+     *
+     *  @param  {[type]} event               
+     *  @param  {[type]} user
+     *  @return {[type]}
+     *
+     */
     handleUpdate(event, user) {
         const customEvent = new CustomEvent('app-users-form-open', {
             'detail': user
@@ -550,7 +557,7 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
     getComponent
   ) {
     return template(
-      '<div class="buckets"><table class="table"><thead><tr class="table__tr"><th class="table__th">\n                        Email\n                    </th><th class="table__th">\n                        Display Name\n                    </th><th class="table__th" colspan="2">\n                        Roles\n                    </th></tr></thead><tbody><tr expr6="expr6" class="table__tr"></tr></tbody></table><app-modal expr12="expr12" id="user-delete-confirm"></app-modal><div expr13="expr13" class="grid"></div></div>',
+      '<div class="buckets"><table class="table"><thead><tr class="table__tr"><th class="table__th">\n                        Email\n                    </th><th class="table__th">\n                        Display Name\n                    </th><th class="table__th" colspan="2">\n                        Roles\n                    </th></tr></thead><tbody><tr expr5="expr5" class="table__tr"></tr></tbody></table><app-modal expr11="expr11" id="user-delete-confirm"></app-modal><div expr12="expr12" class="grid"></div></div>',
       [
         {
           'type': bindingTypes.EACH,
@@ -558,11 +565,11 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
           'condition': null,
 
           'template': template(
-            '<td expr7="expr7" class="table__td"> </td><td expr8="expr8" class="table__td"> </td><td class="table__td"><div expr9="expr9"></div></td><td class="table__td right"><app-sidebar-button expr10="expr10" class="m-bottom-0 m-right-3" event="app-users-form-open" selector="app-users-form"></app-sidebar-button><button expr11="expr11" class="button button--small m-bottom-0" type="button"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-delete"/></svg></button></td>',
+            '<td expr6="expr6" class="table__td"> </td><td expr7="expr7" class="table__td"> </td><td class="table__td"><div expr8="expr8"></div></td><td class="table__td right"><app-sidebar-button expr9="expr9" class="m-bottom-0 m-right-3" event="app-users-form-open" selector="app-users-form"></app-sidebar-button><button expr10="expr10" class="button button--small m-bottom-0" type="button"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-delete"/></svg></button></td>',
             [
               {
-                'redundantAttribute': 'expr7',
-                'selector': '[expr7]',
+                'redundantAttribute': 'expr6',
+                'selector': '[expr6]',
 
                 'expressions': [
                   {
@@ -582,8 +589,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
                 ]
               },
               {
-                'redundantAttribute': 'expr8',
-                'selector': '[expr8]',
+                'redundantAttribute': 'expr7',
+                'selector': '[expr7]',
 
                 'expressions': [
                   {
@@ -611,8 +618,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
                   return _scope.user.roles && _scope.user.roles.indexOf('admin') >= 0;
                 },
 
-                'redundantAttribute': 'expr9',
-                'selector': '[expr9]',
+                'redundantAttribute': 'expr8',
+                'selector': '[expr8]',
 
                 'template': template(
                   '\n                            Admin\n                            <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg>',
@@ -650,12 +657,12 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
                   }
                 ],
 
-                'redundantAttribute': 'expr10',
-                'selector': '[expr10]'
+                'redundantAttribute': 'expr9',
+                'selector': '[expr9]'
               },
               {
-                'redundantAttribute': 'expr11',
-                'selector': '[expr11]',
+                'redundantAttribute': 'expr10',
+                'selector': '[expr10]',
 
                 'expressions': [
                   {
@@ -673,8 +680,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
             ]
           ),
 
-          'redundantAttribute': 'expr6',
-          'selector': '[expr6]',
+          'redundantAttribute': 'expr5',
+          'selector': '[expr5]',
           'itemName': 'user',
           'indexName': null,
 
@@ -703,8 +710,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
           ],
 
           'attributes': [],
-          'redundantAttribute': 'expr12',
-          'selector': '[expr12]'
+          'redundantAttribute': 'expr11',
+          'selector': '[expr11]'
         },
         {
           'type': bindingTypes.IF,
@@ -715,15 +722,15 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
             return _scope.state.maxLength > _scope.state.users.length;
           },
 
-          'redundantAttribute': 'expr13',
-          'selector': '[expr13]',
+          'redundantAttribute': 'expr12',
+          'selector': '[expr12]',
 
           'template': template(
-            '<div class="col-12"><div class="buckets__more"><button expr14="expr14" type="button" class="button">\n                        More\n                        <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-down"/></svg></button></div></div>',
+            '<div class="col-12"><div class="buckets__more"><button expr13="expr13" type="button" class="button">\n                        More\n                        <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-down"/></svg></button></div></div>',
             [
               {
-                'redundantAttribute': 'expr14',
-                'selector': '[expr14]',
+                'redundantAttribute': 'expr13',
+                'selector': '[expr13]',
 
                 'expressions': [
                   {
@@ -797,12 +804,22 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
             // check for data, and if user is send add to state
             if (event.detail.data) {
                 this.state.user = event.detail.data
+                this.state.formValidation.setConstraits({
+                    'email': {
+                        'length': {
+                            'maximum': 255
+                        },
+                        'email': true,
+                        'presence': true
+                    }
+                })
+
                 this.update()
             }
         })
 
         // create form validation
-        const formValidation = new _FormValidator__WEBPACK_IMPORTED_MODULE_1__.default('#app-users-form', {
+        this.state.formValidation = new _FormValidator__WEBPACK_IMPORTED_MODULE_1__.default('#app-users-form', {
             'email': {
                 'length': {
                     'maximum': 255
@@ -844,18 +861,27 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
     handleSubmit(event, data) {
 
         let method = 'post'
+        let url = '/api/users'
 
+        // user is set and has id, send as put with id
         if (this.state.user && this.state.user._id) {
             method = 'put'
+            url += '/' + this.state.user._id
         }
 
         axios__WEBPACK_IMPORTED_MODULE_0___default()({
             method: method,
-            url: '/api/users',
+            url: url,
             data: data
         }).then((response) => {
+
             this.state.user = response.data.data
-            this.$('#sidebar-user-form-close').click()
+
+            console.log(event)
+
+            if (event.submitter.attributes.close) {
+                this.$('#sidebar-user-form-close').click()
+            }
 
             this.update()
         })
@@ -863,7 +889,7 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
 
     /**
      *
-     *  
+     *
      */
     reset() {
         this.state.user = { }
@@ -2931,12 +2957,32 @@ var FormValidator = /*#__PURE__*/function () {
   }
   /**
    *
-   *  @param  {[type]} event [description]
-   *  @return {[type]}       [description]
+   *
    */
 
 
   _createClass(FormValidator, [{
+    key: "setConstraits",
+    value: function setConstraits(constraits) {
+      this.constraits = constraits;
+    }
+    /**
+     *
+     *
+     */
+
+  }, {
+    key: "getConstraits",
+    value: function getConstraits(constraits) {
+      return this.constraits;
+    }
+    /**
+     *
+     *  @param  {[type]} event [description]
+     *  @return {[type]}       [description]
+     */
+
+  }, {
     key: "onSubmit",
     value: function onSubmit(event) {
       var _this2 = this;

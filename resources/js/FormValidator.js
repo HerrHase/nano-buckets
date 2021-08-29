@@ -47,6 +47,24 @@ class FormValidator
 
     /**
      *
+     *
+     */
+    setConstraits(constraits)
+    {
+        this.constraits = constraits
+    }
+
+    /**
+     *
+     *
+     */
+    getConstraits(constraits)
+    {
+        return this.constraits
+    }
+
+    /**
+     *
      *  @param  {[type]} event [description]
      *  @return {[type]}       [description]
      */

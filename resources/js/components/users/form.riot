@@ -107,12 +107,22 @@
                     // check for data, and if user is send add to state
                     if (event.detail.data) {
                         this.state.user = event.detail.data
+                        this.state.formValidation.setConstraits({
+                            'email': {
+                                'length': {
+                                    'maximum': 255
+                                },
+                                'email': true,
+                                'presence': true
+                            }
+                        })
+
                         this.update()
                     }
                 })
 
                 // create form validation
-                const formValidation = new FormValidator('#app-users-form', {
+                this.state.formValidation = new FormValidator('#app-users-form', {
                     'email': {
                         'length': {
                             'maximum': 255
@@ -154,18 +164,26 @@
             handleSubmit(event, data) {
 
                 let method = 'post'
+                let url = '/api/users'
 
+                // user is set and has id, send as put with id
                 if (this.state.user && this.state.user._id) {
                     method = 'put'
+                    url += '/' + this.state.user._id
                 }
 
                 axios({
                     method: method,
-                    url: '/api/users',
+                    url: url,
                     data: data
                 }).then((response) => {
+
                     this.state.user = response.data.data
-                    this.$('#sidebar-user-form-close').click()
+
+                    // check if submit has close-attribute
+                    if (event.submitter.attributes.close) {
+                        this.$('#sidebar-user-form-close').click()
+                    }
 
                     this.update()
                 })
@@ -173,7 +191,7 @@
 
             /**
              *
-             *  
+             *
              */
             reset() {
                 this.state.user = { }

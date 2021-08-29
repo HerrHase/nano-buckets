@@ -104,6 +104,13 @@
                 this.fetch()
             },
 
+            /**
+             *
+             *  @param  {[type]} event               
+             *  @param  {[type]} user
+             *  @return {[type]}
+             *
+             */
             handleUpdate(event, user) {
                 const customEvent = new CustomEvent('app-users-form-open', {
                     'detail': user

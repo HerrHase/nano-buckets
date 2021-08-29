@@ -90,7 +90,7 @@ router.put('/:id', async function(request, response)
 
     const [ valid, errors ] = await validate(body, {
         email: [ isEmail, maxLength(255), required ],
-        password: [ required, maxLength(64) ]
+        password: [ maxLength(64) ]
     })
 
     if (valid) {
@@ -121,7 +121,6 @@ router.delete('/:id', async function(request, response)
     const userRepository = new UserRepository()
 
     // @TODO check for permission of current user
-
     let user = false
 
     const [ valid, errors ] = await validate(request.params, {
