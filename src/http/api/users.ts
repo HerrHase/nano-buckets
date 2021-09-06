@@ -1,10 +1,15 @@
+import { v4 } from "https://deno.land/std@0.99.0/uuid/mod.ts";
+import { validate, required, maxLength, isEmail } from 'https://deno.land/x/validasaur@v0.15.0/mod.ts'
+
 import { Router } from 'https://deno.land/x/opine@1.5.3/mod.ts'
+
+import usersMiddleware from '../../middleware/users.ts'
 import UserRepository from '../../repositories/user.ts'
 
-import { validate, required, maxLength, isEmail } from 'https://deno.land/x/validasaur@v0.15.0/mod.ts'
-import { uuid } from '../../rules/uuid.ts'
-
 const router = Router()
+
+// check for id and load user
+router.param('id', usersMiddleware)
 
 /**
  *  get all users
@@ -27,6 +32,21 @@ router.get('/', async function(request, response)
 })
 
 /**
+ *  get user
+ *
+ *  @param  request
+ *  @param  response
+ *  @return
+ *
+ */
+router.get('/:id', async function(request, response)
+{
+    response.json({
+        data: response.locals.user
+    })
+})
+
+/**
  *  create user
  *
  *  @param  request
@@ -39,23 +59,24 @@ router.post('/', async function(request, response)
     const body = request.body
     const userRepository = new UserRepository()
 
-    // @TODO check for permission of current user
-
     let user
 
     const [ valid, errors ] = await validate(body, {
-        email: [ isEmail, maxLength(255), required ],
-        password: [ required, maxLength(64) ]
+        email: [ isEmail, required ],
+        password: [ maxLength(64) ],
+        displayname: [ maxLength(128) ]
     })
 
     if (valid) {
         user = await userRepository.create(body)
-
-        // remove password
-        // @TODO make sure repository can hide variables
-        delete user.password
+    } else {
+        response.setStatus(422)
+        response.json({
+            'errors': errors
+        })
     }
 
+    response.setStatus(201)
     response.json({
         data: user
     })
@@ -67,42 +88,30 @@ router.post('/', async function(request, response)
  *  @param  request
  *  @param  response
  *  @return
- *
  */
-router.put('/:id', async function(request, response)
+router.put('/:id', async function(request, response, next)
 {
     const body = request.body
     const userRepository = new UserRepository()
 
-    // @TODO check for permission of current user
-
     let user
 
-    const [ validUser, errorsUser ] = await validate(request.params, {
-        'id': [ required, uuid ]
-    })
-
-    if (!validUser) {
-        response.json({
-            data: user
-        })
-    }
-
     const [ valid, errors ] = await validate(body, {
-        email: [ isEmail, maxLength(255), required ],
-        password: [ maxLength(64) ]
+        email: [ isEmail, required ],
+        password: [ maxLength(64) ],
+        displayname: [ maxLength(128) ]
     })
 
     if (valid) {
-
-        body._id = request.params.id
-        user = await userRepository.update(body)
-
-        // remove password
-        // @TODO make sure repository can hide variables
-        delete user.password
+        user = await userRepository.update(response.locals.user._id, body)
+    } else {
+        response.setStatus(422)
+        response.json({
+            'errors': errors
+        })
     }
 
+    response.setStatus(201)
     response.json({
         data: user
     })
@@ -116,26 +125,17 @@ router.put('/:id', async function(request, response)
  *  @return
  *
  */
-router.delete('/:id', async function(request, response)
+router.delete('/:id', function(request, response)
 {
     const userRepository = new UserRepository()
 
-    // @TODO check for permission of current user
-    let user = false
-
-    const [ valid, errors ] = await validate(request.params, {
-        'id': [ required, uuid ]
+    // delete user
+    const user = userRepository.db.deleteOne({
+        '_id': response.locals.user._id
     })
 
-    if (valid) {
-        user = userRepository.db.deleteOne({
-            '_id': request.params.id
-        })
-    }
-
-    response.json({
-        data: user
-    })
+    // send status
+    response.send(204)
 })
 
 export default router

@@ -106,7 +106,7 @@
 
             /**
              *
-             *  @param  {[type]} event               
+             *  @param  {[type]} event
              *  @param  {[type]} user
              *  @return {[type]}
              *
@@ -126,7 +126,7 @@
                 const customEvent = new CustomEvent('open', {
                     'detail': {
                         'confirm': () => {
-                            axios.delete('/api/users/' + user._id)
+                            axios.delete('/api/users/v1/' + user._id)
                                 .then((response) => {
 
                                     // removing from buckets
@@ -152,7 +152,7 @@
              *
              */
             fetch() {
-                axios.get('/api/users').then((response) => {
+                axios.get('/api/users/v1').then((response) => {
                     this.state.users = response.data.data
                     this.update()
                 })

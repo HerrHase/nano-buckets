@@ -171,7 +171,7 @@
             handleSubmit(event, data) {
 
                 let method = 'post'
-                let url = '/api/users'
+                let url = '/api/users/v1'
 
                 // user is set and has id, send as put with id
                 if (this.state.user && this.state.user._id) {
@@ -188,14 +188,17 @@
                     data: data
                 }).then((response) => {
 
-                    this.state.user = response.data.data
+                    this.state.loading = false
+
+                    if (response.status === 201) {
+                        this.state.user = response.data.data
+                    } 
 
                     // check if submit has close-attribute
                     if (event.submitter.attributes.close) {
                         this.$('#sidebar-user-form-close').click()
                     }
 
-                    this.state.loading = false
                     this.update()
                 })
             },

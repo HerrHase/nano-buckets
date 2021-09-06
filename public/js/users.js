@@ -124,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div expr0="expr0" class="field-error"></div>',
+      '<div expr2="expr2" class="field-error"></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -135,11 +135,11 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.state.errors.length > 0;
           },
 
-          'redundantAttribute': 'expr0',
-          'selector': '[expr0]',
+          'redundantAttribute': 'expr2',
+          'selector': '[expr2]',
 
           'template': template(
-            '<ul><li expr1="expr1"></li></ul>',
+            '<ul><li expr3="expr3"></li></ul>',
             [
               {
                 'type': bindingTypes.EACH,
@@ -170,8 +170,8 @@ __webpack_require__.r(__webpack_exports__);
                   ]
                 ),
 
-                'redundantAttribute': 'expr1',
-                'selector': '[expr1]',
+                'redundantAttribute': 'expr3',
+                'selector': '[expr3]',
                 'itemName': 'error',
                 'indexName': null,
 
@@ -215,7 +215,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div class="loading-wrapper"><div expr32="expr32" class="loading"></div></div>',
+      '<div class="loading-wrapper"><div expr36="expr36" class="loading"></div></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -226,8 +226,8 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.props.loading;
           },
 
-          'redundantAttribute': 'expr32',
-          'selector': '[expr32]',
+          'redundantAttribute': 'expr36',
+          'selector': '[expr36]',
 
           'template': template(
             '<span></span><span></span><span></span>',
@@ -316,18 +316,18 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div class="modal"><div class="modal__inner"><div class="modal__title center"><slot expr33="expr33" name="title"></slot></div><div expr34="expr34" class="modal__body"> </div><div class="modal__footer"><button expr35="expr35" class="button button--outline button--danger">\n                    Confirm\n                </button><button expr36="expr36" class="button button--outline float-right">\n                    Reject\n                </button></div></div></div>',
+      '<div class="modal"><div class="modal__inner"><div class="modal__title center"><slot expr32="expr32" name="title"></slot></div><div expr33="expr33" class="modal__body"> </div><div class="modal__footer"><button expr34="expr34" class="button button--outline button--danger">\n                    Confirm\n                </button><button expr35="expr35" class="button button--outline float-right">\n                    Reject\n                </button></div></div></div>',
       [
         {
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'title',
-          'redundantAttribute': 'expr33',
-          'selector': '[expr33]'
+          'redundantAttribute': 'expr32',
+          'selector': '[expr32]'
         },
         {
-          'redundantAttribute': 'expr34',
-          'selector': '[expr34]',
+          'redundantAttribute': 'expr33',
+          'selector': '[expr33]',
 
           'expressions': [
             {
@@ -347,8 +347,8 @@ __webpack_require__.r(__webpack_exports__);
           ]
         },
         {
-          'redundantAttribute': 'expr35',
-          'selector': '[expr35]',
+          'redundantAttribute': 'expr34',
+          'selector': '[expr34]',
 
           'expressions': [
             {
@@ -364,8 +364,8 @@ __webpack_require__.r(__webpack_exports__);
           ]
         },
         {
-          'redundantAttribute': 'expr36',
-          'selector': '[expr36]',
+          'redundantAttribute': 'expr35',
+          'selector': '[expr35]',
 
           'expressions': [
             {
@@ -471,11 +471,11 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<button expr2="expr2" class="button m-bottom-0" type="button"><slot expr3="expr3"></slot></button>',
+      '<button expr0="expr0" class="button m-bottom-0" type="button"><slot expr1="expr1"></slot></button>',
       [
         {
-          'redundantAttribute': 'expr2',
-          'selector': '[expr2]',
+          'redundantAttribute': 'expr0',
+          'selector': '[expr0]',
 
           'expressions': [
             {
@@ -494,8 +494,8 @@ __webpack_require__.r(__webpack_exports__);
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr3',
-          'selector': '[expr3]'
+          'redundantAttribute': 'expr1',
+          'selector': '[expr1]'
         }
       ]
     );
@@ -547,7 +547,7 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
 
     /**
      *
-     *  @param  {[type]} event               
+     *  @param  {[type]} event
      *  @param  {[type]} user
      *  @return {[type]}
      *
@@ -567,7 +567,7 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
         const customEvent = new CustomEvent('open', {
             'detail': {
                 'confirm': () => {
-                    axios__WEBPACK_IMPORTED_MODULE_0___default().delete('/api/users/' + user._id)
+                    axios__WEBPACK_IMPORTED_MODULE_0___default().delete('/api/users/v1/' + user._id)
                         .then((response) => {
 
                             // removing from buckets
@@ -593,7 +593,7 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
      *
      */
     fetch() {
-        axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/users').then((response) => {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/users/v1').then((response) => {
             this.state.users = response.data.data
             this.update()
         })
@@ -917,7 +917,7 @@ riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
     handleSubmit(event, data) {
 
         let method = 'post'
-        let url = '/api/users'
+        let url = '/api/users/v1'
 
         // user is set and has id, send as put with id
         if (this.state.user && this.state.user._id) {
@@ -933,6 +933,8 @@ riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
             url: url,
             data: data
         }).then((response) => {
+
+            console.log(response)
 
             this.state.user = response.data.data
 

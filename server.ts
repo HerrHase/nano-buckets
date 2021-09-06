@@ -43,11 +43,11 @@ app.set('view engine', 'html')
 app.use('*', session)
 
 app.use('/', home)
-
 app.use('/buckets', buckets)
-
 app.use('/users', users)
-app.use('/api/users', usersApi)
+
+// routes: api
+app.use('/api/users/v1', usersApi)
 
 //app.use('/api/bucket', bucketApi)
 //app.use('/api/note', noteApi)

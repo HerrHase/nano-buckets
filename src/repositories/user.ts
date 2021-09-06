@@ -33,16 +33,16 @@ class UserRepository
     /**
      *
      */
-    async update(data: any)
+    async update(id: any, data: any)
     {
-        const user = await this.db.findOne({ '_id': data._id })
+        const user = await this.db.findOne({ '_id': id })
 
         // if password has changed hash password new
         if (user && user.password !== data.password) {
             data.password = await bcrypt.hash(data.password)
         }
 
-        return await this.db.updateOne({ '_id': data._id }, data)
+        return await this.db.updateOne({ '_id': id }, data)
     }
 }
 
