@@ -1,5 +1,6 @@
 import { v4 } from "https://deno.land/std@0.99.0/uuid/mod.ts";
 import { validate, required, maxLength, isEmail } from 'https://deno.land/x/validasaur@v0.15.0/mod.ts'
+import { uniqueUser } from '../../rules/uniqueUser.ts'
 
 import { Router } from 'https://deno.land/x/opine@1.5.3/mod.ts'
 
@@ -62,7 +63,7 @@ router.post('/', async function(request, response)
     let user
 
     const [ valid, errors ] = await validate(body, {
-        email: [ isEmail, required ],
+        email: [ isEmail, required, uniqueUser('email') ],
         password: [ maxLength(64) ],
         displayname: [ maxLength(128) ]
     })
@@ -97,7 +98,7 @@ router.put('/:id', async function(request, response, next)
     let user
 
     const [ valid, errors ] = await validate(body, {
-        email: [ isEmail, required ],
+        email: [ isEmail, required, uniqueUser('email') ],
         password: [ maxLength(64) ],
         displayname: [ maxLength(128) ]
     })

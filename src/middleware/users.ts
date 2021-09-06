@@ -7,12 +7,13 @@ import UserRepository from '../repositories/user.ts'
 const router = Router()
 
 /**
- *  check every route for single bucket
+ *  check route for user if parameter is
  *
  *  @param  request
  *  @param  response
  *  @param  next
  *  @return
+ *  
  */
 async function usersMiddleware(request: any, response: any, next: any)
 {
