@@ -8,8 +8,13 @@ import { BucketSchema } from '../stores/bucket.ts'
  */
 class BucketRepository
 {
+    /** */
     db: any
 
+    /**
+     *
+     *  
+     */
     constructor()
     {
         this.db = new Database<BucketSchema>('./storage/database/buckets.json')
@@ -17,7 +22,7 @@ class BucketRepository
 
     /**
      *
-     *  
+     *
      */
     async create(data: any)
     {

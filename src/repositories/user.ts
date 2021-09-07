@@ -2,7 +2,7 @@ import * as bcrypt from 'https://deno.land/x/bcrypt@v0.2.4/mod.ts'
 import { v4 } from 'https://deno.land/std@0.99.0/uuid/mod.ts'
 
 import { Database } from 'https://deno.land/x/aloedb@0.9.0/mod.ts'
-import { UserSchema } from './../stores/user.ts'
+import { UserSchema } from './../schemas/user.ts'
 
 /**
  *

@@ -3,6 +3,7 @@ import { validate, required } from 'https://deno.land/x/validasaur@v0.15.0/mod.t
 import { uuid } from '../rules/uuid.ts'
 
 import BucketRepository from '../repositories/bucket.ts'
+import uuidSerialize from '../serializers/uuid.ts'
 
 const router = Router()
 
@@ -16,11 +17,8 @@ const router = Router()
  */
 async function bucketMiddleware(request: any, response: any, next: any)
 {
-    // max for id
-    request.params.bucket_id = request.params.bucket_id.slice(0, 128)
-
-    // only dash, numbers & letters are allowed
-    request.params.bucket_id = request.params.bucket_id.replace(/[^a-z0-9-]/gi, '')
+    // clean id
+    request.params.bucket_id = uuidSerialize(request.params.bucket_id)
 
     const [ valid, errors ] = await validate(request.params, {
         bucket_id: [ uuid ]
@@ -28,9 +26,7 @@ async function bucketMiddleware(request: any, response: any, next: any)
 
     // if invalid send 404
     if (!valid) {
-        response
-            .setStatus(404)
-            .send()
+        response.send(422)
     }
 
     // getting
@@ -39,9 +35,7 @@ async function bucketMiddleware(request: any, response: any, next: any)
 
     // if not exists send 404
     if (!bucket) {
-        response
-            .setStatus(404)
-            .send()
+        response.send(404)
     }
 
     response.locals.bucket = bucket

@@ -3,6 +3,7 @@ import { validate, required } from 'https://deno.land/x/validasaur@v0.15.0/mod.t
 import { uuid } from '../rules/uuid.ts'
 
 import UserRepository from '../repositories/user.ts'
+import uuidSerialize from '../serializers/uuid.ts'
 
 const router = Router()
 
@@ -13,25 +14,20 @@ const router = Router()
  *  @param  response
  *  @param  next
  *  @return
- *  
+ *
  */
 async function usersMiddleware(request: any, response: any, next: any)
 {
-    // max for id
-    request.params.id = request.params.id.slice(0, 128)
-
-    // only dash, numbers & letters are allowed
-    request.params.id = request.params.id.replace(/[^a-z0-9-]/gi, '')
+    // clean id
+    request.params.id = uuidSerialize(request.params.id)
 
     const [ valid, errors ] = await validate(request.params, {
         id: [ uuid ]
     })
 
-    // if invalid send 404
+    // if invalid send 422
     if (!valid) {
-        response
-            .setStatus(404)
-            .send()
+        response.send(422)
     }
 
     // getting
@@ -40,9 +36,7 @@ async function usersMiddleware(request: any, response: any, next: any)
 
     // if not exists send 404
     if (!user) {
-        response
-            .setStatus(404)
-            .send()
+        response.send(404)
     }
 
     response.locals.user = user

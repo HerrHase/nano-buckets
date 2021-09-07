@@ -6,10 +6,17 @@ import { BucketSchema } from '../stores/bucket.ts'
  *
  *
  */
-class BucketRepository
+class NoteRepository
 {
+    /** */
     db: any
 
+    /**
+     *
+     *  @param user_id
+     *  @param bucket_id
+     *
+     */
     constructor(user_id, bucket_id)
     {
         this.db = new Database<BucketSchema>('./storage/database/' + user_id + '/' + bucket_id + '.json')
@@ -27,7 +34,7 @@ class BucketRepository
 
     /**
      *
-     *  
+     *
      */
     async update(data: any)
     {
