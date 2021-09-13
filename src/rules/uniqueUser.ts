@@ -1,6 +1,6 @@
 import { invalid, Validity, Rule } from "https://deno.land/x/validasaur/mod.ts";
 import { Database } from 'https://deno.land/x/aloedb@0.9.0/mod.ts'
-import { UserSchema } from './../stores/user.ts'
+import { UserSchema } from './../schemas/user.ts'
 
 /**
  *  search for key

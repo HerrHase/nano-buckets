@@ -124,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div expr2="expr2" class="field-error"></div>',
+      '<div expr0="expr0" class="field-error"></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -135,11 +135,11 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.state.errors.length > 0;
           },
 
-          'redundantAttribute': 'expr2',
-          'selector': '[expr2]',
+          'redundantAttribute': 'expr0',
+          'selector': '[expr0]',
 
           'template': template(
-            '<ul><li expr3="expr3"></li></ul>',
+            '<ul><li expr1="expr1"></li></ul>',
             [
               {
                 'type': bindingTypes.EACH,
@@ -170,8 +170,8 @@ __webpack_require__.r(__webpack_exports__);
                   ]
                 ),
 
-                'redundantAttribute': 'expr3',
-                'selector': '[expr3]',
+                'redundantAttribute': 'expr1',
+                'selector': '[expr1]',
                 'itemName': 'error',
                 'indexName': null,
 
@@ -215,7 +215,7 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div class="loading-wrapper"><div expr36="expr36" class="loading"></div></div>',
+      '<div class="loading-wrapper"><div expr23="expr23" class="loading"></div><div class="loading-overlay"></div></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -226,8 +226,8 @@ __webpack_require__.r(__webpack_exports__);
             return _scope.props.loading;
           },
 
-          'redundantAttribute': 'expr36',
-          'selector': '[expr36]',
+          'redundantAttribute': 'expr23',
+          'selector': '[expr23]',
 
           'template': template(
             '<span></span><span></span><span></span>',
@@ -316,18 +316,18 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<div class="modal"><div class="modal__inner"><div class="modal__title center"><slot expr32="expr32" name="title"></slot></div><div expr33="expr33" class="modal__body"> </div><div class="modal__footer"><button expr34="expr34" class="button button--outline button--danger">\n                    Confirm\n                </button><button expr35="expr35" class="button button--outline float-right">\n                    Reject\n                </button></div></div></div>',
+      '<div class="modal"><div class="modal__inner"><div class="modal__title center"><slot expr35="expr35" name="title"></slot></div><div expr36="expr36" class="modal__body"> </div><div class="modal__footer"><button expr37="expr37" class="button button--outline button--danger">\n                    Confirm\n                </button><button expr38="expr38" class="button button--outline float-right">\n                    Reject\n                </button></div></div></div>',
       [
         {
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'title',
-          'redundantAttribute': 'expr32',
-          'selector': '[expr32]'
+          'redundantAttribute': 'expr35',
+          'selector': '[expr35]'
         },
         {
-          'redundantAttribute': 'expr33',
-          'selector': '[expr33]',
+          'redundantAttribute': 'expr36',
+          'selector': '[expr36]',
 
           'expressions': [
             {
@@ -347,8 +347,8 @@ __webpack_require__.r(__webpack_exports__);
           ]
         },
         {
-          'redundantAttribute': 'expr34',
-          'selector': '[expr34]',
+          'redundantAttribute': 'expr37',
+          'selector': '[expr37]',
 
           'expressions': [
             {
@@ -364,8 +364,8 @@ __webpack_require__.r(__webpack_exports__);
           ]
         },
         {
-          'redundantAttribute': 'expr35',
-          'selector': '[expr35]',
+          'redundantAttribute': 'expr38',
+          'selector': '[expr38]',
 
           'expressions': [
             {
@@ -471,11 +471,11 @@ __webpack_require__.r(__webpack_exports__);
     getComponent
   ) {
     return template(
-      '<button expr0="expr0" class="button m-bottom-0" type="button"><slot expr1="expr1"></slot></button>',
+      '<button expr12="expr12" class="button m-bottom-0" type="button"><slot expr13="expr13"></slot></button>',
       [
         {
-          'redundantAttribute': 'expr0',
-          'selector': '[expr0]',
+          'redundantAttribute': 'expr12',
+          'selector': '[expr12]',
 
           'expressions': [
             {
@@ -494,8 +494,8 @@ __webpack_require__.r(__webpack_exports__);
           'type': bindingTypes.SLOT,
           'attributes': [],
           'name': 'default',
-          'redundantAttribute': 'expr1',
-          'selector': '[expr1]'
+          'redundantAttribute': 'expr13',
+          'selector': '[expr13]'
         }
       ]
     );
@@ -529,7 +529,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-riot__WEBPACK_IMPORTED_MODULE_3__.register('app-modal', _modal_riot__WEBPACK_IMPORTED_MODULE_2__.default)
+riot__WEBPACK_IMPORTED_MODULE_3__.register('app-modal', _modal_riot__WEBPACK_IMPORTED_MODULE_2__["default"])
 riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -567,7 +567,10 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
         const customEvent = new CustomEvent('open', {
             'detail': {
                 'confirm': () => {
-                    axios__WEBPACK_IMPORTED_MODULE_0___default().delete('/api/users/v1/' + user._id)
+
+                    this.state.loading = true
+
+                    axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]('/api/users/v1/' + user._id)
                         .then((response) => {
 
                             // removing from buckets
@@ -575,6 +578,10 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
                                 return u._id === user._id
                             })
 
+                        }).catch((error) => {
+
+                        }).then(() => {
+                            this.state.loading = false
                             this.update()
                         })
                 },
@@ -607,7 +614,7 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
     getComponent
   ) {
     return template(
-      '<div class="buckets"><table class="table"><thead><tr class="table__tr"><th class="table__th">\n                        Email\n                    </th><th class="table__th">\n                        Display Name\n                    </th><th class="table__th" colspan="2">\n                        Roles\n                    </th></tr></thead><tbody><tr expr4="expr4" class="table__tr"></tr></tbody></table><app-modal expr10="expr10" id="user-delete-confirm"></app-modal><div expr11="expr11" class="grid"></div></div>',
+      '<div class="buckets"><table class="table"><thead><tr class="table__tr"><th class="table__th">\n                        Email\n                    </th><th class="table__th">\n                        Display Name\n                    </th><th class="table__th" colspan="2">\n                        Roles\n                    </th></tr></thead><tbody><tr expr2="expr2" class="table__tr"></tr></tbody></table><app-modal expr8="expr8" id="user-delete-confirm"></app-modal><div expr9="expr9" class="grid"></div><app-loading expr11="expr11"></app-loading></div>',
       [
         {
           'type': bindingTypes.EACH,
@@ -615,11 +622,11 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
           'condition': null,
 
           'template': template(
-            '<td expr5="expr5" class="table__td"> </td><td expr6="expr6" class="table__td"> </td><td class="table__td"><div expr7="expr7"></div></td><td class="table__td right"><app-sidebar-button expr8="expr8" class="m-bottom-0 m-right-3" event="app-users-form-open" selector="app-users-form"></app-sidebar-button><button expr9="expr9" class="button button--small m-bottom-0" type="button"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-delete"/></svg></button></td>',
+            '<td expr3="expr3" class="table__td"> </td><td expr4="expr4" class="table__td"> </td><td class="table__td"><div expr5="expr5"></div></td><td class="table__td right"><app-sidebar-button expr6="expr6" class="m-bottom-0 m-right-3" event="app-users-form-open" selector="app-users-form"></app-sidebar-button><button expr7="expr7" class="button button--small m-bottom-0" type="button"><svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-delete"/></svg></button></td>',
             [
               {
-                'redundantAttribute': 'expr5',
-                'selector': '[expr5]',
+                'redundantAttribute': 'expr3',
+                'selector': '[expr3]',
 
                 'expressions': [
                   {
@@ -639,8 +646,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
                 ]
               },
               {
-                'redundantAttribute': 'expr6',
-                'selector': '[expr6]',
+                'redundantAttribute': 'expr4',
+                'selector': '[expr4]',
 
                 'expressions': [
                   {
@@ -668,8 +675,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
                   return _scope.user.roles && _scope.user.roles.indexOf('admin') >= 0;
                 },
 
-                'redundantAttribute': 'expr7',
-                'selector': '[expr7]',
+                'redundantAttribute': 'expr5',
+                'selector': '[expr5]',
 
                 'template': template(
                   '\n                            Admin\n                            <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg>',
@@ -707,12 +714,12 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
                   }
                 ],
 
-                'redundantAttribute': 'expr8',
-                'selector': '[expr8]'
+                'redundantAttribute': 'expr6',
+                'selector': '[expr6]'
               },
               {
-                'redundantAttribute': 'expr9',
-                'selector': '[expr9]',
+                'redundantAttribute': 'expr7',
+                'selector': '[expr7]',
 
                 'expressions': [
                   {
@@ -730,8 +737,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
             ]
           ),
 
-          'redundantAttribute': 'expr4',
-          'selector': '[expr4]',
+          'redundantAttribute': 'expr2',
+          'selector': '[expr2]',
           'itemName': 'user',
           'indexName': null,
 
@@ -760,8 +767,8 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
           ],
 
           'attributes': [],
-          'redundantAttribute': 'expr10',
-          'selector': '[expr10]'
+          'redundantAttribute': 'expr8',
+          'selector': '[expr8]'
         },
         {
           'type': bindingTypes.IF,
@@ -772,15 +779,15 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
             return _scope.state.maxLength > _scope.state.users.length;
           },
 
-          'redundantAttribute': 'expr11',
-          'selector': '[expr11]',
+          'redundantAttribute': 'expr9',
+          'selector': '[expr9]',
 
           'template': template(
-            '<div class="col-12"><div class="buckets__more"><button expr12="expr12" type="button" class="button">\n                        More\n                        <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-down"/></svg></button></div></div>',
+            '<div class="col-12"><div class="buckets__more"><button expr10="expr10" type="button" class="button">\n                        More\n                        <svg class="icon" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-down"/></svg></button></div></div>',
             [
               {
-                'redundantAttribute': 'expr12',
-                'selector': '[expr12]',
+                'redundantAttribute': 'expr10',
+                'selector': '[expr10]',
 
                 'expressions': [
                   {
@@ -797,6 +804,34 @@ riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-modal')
               }
             ]
           )
+        },
+        {
+          'type': bindingTypes.TAG,
+          'getComponent': getComponent,
+
+          'evaluate': function(
+            _scope
+          ) {
+            return 'app-loading';
+          },
+
+          'slots': [],
+
+          'attributes': [
+            {
+              'type': expressionTypes.ATTRIBUTE,
+              'name': 'loading',
+
+              'evaluate': function(
+                _scope
+              ) {
+                return _scope.state.loading;
+              }
+            }
+          ],
+
+          'redundantAttribute': 'expr11',
+          'selector': '[expr11]'
         }
       ]
     );
@@ -820,22 +855,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var riot__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! riot */ "./node_modules/riot/riot.esm.js");
+/* harmony import */ var riot__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! riot */ "./node_modules/riot/riot.esm.js");
 /* harmony import */ var _FormValidator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../FormValidator */ "./resources/js/FormValidator.js");
 /* harmony import */ var _field_error_riot__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../field-error.riot */ "./resources/js/components/field-error.riot");
-/* harmony import */ var _loading_riot__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../loading.riot */ "./resources/js/components/loading.riot");
 
 
 
 
 
 
-
-riot__WEBPACK_IMPORTED_MODULE_4__.register('field-error', _field_error_riot__WEBPACK_IMPORTED_MODULE_2__.default)
-riot__WEBPACK_IMPORTED_MODULE_4__.mount('field-error')
-
-riot__WEBPACK_IMPORTED_MODULE_4__.register('app-loading', _loading_riot__WEBPACK_IMPORTED_MODULE_3__.default)
-riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
+riot__WEBPACK_IMPORTED_MODULE_3__.register('field-error', _field_error_riot__WEBPACK_IMPORTED_MODULE_2__["default"])
+riot__WEBPACK_IMPORTED_MODULE_3__.mount('field-error')
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   'css': null,
@@ -875,7 +905,7 @@ riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
         })
 
         // create form validation
-        this.state.formValidation = new _FormValidator__WEBPACK_IMPORTED_MODULE_1__.default('#app-users-form', {
+        this.state.formValidation = new _FormValidator__WEBPACK_IMPORTED_MODULE_1__["default"]('#app-users-form', {
             'email': {
                 'length': {
                     'maximum': 255
@@ -888,6 +918,9 @@ riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
                     'maximum': 64
                 },
                 'presence': true
+            },
+            'password_confirm': {
+                'equality': 'password'
             }
         }, (event, data) => {
             this.handleSubmit(event, data)
@@ -914,8 +947,8 @@ riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
      *
      *
      */
-    handleSubmit(event, data) {
-
+    handleSubmit(event, data)
+    {
         let method = 'post'
         let url = '/api/users/v1'
 
@@ -933,16 +966,17 @@ riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
             url: url,
             data: data
         }).then((response) => {
-
-            console.log(response)
-
             this.state.user = response.data.data
 
             // check if submit has close-attribute
             if (event.submitter.attributes.close) {
                 this.$('#sidebar-user-form-close').click()
             }
+        }).catch((error) => {
+            if (error.response.status === 422) {
 
+            }
+        }).then(() => {
             this.state.loading = false
             this.update()
         })
@@ -965,7 +999,7 @@ riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
     getComponent
   ) {
     return template(
-      '<div class="sidebar"><div class="sidebar__inner"><div class="bar"><div class="bar__main"><span expr22="expr22"></span><span expr23="expr23"></span></div><div class="bar__end"><button expr24="expr24" id="sidebar-user-form-close" class="button button--transparent" type="button"><svg class="icon fill-text-contrast" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-close"/></svg></button></div></div><div class="sidebar__body"><form id="app-users-form" novalidate><div class="field-group"><label class="field-label">\n                            E-Mail\n                            <input expr25="expr25" name="email" type="text" class="field-text"/></label><field-error expr26="expr26" name="email"></field-error></div><div class="field-group"><label class="field-label">\n                            Display Name\n                            <input expr27="expr27" name="display_name" type="text" class="field-text"/></label><field-error expr28="expr28" name="display_name"></field-error></div><div class="field-group"><label class="field-label">\n                            Password\n                            <input name="password" type="password" class="field-text"/></label><field-error expr29="expr29" name="password"></field-error></div><div class="field-group"><label class="field-label"><input name="roles[]" type="checkbox" class="field-choice" value="admin"/><svg class="icon field-choice__unchecked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox"/></svg><svg class="icon field-choice__checked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox-checked"/></svg>\n                            Admin\n                        </label><field-error expr30="expr30" name="roles"></field-error></div></form></div><div class="sidebar__footer"><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg></button><button class="button m-bottom-0" type="submit" form="app-users-form" close>\n                    Save and Close\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-right"/></svg></button></div><app-loading expr31="expr31"></app-loading></div></div>',
+      '<div class="sidebar"><div class="sidebar__inner"><div class="bar"><div class="bar__main"><span expr24="expr24"></span><span expr25="expr25"></span></div><div class="bar__end"><button expr26="expr26" id="sidebar-user-form-close" class="button button--transparent" type="button"><svg class="icon fill-text-contrast" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-close"/></svg></button></div></div><div class="sidebar__body"><form id="app-users-form" novalidate><div class="field-group"><label class="field-label">\n                            E-Mail\n                            <input expr27="expr27" name="email" type="text" class="field-text"/></label><field-error expr28="expr28" name="email"></field-error></div><div class="field-group"><label class="field-label">\n                            Display Name\n                            <input expr29="expr29" name="display_name" type="text" class="field-text"/></label><field-error expr30="expr30" name="display_name"></field-error></div><div class="field-group m-bottom-7"><label class="field-label"><input name="roles[]" type="checkbox" class="field-choice" value="admin"/><svg class="icon field-choice__unchecked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox"/></svg><svg class="icon field-choice__checked" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-checkbox-checked"/></svg>\n                            Admin\n                        </label><field-error expr31="expr31" name="roles"></field-error></div><div class="field-group"><label class="field-label">\n                            Password\n                            <input name="password" type="password" class="field-text"/></label><field-error expr32="expr32" name="password"></field-error></div><div class="field-group"><label class="field-label">\n                            Password confirm\n                            <input name="password_confirm" type="password" class="field-text"/></label><field-error expr33="expr33" name="password_confirm"></field-error></div></form></div><div class="sidebar__footer"><button class="button m-bottom-0" type="submit" form="app-users-form">\n                    Save\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-check"/></svg></button><button class="button m-bottom-0" type="submit" form="app-users-form" close>\n                    Save and Close\n                    <svg class="icon fill-success p-left-3" aria-hidden="true"><use xlink:href="/symbol-defs.svg#icon-arrow-right"/></svg></button></div><app-loading expr34="expr34"></app-loading></div></div>',
       [
         {
           'type': bindingTypes.IF,
@@ -976,8 +1010,8 @@ riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
             return !_scope.state.user._id;
           },
 
-          'redundantAttribute': 'expr22',
-          'selector': '[expr22]',
+          'redundantAttribute': 'expr24',
+          'selector': '[expr24]',
 
           'template': template(
             '\n                        Create User\n                    ',
@@ -993,8 +1027,8 @@ riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
             return _scope.state.user._id;
           },
 
-          'redundantAttribute': 'expr23',
-          'selector': '[expr23]',
+          'redundantAttribute': 'expr25',
+          'selector': '[expr25]',
 
           'template': template(
             '\n                        Update User\n                    ',
@@ -1002,8 +1036,8 @@ riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
           )
         },
         {
-          'redundantAttribute': 'expr24',
-          'selector': '[expr24]',
+          'redundantAttribute': 'expr26',
+          'selector': '[expr26]',
 
           'expressions': [
             {
@@ -1019,8 +1053,8 @@ riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
           ]
         },
         {
-          'redundantAttribute': 'expr25',
-          'selector': '[expr25]',
+          'redundantAttribute': 'expr27',
+          'selector': '[expr27]',
 
           'expressions': [
             {
@@ -1046,12 +1080,12 @@ riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
 
           'slots': [],
           'attributes': [],
-          'redundantAttribute': 'expr26',
-          'selector': '[expr26]'
+          'redundantAttribute': 'expr28',
+          'selector': '[expr28]'
         },
         {
-          'redundantAttribute': 'expr27',
-          'selector': '[expr27]',
+          'redundantAttribute': 'expr29',
+          'selector': '[expr29]',
 
           'expressions': [
             {
@@ -1077,38 +1111,53 @@ riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
 
           'slots': [],
           'attributes': [],
-          'redundantAttribute': 'expr28',
-          'selector': '[expr28]'
-        },
-        {
-          'type': bindingTypes.TAG,
-          'getComponent': getComponent,
-
-          'evaluate': function(
-            _scope
-          ) {
-            return 'field-error';
-          },
-
-          'slots': [],
-          'attributes': [],
-          'redundantAttribute': 'expr29',
-          'selector': '[expr29]'
-        },
-        {
-          'type': bindingTypes.TAG,
-          'getComponent': getComponent,
-
-          'evaluate': function(
-            _scope
-          ) {
-            return 'field-error';
-          },
-
-          'slots': [],
-          'attributes': [],
           'redundantAttribute': 'expr30',
           'selector': '[expr30]'
+        },
+        {
+          'type': bindingTypes.TAG,
+          'getComponent': getComponent,
+
+          'evaluate': function(
+            _scope
+          ) {
+            return 'field-error';
+          },
+
+          'slots': [],
+          'attributes': [],
+          'redundantAttribute': 'expr31',
+          'selector': '[expr31]'
+        },
+        {
+          'type': bindingTypes.TAG,
+          'getComponent': getComponent,
+
+          'evaluate': function(
+            _scope
+          ) {
+            return 'field-error';
+          },
+
+          'slots': [],
+          'attributes': [],
+          'redundantAttribute': 'expr32',
+          'selector': '[expr32]'
+        },
+        {
+          'type': bindingTypes.TAG,
+          'getComponent': getComponent,
+
+          'evaluate': function(
+            _scope
+          ) {
+            return 'field-error';
+          },
+
+          'slots': [],
+          'attributes': [],
+          'redundantAttribute': 'expr33',
+          'selector': '[expr33]'
         },
         {
           'type': bindingTypes.TAG,
@@ -1135,8 +1184,8 @@ riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading')
             }
           ],
 
-          'redundantAttribute': 'expr31',
-          'selector': '[expr31]'
+          'redundantAttribute': 'expr34',
+          'selector': '[expr34]'
         }
       ]
     );
@@ -1179,6 +1228,7 @@ module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
     var requestData = config.data;
     var requestHeaders = config.headers;
+    var responseType = config.responseType;
 
     if (utils.isFormData(requestData)) {
       delete requestHeaders['Content-Type']; // Let the browser set it
@@ -1199,23 +1249,14 @@ module.exports = function xhrAdapter(config) {
     // Set the request timeout in MS
     request.timeout = config.timeout;
 
-    // Listen for ready state
-    request.onreadystatechange = function handleLoad() {
-      if (!request || request.readyState !== 4) {
+    function onloadend() {
+      if (!request) {
         return;
       }
-
-      // The request errored out and we didn't get a response, this will be
-      // handled by onerror instead
-      // With one exception: request that using file: protocol, most browsers
-      // will return status as 0 even though it's a successful request
-      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
-        return;
-      }
-
       // Prepare the response
       var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
-      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+      var responseData = !responseType || responseType === 'text' ||  responseType === 'json' ?
+        request.responseText : request.response;
       var response = {
         data: responseData,
         status: request.status,
@@ -1229,7 +1270,30 @@ module.exports = function xhrAdapter(config) {
 
       // Clean up request
       request = null;
-    };
+    }
+
+    if ('onloadend' in request) {
+      // Use onloadend if available
+      request.onloadend = onloadend;
+    } else {
+      // Listen for ready state to emulate onloadend
+      request.onreadystatechange = function handleLoad() {
+        if (!request || request.readyState !== 4) {
+          return;
+        }
+
+        // The request errored out and we didn't get a response, this will be
+        // handled by onerror instead
+        // With one exception: request that using file: protocol, most browsers
+        // will return status as 0 even though it's a successful request
+        if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+          return;
+        }
+        // readystate handler is calling before onerror or ontimeout handlers,
+        // so we should call onloadend on the next 'tick'
+        setTimeout(onloadend);
+      };
+    }
 
     // Handle browser request cancellation (as opposed to a manual cancellation)
     request.onabort = function handleAbort() {
@@ -1259,7 +1323,10 @@ module.exports = function xhrAdapter(config) {
       if (config.timeoutErrorMessage) {
         timeoutErrorMessage = config.timeoutErrorMessage;
       }
-      reject(createError(timeoutErrorMessage, config, 'ECONNABORTED',
+      reject(createError(
+        timeoutErrorMessage,
+        config,
+        config.transitional && config.transitional.clarifyTimeoutError ? 'ETIMEDOUT' : 'ECONNABORTED',
         request));
 
       // Clean up request
@@ -1299,16 +1366,8 @@ module.exports = function xhrAdapter(config) {
     }
 
     // Add responseType to request if needed
-    if (config.responseType) {
-      try {
-        request.responseType = config.responseType;
-      } catch (e) {
-        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
-        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
-        if (config.responseType !== 'json') {
-          throw e;
-        }
-      }
+    if (responseType && responseType !== 'json') {
+      request.responseType = config.responseType;
     }
 
     // Handle progress if needed
@@ -1409,7 +1468,7 @@ axios.isAxiosError = __webpack_require__(/*! ./helpers/isAxiosError */ "./node_m
 module.exports = axios;
 
 // Allow use of default import syntax in TypeScript
-module.exports.default = axios;
+module.exports["default"] = axios;
 
 
 /***/ }),
@@ -1542,7 +1601,9 @@ var buildURL = __webpack_require__(/*! ../helpers/buildURL */ "./node_modules/ax
 var InterceptorManager = __webpack_require__(/*! ./InterceptorManager */ "./node_modules/axios/lib/core/InterceptorManager.js");
 var dispatchRequest = __webpack_require__(/*! ./dispatchRequest */ "./node_modules/axios/lib/core/dispatchRequest.js");
 var mergeConfig = __webpack_require__(/*! ./mergeConfig */ "./node_modules/axios/lib/core/mergeConfig.js");
+var validator = __webpack_require__(/*! ../helpers/validator */ "./node_modules/axios/lib/helpers/validator.js");
 
+var validators = validator.validators;
 /**
  * Create a new instance of Axios
  *
@@ -1582,20 +1643,71 @@ Axios.prototype.request = function request(config) {
     config.method = 'get';
   }
 
-  // Hook up interceptors middleware
-  var chain = [dispatchRequest, undefined];
-  var promise = Promise.resolve(config);
+  var transitional = config.transitional;
 
+  if (transitional !== undefined) {
+    validator.assertOptions(transitional, {
+      silentJSONParsing: validators.transitional(validators.boolean, '1.0.0'),
+      forcedJSONParsing: validators.transitional(validators.boolean, '1.0.0'),
+      clarifyTimeoutError: validators.transitional(validators.boolean, '1.0.0')
+    }, false);
+  }
+
+  // filter out skipped interceptors
+  var requestInterceptorChain = [];
+  var synchronousRequestInterceptors = true;
   this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
-    chain.unshift(interceptor.fulfilled, interceptor.rejected);
+    if (typeof interceptor.runWhen === 'function' && interceptor.runWhen(config) === false) {
+      return;
+    }
+
+    synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
+
+    requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
   });
 
+  var responseInterceptorChain = [];
   this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
-    chain.push(interceptor.fulfilled, interceptor.rejected);
+    responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
   });
 
-  while (chain.length) {
-    promise = promise.then(chain.shift(), chain.shift());
+  var promise;
+
+  if (!synchronousRequestInterceptors) {
+    var chain = [dispatchRequest, undefined];
+
+    Array.prototype.unshift.apply(chain, requestInterceptorChain);
+    chain = chain.concat(responseInterceptorChain);
+
+    promise = Promise.resolve(config);
+    while (chain.length) {
+      promise = promise.then(chain.shift(), chain.shift());
+    }
+
+    return promise;
+  }
+
+
+  var newConfig = config;
+  while (requestInterceptorChain.length) {
+    var onFulfilled = requestInterceptorChain.shift();
+    var onRejected = requestInterceptorChain.shift();
+    try {
+      newConfig = onFulfilled(newConfig);
+    } catch (error) {
+      onRejected(error);
+      break;
+    }
+  }
+
+  try {
+    promise = dispatchRequest(newConfig);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+
+  while (responseInterceptorChain.length) {
+    promise = promise.then(responseInterceptorChain.shift(), responseInterceptorChain.shift());
   }
 
   return promise;
@@ -1657,10 +1769,12 @@ function InterceptorManager() {
  *
  * @return {Number} An ID used to remove interceptor later
  */
-InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+InterceptorManager.prototype.use = function use(fulfilled, rejected, options) {
   this.handlers.push({
     fulfilled: fulfilled,
-    rejected: rejected
+    rejected: rejected,
+    synchronous: options ? options.synchronous : false,
+    runWhen: options ? options.runWhen : null
   });
   return this.handlers.length - 1;
 };
@@ -1793,7 +1907,8 @@ module.exports = function dispatchRequest(config) {
   config.headers = config.headers || {};
 
   // Transform request data
-  config.data = transformData(
+  config.data = transformData.call(
+    config,
     config.data,
     config.headers,
     config.transformRequest
@@ -1819,7 +1934,8 @@ module.exports = function dispatchRequest(config) {
     throwIfCancellationRequested(config);
 
     // Transform response data
-    response.data = transformData(
+    response.data = transformData.call(
+      config,
       response.data,
       response.headers,
       config.transformResponse
@@ -1832,7 +1948,8 @@ module.exports = function dispatchRequest(config) {
 
       // Transform response data
       if (reason && reason.response) {
-        reason.response.data = transformData(
+        reason.response.data = transformData.call(
+          config,
           reason.response.data,
           reason.response.headers,
           config.transformResponse
@@ -2044,6 +2161,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+var defaults = __webpack_require__(/*! ./../defaults */ "./node_modules/axios/lib/defaults.js");
 
 /**
  * Transform the data for a request or a response
@@ -2054,9 +2172,10 @@ var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/util
  * @returns {*} The resulting transformed data
  */
 module.exports = function transformData(data, headers, fns) {
+  var context = this || defaults;
   /*eslint no-param-reassign:0*/
   utils.forEach(fns, function transform(fn) {
-    data = fn(data, headers);
+    data = fn.call(context, data, headers);
   });
 
   return data;
@@ -2077,6 +2196,7 @@ module.exports = function transformData(data, headers, fns) {
 
 var utils = __webpack_require__(/*! ./utils */ "./node_modules/axios/lib/utils.js");
 var normalizeHeaderName = __webpack_require__(/*! ./helpers/normalizeHeaderName */ "./node_modules/axios/lib/helpers/normalizeHeaderName.js");
+var enhanceError = __webpack_require__(/*! ./core/enhanceError */ "./node_modules/axios/lib/core/enhanceError.js");
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -2100,12 +2220,35 @@ function getDefaultAdapter() {
   return adapter;
 }
 
+function stringifySafely(rawValue, parser, encoder) {
+  if (utils.isString(rawValue)) {
+    try {
+      (parser || JSON.parse)(rawValue);
+      return utils.trim(rawValue);
+    } catch (e) {
+      if (e.name !== 'SyntaxError') {
+        throw e;
+      }
+    }
+  }
+
+  return (encoder || JSON.stringify)(rawValue);
+}
+
 var defaults = {
+
+  transitional: {
+    silentJSONParsing: true,
+    forcedJSONParsing: true,
+    clarifyTimeoutError: false
+  },
+
   adapter: getDefaultAdapter(),
 
   transformRequest: [function transformRequest(data, headers) {
     normalizeHeaderName(headers, 'Accept');
     normalizeHeaderName(headers, 'Content-Type');
+
     if (utils.isFormData(data) ||
       utils.isArrayBuffer(data) ||
       utils.isBuffer(data) ||
@@ -2122,20 +2265,32 @@ var defaults = {
       setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
       return data.toString();
     }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
+    if (utils.isObject(data) || (headers && headers['Content-Type'] === 'application/json')) {
+      setContentTypeIfUnset(headers, 'application/json');
+      return stringifySafely(data);
     }
     return data;
   }],
 
   transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
+    var transitional = this.transitional;
+    var silentJSONParsing = transitional && transitional.silentJSONParsing;
+    var forcedJSONParsing = transitional && transitional.forcedJSONParsing;
+    var strictJSONParsing = !silentJSONParsing && this.responseType === 'json';
+
+    if (strictJSONParsing || (forcedJSONParsing && utils.isString(data) && data.length)) {
       try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
+        return JSON.parse(data);
+      } catch (e) {
+        if (strictJSONParsing) {
+          if (e.name === 'SyntaxError') {
+            throw enhanceError(e, this, 'E_JSON_PARSE');
+          }
+          throw e;
+        }
+      }
     }
+
     return data;
   }],
 
@@ -2618,6 +2773,122 @@ module.exports = function spread(callback) {
 
 /***/ }),
 
+/***/ "./node_modules/axios/lib/helpers/validator.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/validator.js ***!
+  \*****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var pkg = __webpack_require__(/*! ./../../package.json */ "./node_modules/axios/package.json");
+
+var validators = {};
+
+// eslint-disable-next-line func-names
+['object', 'boolean', 'number', 'function', 'string', 'symbol'].forEach(function(type, i) {
+  validators[type] = function validator(thing) {
+    return typeof thing === type || 'a' + (i < 1 ? 'n ' : ' ') + type;
+  };
+});
+
+var deprecatedWarnings = {};
+var currentVerArr = pkg.version.split('.');
+
+/**
+ * Compare package versions
+ * @param {string} version
+ * @param {string?} thanVersion
+ * @returns {boolean}
+ */
+function isOlderVersion(version, thanVersion) {
+  var pkgVersionArr = thanVersion ? thanVersion.split('.') : currentVerArr;
+  var destVer = version.split('.');
+  for (var i = 0; i < 3; i++) {
+    if (pkgVersionArr[i] > destVer[i]) {
+      return true;
+    } else if (pkgVersionArr[i] < destVer[i]) {
+      return false;
+    }
+  }
+  return false;
+}
+
+/**
+ * Transitional option validator
+ * @param {function|boolean?} validator
+ * @param {string?} version
+ * @param {string} message
+ * @returns {function}
+ */
+validators.transitional = function transitional(validator, version, message) {
+  var isDeprecated = version && isOlderVersion(version);
+
+  function formatMessage(opt, desc) {
+    return '[Axios v' + pkg.version + '] Transitional option \'' + opt + '\'' + desc + (message ? '. ' + message : '');
+  }
+
+  // eslint-disable-next-line func-names
+  return function(value, opt, opts) {
+    if (validator === false) {
+      throw new Error(formatMessage(opt, ' has been removed in ' + version));
+    }
+
+    if (isDeprecated && !deprecatedWarnings[opt]) {
+      deprecatedWarnings[opt] = true;
+      // eslint-disable-next-line no-console
+      console.warn(
+        formatMessage(
+          opt,
+          ' has been deprecated since v' + version + ' and will be removed in the near future'
+        )
+      );
+    }
+
+    return validator ? validator(value, opt, opts) : true;
+  };
+};
+
+/**
+ * Assert object's properties type
+ * @param {object} options
+ * @param {object} schema
+ * @param {boolean?} allowUnknown
+ */
+
+function assertOptions(options, schema, allowUnknown) {
+  if (typeof options !== 'object') {
+    throw new TypeError('options must be an object');
+  }
+  var keys = Object.keys(options);
+  var i = keys.length;
+  while (i-- > 0) {
+    var opt = keys[i];
+    var validator = schema[opt];
+    if (validator) {
+      var value = options[opt];
+      var result = value === undefined || validator(value, opt, options);
+      if (result !== true) {
+        throw new TypeError('option ' + opt + ' must be ' + result);
+      }
+      continue;
+    }
+    if (allowUnknown !== true) {
+      throw Error('Unknown option ' + opt);
+    }
+  }
+}
+
+module.exports = {
+  isOlderVersion: isOlderVersion,
+  assertOptions: assertOptions,
+  validators: validators
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/axios/lib/utils.js":
 /*!*****************************************!*\
   !*** ./node_modules/axios/lib/utils.js ***!
@@ -2628,8 +2899,6 @@ module.exports = function spread(callback) {
 
 
 var bind = __webpack_require__(/*! ./helpers/bind */ "./node_modules/axios/lib/helpers/bind.js");
-
-/*global toString:true*/
 
 // utils is a library of generic helper functions non-specific to axios
 
@@ -2814,7 +3083,7 @@ function isURLSearchParams(val) {
  * @returns {String} The String freed of excess whitespace
  */
 function trim(str) {
-  return str.replace(/^\s*/, '').replace(/\s*$/, '');
+  return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, '');
 }
 
 /**
@@ -3077,15 +3346,20 @@ var FormValidator = /*#__PURE__*/function () {
       var _this2 = this;
 
       event.preventDefault();
-      var errors = validate_js__WEBPACK_IMPORTED_MODULE_0___default()(form_serialize__WEBPACK_IMPORTED_MODULE_1___default()(event.target, {
+      console.log(this.constraits, event.target, form_serialize__WEBPACK_IMPORTED_MODULE_1___default()(event.target, {
+        hash: true
+      }));
+      var errors = validate_js__WEBPACK_IMPORTED_MODULE_0___default().async(form_serialize__WEBPACK_IMPORTED_MODULE_1___default()(event.target, {
         hash: true
       }), this.constraits, {
         fullMessages: false
-      });
-
-      if (errors) {
+      }).then(function () {
+        _this2.onSuccess(event, form_serialize__WEBPACK_IMPORTED_MODULE_1___default()(event.target, {
+          hash: true
+        }));
+      }, function (errors) {
         // send each element a event
-        this.elements.forEach(function (element) {
+        _this2.elements.forEach(function (element) {
           var elementErrors = false; // check for errors by name
 
           if (errors[element.attributes.name.nodeValue]) {
@@ -3094,11 +3368,7 @@ var FormValidator = /*#__PURE__*/function () {
 
           _this2.dispatchCustomEvent(elementErrors, element);
         });
-      } else {
-        this.onSuccess(event, form_serialize__WEBPACK_IMPORTED_MODULE_1___default()(event.target, {
-          hash: true
-        }));
-      }
+      });
     }
     /**
      *
@@ -5992,7 +6262,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "version": () => (/* binding */ version),
 /* harmony export */   "withTypes": () => (/* binding */ withTypes)
 /* harmony export */ });
-/* Riot v6.0.1, @license MIT */
+/* Riot v6.0.3, @license MIT */
 /**
  * Convert a string from camel case to dash-case
  * @param   {string} string - probably a component tag name
@@ -6407,92 +6677,92 @@ var udomdiff = ((a, b, get, before) => {
       while (bStart < bEnd) insertBefore(get(b[bStart++], 1), node);
     } // remove head or tail: fast path
     else if (bEnd === bStart) {
-        while (aStart < aEnd) {
-          // remove the node only if it's unknown or not live
-          if (!map || !map.has(a[aStart])) removeChild(get(a[aStart], -1));
-          aStart++;
-        }
-      } // same node: fast path
-      else if (a[aStart] === b[bStart]) {
-          aStart++;
-          bStart++;
-        } // same tail: fast path
-        else if (a[aEnd - 1] === b[bEnd - 1]) {
-            aEnd--;
-            bEnd--;
-          } // The once here single last swap "fast path" has been removed in v1.1.0
-          // https://github.com/WebReflection/udomdiff/blob/single-final-swap/esm/index.js#L69-L85
-          // reverse swap: also fast path
-          else if (a[aStart] === b[bEnd - 1] && b[bStart] === a[aEnd - 1]) {
-              // this is a "shrink" operation that could happen in these cases:
-              // [1, 2, 3, 4, 5]
-              // [1, 4, 3, 2, 5]
-              // or asymmetric too
-              // [1, 2, 3, 4, 5]
-              // [1, 2, 3, 5, 6, 4]
-              const node = get(a[--aEnd], -1).nextSibling;
-              insertBefore(get(b[bStart++], 1), get(a[aStart++], -1).nextSibling);
-              insertBefore(get(b[--bEnd], 1), node); // mark the future index as identical (yeah, it's dirty, but cheap 👍)
-              // The main reason to do this, is that when a[aEnd] will be reached,
-              // the loop will likely be on the fast path, as identical to b[bEnd].
-              // In the best case scenario, the next loop will skip the tail,
-              // but in the worst one, this node will be considered as already
-              // processed, bailing out pretty quickly from the map index check
+      while (aStart < aEnd) {
+        // remove the node only if it's unknown or not live
+        if (!map || !map.has(a[aStart])) removeChild(get(a[aStart], -1));
+        aStart++;
+      }
+    } // same node: fast path
+    else if (a[aStart] === b[bStart]) {
+      aStart++;
+      bStart++;
+    } // same tail: fast path
+    else if (a[aEnd - 1] === b[bEnd - 1]) {
+      aEnd--;
+      bEnd--;
+    } // The once here single last swap "fast path" has been removed in v1.1.0
+    // https://github.com/WebReflection/udomdiff/blob/single-final-swap/esm/index.js#L69-L85
+    // reverse swap: also fast path
+    else if (a[aStart] === b[bEnd - 1] && b[bStart] === a[aEnd - 1]) {
+      // this is a "shrink" operation that could happen in these cases:
+      // [1, 2, 3, 4, 5]
+      // [1, 4, 3, 2, 5]
+      // or asymmetric too
+      // [1, 2, 3, 4, 5]
+      // [1, 2, 3, 5, 6, 4]
+      const node = get(a[--aEnd], -1).nextSibling;
+      insertBefore(get(b[bStart++], 1), get(a[aStart++], -1).nextSibling);
+      insertBefore(get(b[--bEnd], 1), node); // mark the future index as identical (yeah, it's dirty, but cheap 👍)
+      // The main reason to do this, is that when a[aEnd] will be reached,
+      // the loop will likely be on the fast path, as identical to b[bEnd].
+      // In the best case scenario, the next loop will skip the tail,
+      // but in the worst one, this node will be considered as already
+      // processed, bailing out pretty quickly from the map index check
 
-              a[aEnd] = b[bEnd];
-            } // map based fallback, "slow" path
-            else {
-                // the map requires an O(bEnd - bStart) operation once
-                // to store all future nodes indexes for later purposes.
-                // In the worst case scenario, this is a full O(N) cost,
-                // and such scenario happens at least when all nodes are different,
-                // but also if both first and last items of the lists are different
-                if (!map) {
-                  map = new Map();
-                  let i = bStart;
+      a[aEnd] = b[bEnd];
+    } // map based fallback, "slow" path
+    else {
+      // the map requires an O(bEnd - bStart) operation once
+      // to store all future nodes indexes for later purposes.
+      // In the worst case scenario, this is a full O(N) cost,
+      // and such scenario happens at least when all nodes are different,
+      // but also if both first and last items of the lists are different
+      if (!map) {
+        map = new Map();
+        let i = bStart;
 
-                  while (i < bEnd) map.set(b[i], i++);
-                } // if it's a future node, hence it needs some handling
-
-
-                if (map.has(a[aStart])) {
-                  // grab the index of such node, 'cause it might have been processed
-                  const index = map.get(a[aStart]); // if it's not already processed, look on demand for the next LCS
-
-                  if (bStart < index && index < bEnd) {
-                    let i = aStart; // counts the amount of nodes that are the same in the future
-
-                    let sequence = 1;
-
-                    while (++i < aEnd && i < bEnd && map.get(a[i]) === index + sequence) sequence++; // effort decision here: if the sequence is longer than replaces
-                    // needed to reach such sequence, which would brings again this loop
-                    // to the fast path, prepend the difference before a sequence,
-                    // and move only the future list index forward, so that aStart
-                    // and bStart will be aligned again, hence on the fast path.
-                    // An example considering aStart and bStart are both 0:
-                    // a: [1, 2, 3, 4]
-                    // b: [7, 1, 2, 3, 6]
-                    // this would place 7 before 1 and, from that time on, 1, 2, and 3
-                    // will be processed at zero cost
+        while (i < bEnd) map.set(b[i], i++);
+      } // if it's a future node, hence it needs some handling
 
 
-                    if (sequence > index - bStart) {
-                      const node = get(a[aStart], 0);
+      if (map.has(a[aStart])) {
+        // grab the index of such node, 'cause it might have been processed
+        const index = map.get(a[aStart]); // if it's not already processed, look on demand for the next LCS
 
-                      while (bStart < index) insertBefore(get(b[bStart++], 1), node);
-                    } // if the effort wasn't good enough, fallback to a replace,
-                    // moving both source and target indexes forward, hoping that some
-                    // similar node will be found later on, to go back to the fast path
-                    else {
-                        replaceChild(get(b[bStart++], 1), get(a[aStart++], -1));
-                      }
-                  } // otherwise move the source forward, 'cause there's nothing to do
-                  else aStart++;
-                } // this node has no meaning in the future list, so it's more than safe
-                // to remove it, and check the next live node out instead, meaning
-                // that only the live list index should be forwarded
-                else removeChild(get(a[aStart++], -1));
-              }
+        if (bStart < index && index < bEnd) {
+          let i = aStart; // counts the amount of nodes that are the same in the future
+
+          let sequence = 1;
+
+          while (++i < aEnd && i < bEnd && map.get(a[i]) === index + sequence) sequence++; // effort decision here: if the sequence is longer than replaces
+          // needed to reach such sequence, which would brings again this loop
+          // to the fast path, prepend the difference before a sequence,
+          // and move only the future list index forward, so that aStart
+          // and bStart will be aligned again, hence on the fast path.
+          // An example considering aStart and bStart are both 0:
+          // a: [1, 2, 3, 4]
+          // b: [7, 1, 2, 3, 6]
+          // this would place 7 before 1 and, from that time on, 1, 2, and 3
+          // will be processed at zero cost
+
+
+          if (sequence > index - bStart) {
+            const node = get(a[aStart], 0);
+
+            while (bStart < index) insertBefore(get(b[bStart++], 1), node);
+          } // if the effort wasn't good enough, fallback to a replace,
+          // moving both source and target indexes forward, hoping that some
+          // similar node will be found later on, to go back to the fast path
+          else {
+            replaceChild(get(b[bStart++], 1), get(a[aStart++], -1));
+          }
+        } // otherwise move the source forward, 'cause there's nothing to do
+        else aStart++;
+      } // this node has no meaning in the future list, so it's more than safe
+      // to remove it, and check the next live node out instead, meaning
+      // that only the live list index should be forwarded
+      else removeChild(get(a[aStart++], -1));
+    }
   }
 
   return b;
@@ -8106,10 +8376,10 @@ function createPureComponent(pureFactoryFunction, _ref) {
     // intercept the mount calls to bind the DOM node to the pure object created
     // see also https://github.com/riot/riot/issues/2806
     if (method === MOUNT_METHOD_KEY) {
-      const [el] = args; // mark this node as pure element
+      const [element] = args; // mark this node as pure element
 
-      el[IS_PURE_SYMBOL] = true;
-      bindDOMNodeToComponentObject(el, component);
+      defineProperty(element, IS_PURE_SYMBOL, true);
+      bindDOMNodeToComponentObject(element, component);
     }
 
     component[method](...args);
@@ -8304,6 +8574,8 @@ function enhanceComponentAPI(component, _ref5) {
         state = {};
       }
 
+      // any element mounted passing through this function can't be a pure component
+      defineProperty(element, IS_PURE_SYMBOL, false);
       this[PARENT_KEY_SYMBOL] = parentScope;
       this[ATTRIBUTES_KEY_SYMBOL] = createAttributeBindings(element, attributes).mount(parentScope);
       defineProperty(this, PROPS_KEY, Object.freeze(Object.assign({}, evaluateInitialProps(element, props), evaluateAttributeExpressions(this[ATTRIBUTES_KEY_SYMBOL].expressions))));
@@ -8539,7 +8811,7 @@ function pure(func) {
 const withTypes = component => component;
 /** @type {string} current riot version */
 
-const version = 'v6.0.1'; // expose some internal stuff that might be used from external tools
+const version = 'v6.0.3'; // expose some internal stuff that might be used from external tools
 
 const __ = {
   cssManager,
@@ -9816,6 +10088,17 @@ const __ = {
         __webpack_require__.amdD);
 
 
+/***/ }),
+
+/***/ "./node_modules/axios/package.json":
+/*!*****************************************!*\
+  !*** ./node_modules/axios/package.json ***!
+  \*****************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('{"_from":"axios@^0.21.1","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21.1","name":"axios","escapedName":"axios","rawSpec":"^0.21.1","saveSpec":null,"fetchSpec":"^0.21.1"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21.1","_where":"/home/herrhase/Workspace/herrhase/nano-buckets","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+
 /***/ })
 
 /******/ 	});
@@ -9925,21 +10208,25 @@ var __webpack_exports__ = {};
   !*** ./resources/js/users.js ***!
   \*******************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var riot__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! riot */ "./node_modules/riot/riot.esm.js");
+/* harmony import */ var riot__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! riot */ "./node_modules/riot/riot.esm.js");
 /* harmony import */ var _components_users_riot__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/users.riot */ "./resources/js/components/users.riot");
 /* harmony import */ var _components_users_form_riot__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/users/form.riot */ "./resources/js/components/users/form.riot");
 /* harmony import */ var _components_sidebar_button_riot__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/sidebar-button.riot */ "./resources/js/components/sidebar-button.riot");
+/* harmony import */ var _components_loading_riot__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/loading.riot */ "./resources/js/components/loading.riot");
+
 
 
 
  // register components for buckets
 
-riot__WEBPACK_IMPORTED_MODULE_3__.register('app-users', _components_users_riot__WEBPACK_IMPORTED_MODULE_0__.default);
-riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-users');
-riot__WEBPACK_IMPORTED_MODULE_3__.register('app-users-form', _components_users_form_riot__WEBPACK_IMPORTED_MODULE_1__.default);
-riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-users-form');
-riot__WEBPACK_IMPORTED_MODULE_3__.register('app-sidebar-button', _components_sidebar_button_riot__WEBPACK_IMPORTED_MODULE_2__.default);
-riot__WEBPACK_IMPORTED_MODULE_3__.mount('app-sidebar-button');
+riot__WEBPACK_IMPORTED_MODULE_4__.register('app-users', _components_users_riot__WEBPACK_IMPORTED_MODULE_0__["default"]);
+riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-users');
+riot__WEBPACK_IMPORTED_MODULE_4__.register('app-users-form', _components_users_form_riot__WEBPACK_IMPORTED_MODULE_1__["default"]);
+riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-users-form');
+riot__WEBPACK_IMPORTED_MODULE_4__.register('app-sidebar-button', _components_sidebar_button_riot__WEBPACK_IMPORTED_MODULE_2__["default"]);
+riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-sidebar-button');
+riot__WEBPACK_IMPORTED_MODULE_4__.register('app-loading', _components_loading_riot__WEBPACK_IMPORTED_MODULE_3__["default"]);
+riot__WEBPACK_IMPORTED_MODULE_4__.mount('app-loading');
 })();
 
 /******/ })()

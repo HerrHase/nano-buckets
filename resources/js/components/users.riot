@@ -73,6 +73,8 @@
             </div>
         </div>
 
+        <app-loading loading={ state.loading }></app-loading>
+
     </div>
     <script>
 
@@ -126,6 +128,9 @@
                 const customEvent = new CustomEvent('open', {
                     'detail': {
                         'confirm': () => {
+
+                            this.state.loading = true
+
                             axios.delete('/api/users/v1/' + user._id)
                                 .then((response) => {
 
@@ -134,6 +139,10 @@
                                         return u._id === user._id
                                     })
 
+                                }).catch((error) => {
+
+                                }).then(() => {
+                                    this.state.loading = false
                                     this.update()
                                 })
                         },

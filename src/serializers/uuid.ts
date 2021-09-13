@@ -4,7 +4,7 @@
  *  @return
  */
 
-function uuidSerialize(value: string)
+export function uuidSerialize(value: string)
 {
     // max for id
     value = value.slice(0, 128)

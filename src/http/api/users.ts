@@ -25,11 +25,30 @@ router.get('/', async function(request, response)
     const userRepository = new UserRepository()
     const users = await userRepository.db.findMany()
 
-    // @TODO check for permission of current user
-
     response.json({
         data: users
     })
+})
+
+/**
+ *  check if user email is unique
+ *
+ *  @param  request
+ *  @param  response
+ *  @return
+ *
+ */
+router.get('/unique/:email', async function(request, response)
+{
+    const [ valid, errors ] = await validate(request.params, {
+        email: [ uniqueUser('email') ]
+    })
+
+    if (!valid) {
+        response.send(422)
+    } else {
+        response.send(200)
+    }
 })
 
 /**

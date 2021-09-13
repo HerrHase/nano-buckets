@@ -72,30 +72,33 @@ class FormValidator
     {
         event.preventDefault()
 
-        let errors = validate(serialize(event.target, {
+        let errors = validate.async(serialize(event.target, {
             hash: true
         }), this.constraits, {
             fullMessages: false
-        })
+        }).then(
+            () => {
+                this.onSuccess(event, serialize(event.target, {
+                    hash: true
+                }))
+            },
 
-        if (errors) {
+            (errors) => {
 
-            // send each element a event
-            this.elements.forEach((element) => {
-                let elementErrors = false
+                // send each element a event
+                this.elements.forEach((element) => {
+                    let elementErrors = false
 
-                // check for errors by name
-                if (errors[element.attributes.name.nodeValue]) {
-                    elementErrors = errors[element.attributes.name.nodeValue]
-                }
+                    // check for errors by name
+                    if (errors[element.attributes.name.nodeValue]) {
+                        elementErrors = errors[element.attributes.name.nodeValue]
+                    }
 
-                this.dispatchCustomEvent(elementErrors, element)
-            })
-        } else {
-            this.onSuccess(event, serialize(event.target, {
-                hash: true
-            }))
-        }
+                    this.dispatchCustomEvent(elementErrors, element)
+                })
+
+            }
+        )
     }
 
     /**

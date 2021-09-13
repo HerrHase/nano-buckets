@@ -3,7 +3,7 @@ import { validate, required } from 'https://deno.land/x/validasaur@v0.15.0/mod.t
 import { uuid } from '../rules/uuid.ts'
 
 import BucketRepository from '../repositories/bucket.ts'
-import uuidSerialize from '../serializers/uuid.ts'
+import { uuidSerialize } from '../serializers/uuid.ts'
 
 const router = Router()
 

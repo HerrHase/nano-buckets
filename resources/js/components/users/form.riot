@@ -36,14 +36,8 @@
                         </label>
                         <field-error name="display_name"></field-error>
                     </div>
-                    <div class="field-group">
-                        <label class="field-label">
-                            Password
-                            <input name="password" type="password" class="field-text" />
-                        </label>
-                        <field-error name="password"></field-error>
-                    </div>
-                    <div class="field-group">
+
+                    <div class="field-group m-bottom-7">
                         <label class="field-label">
                             <input name="roles[]" type="checkbox" class="field-choice" value="admin" />
                             <svg class="icon field-choice__unchecked" aria-hidden="true">
@@ -55,6 +49,21 @@
                             Admin
                         </label>
                         <field-error name="roles"></field-error>
+                    </div>
+
+                    <div class="field-group">
+                        <label class="field-label">
+                            Password
+                            <input name="password" type="password" class="field-text" />
+                        </label>
+                        <field-error name="password"></field-error>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">
+                            Password confirm
+                            <input name="password_confirm" type="password" class="field-text" />
+                        </label>
+                        <field-error name="password_confirm"></field-error>
                     </div>
                 </form>
             </div>
@@ -85,13 +94,9 @@
 
         import FormValidator from './../../FormValidator'
         import FieldError from './../field-error.riot'
-        import AppLoading from './../loading.riot'
 
         riot.register('field-error', FieldError)
         riot.mount('field-error')
-
-        riot.register('app-loading', AppLoading)
-        riot.mount('app-loading')
 
         export default {
 
@@ -142,6 +147,9 @@
                             'maximum': 64
                         },
                         'presence': true
+                    },
+                    'password_confirm': {
+                        'equality': 'password'
                     }
                 }, (event, data) => {
                     this.handleSubmit(event, data)
@@ -168,8 +176,8 @@
              *
              *
              */
-            handleSubmit(event, data) {
-
+            handleSubmit(event, data)
+            {
                 let method = 'post'
                 let url = '/api/users/v1'
 
@@ -187,18 +195,18 @@
                     url: url,
                     data: data
                 }).then((response) => {
-
-                    this.state.loading = false
-
-                    if (response.status === 201) {
-                        this.state.user = response.data.data
-                    } 
+                    this.state.user = response.data.data
 
                     // check if submit has close-attribute
                     if (event.submitter.attributes.close) {
                         this.$('#sidebar-user-form-close').click()
                     }
+                }).catch((error) => {
+                    if (error.response.status === 422) {
 
+                    }
+                }).then(() => {
+                    this.state.loading = false
                     this.update()
                 })
             },

@@ -1,6 +1,6 @@
 import { v4 } from 'https://deno.land/std@0.99.0/uuid/mod.ts'
 import { Database } from 'https://deno.land/x/aloedb@0.9.0/mod.ts'
-import { BucketSchema } from '../stores/bucket.ts'
+import { BucketSchema } from '../schemas/bucket.ts'
 
 /**
  *
@@ -13,7 +13,7 @@ class BucketRepository
 
     /**
      *
-     *  
+     *
      */
     constructor()
     {
